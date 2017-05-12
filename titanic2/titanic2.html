@@ -1,0 +1,156 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>&lt;no title&gt; &#8212; Titanic2 0.5 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-titanic2.titanic2"></span><p>The titanic2 package includes a suite of functions that use training data sets
+for both survivors and non-survivors of the Titanic to perform feature engineering,
+fit a random forest model, and make predictions for a test data set.</p>
+<dl class="function">
+<dt id="titanic2.titanic2.Extract_Features">
+<code class="descclassname">titanic2.titanic2.</code><code class="descname">Extract_Features</code><span class="sig-paren">(</span><em>file_name</em><span class="sig-paren">)</span><a class="headerlink" href="#titanic2.titanic2.Extract_Features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads csv file found in file_name, manipulates data to create
+features needed for prediction, and returns a data frame</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_name</strong> – Name of csv file that contains data</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A data frame with extracted features</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="titanic2.titanic2.Fit_Random_Forest">
+<code class="descclassname">titanic2.titanic2.</code><code class="descname">Fit_Random_Forest</code><span class="sig-paren">(</span><em>data_frame</em><span class="sig-paren">)</span><a class="headerlink" href="#titanic2.titanic2.Fit_Random_Forest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the Random Forest algorithm on data_frame and
+returns the fitted model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data_frame</strong> – Data frame that contains features along with response</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A Random Forest model object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="titanic2.titanic2.Predict_File">
+<code class="descclassname">titanic2.titanic2.</code><code class="descname">Predict_File</code><span class="sig-paren">(</span><em>rf_model</em>, <em>test_data</em>, <em>out_file_name</em><span class="sig-paren">)</span><a class="headerlink" href="#titanic2.titanic2.Predict_File" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the fitted Random Forest model and a test data set and 
+makes predictions for the test data set and then writes a csv file with
+these predictions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rf_model</strong> – Random Forest model that was fit to training data</li>
+<li><strong>test_data</strong> – Data set for which we wish to make predictions</li>
+<li><strong>out_file_name</strong> – File path and name for output file</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Returns nothing:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><p class="first last">Creates csv file with predictions</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/titanic2.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, David Arthur.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6b3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/titanic2.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
