@@ -16,7 +16,7 @@ Code_
 .. toctree::
    :maxdepth: 1
    
-   Titanic2.rst
+   titanic2.rst
 
 
 
