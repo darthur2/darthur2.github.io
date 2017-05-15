@@ -1,3 +1,8 @@
+Titanic2 Module
+================
+
+Produces predictions for survival of Titanic passengers.
+
 .. automodule:: titanic2.titanic2
     :members:
     :undoc-members:
