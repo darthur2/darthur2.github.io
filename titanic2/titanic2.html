@@ -53,9 +53,9 @@
 <dd><p>Reads in the Titanic csv file and extracts features needed to make predictions.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>file_name (str): Location of csv file that contains variables for the Titanic analysis.</dd>
+<dd>file_name (str): Location of csv file that contains variables for the Titanic analysis</dd>
 <dt>Returns:</dt>
-<dd>pandas.DataFrame: Data frame containing extracted features used for fitting the Random Forest needed to make predictions.</dd>
+<dd>pandas.DataFrame: Contains extracted features used for fitting Random Forest needed for predictions</dd>
 </dl>
 </dd></dl>
 
@@ -65,11 +65,10 @@
 <dd><p>Takes the response from the training data and the features from the training data and trains a Random Forest model and then returns that model for future predictions.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">features (pandas.DataFrame): Features used to train Random Forest for future predictions.</p>
-<p class="last">train_file (str): Location of file containing training data.</p>
-</dd>
+<dd>features (pandas.DataFrame): Features used to train Random Forest for future predictions
+train_file (str): Location of file containing training data</dd>
 <dt>Returns:</dt>
-<dd>rf_model (sklearn.ensemble.RandomForestClassifier): Trained model to be used for predictions.</dd>
+<dd>sklearn.ensemble.RandomForestClassifier: Trained model to be used for predictions</dd>
 </dl>
 </dd></dl>
 
@@ -79,10 +78,9 @@
 <dd><p>Takes trained Random Forest model and uses it to make predictions using the features from test_data. Then it outputs the predictions for each passenger in the test data set along with their passenger ID.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">rf_model (sklearn.ensemble.RandomForestClassifier): Trained model to be used for predictions.</p>
-<p>test_file (str): Name of file location for test data set.</p>
-<p class="last">out_file_name (str): Name of file location for output file containing predictions.</p>
-</dd>
+<dd>rf_model (sklearn.ensemble.RandomForestClassifier): Trained model to be used for predictions
+test_file (str): Name of file location for test data set
+out_file_name (str): Name of file location for output file containing predictions</dd>
 <dt>Returns:</dt>
 <dd>Nothing. Creates a file.</dd>
 </dl>
