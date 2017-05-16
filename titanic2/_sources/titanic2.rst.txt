@@ -1,0 +1,7 @@
+Titanic2 Module
+================
+
+.. automodule:: titanic2.titanic2
+    :members:
+    :undoc-members:
+    :show-inheritance:
