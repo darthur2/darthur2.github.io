@@ -63,8 +63,9 @@ predictions for a test data set.</p>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;~</span><span class="se">\t</span><span class="s1">rain.csv&#39;</span>
-<span class="n">train_data</span> <span class="o">=</span> <span class="n">Extract_Features</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">train_file</span> <span class="o">=</span> <span class="s1">&#39;~</span><span class="se">\t</span><span class="s1">rain.csv&#39;</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">Extract_Features</span><span class="p">(</span><span class="n">train_file</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -99,6 +100,13 @@ in the scikit-learn documentation.</p>
 </tr>
 </tbody>
 </table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">train_file</span> <span class="o">=</span> <span class="s1">&#39;~</span><span class="se">\t</span><span class="s1">rain.csv&#39;</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">Extract_Features</span><span class="p">(</span><span class="n">train_file</span><span class="p">)</span>
+
+<span class="n">rf_model</span> <span class="o">=</span> <span class="n">Fit_Random_Forest</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">train_file</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -122,6 +130,18 @@ Then it outputs the predictions for each passenger in the test data set along wi
 </tr>
 </tbody>
 </table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">train_file</span> <span class="o">=</span> <span class="s1">&#39;~</span><span class="se">\t</span><span class="s1">rain.csv&#39;</span>
+<span class="n">test_file</span> <span class="o">=</span> <span class="s1">&#39;~</span><span class="se">\t</span><span class="s1">est.csv&#39;</span>
+<span class="n">out_file</span> <span class="o">=</span> <span class="s1">&#39;~\predictions.csv&#39;</span>
+
+<span class="n">features</span> <span class="o">=</span> <span class="n">Extract_Features</span><span class="p">(</span><span class="n">train_file</span><span class="p">)</span>
+
+<span class="n">rf_model</span> <span class="o">=</span> <span class="n">Fit_Random_Forest</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">train_file</span><span class="p">)</span>
+
+<span class="n">Predict_File</span><span class="p">(</span><span class="n">rf_model</span><span class="p">,</span> <span class="n">test_file</span><span class="p">,</span> <span class="n">out_file</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
