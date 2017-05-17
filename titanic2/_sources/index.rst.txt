@@ -17,7 +17,7 @@ Code_
 Documentation Resources
 ########################
 
-.. _Code: https://github.com/darthur2/Titanic/
+.. _Code: https://github.com/darthur2/titanic2/
 
 .. toctree::
    :maxdepth: 1
@@ -32,7 +32,7 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
-.. |Build Status| image:: https://travis-ci.org/darthur2/Titanic.svg?branch=master
-        :target: https://travis-ci.org/darthur2/Titanic
-.. |Coverage Status| image:: https://coveralls.io/repos/github/darthur2/Titanic/badge.svg
-        :target: https://coveralls.io/github/darthur2/Titanic
+.. |Build Status| image:: https://travis-ci.org/darthur2/titanic2.svg?branch=master
+        :target: https://travis-ci.org/darthur2/titanic2
+.. |Coverage Status| image:: https://coveralls.io/repos/github/darthur2/titanic2/badge.svg
+        :target: https://coveralls.io/github/darthur2/titanic2
