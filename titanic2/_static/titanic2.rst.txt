@@ -1,8 +1,0 @@
-Titanic2 Module
-================
-.. _RandomForestClassifier: http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
-
-.. automodule:: titanic2.titanic2
-    :members:
-    :undoc-members:
-    :show-inheritance:
