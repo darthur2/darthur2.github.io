@@ -55,7 +55,7 @@ predictions for a test data set.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_name</strong> (<em>string</em>) – Location of csv file that contains variables for the Titanic analysis.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_name</strong> (<em>str</em>) – Location of csv file that contains variables for the Titanic analysis.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Data frame of features to be used in training a Random Forest model.</td>
 </tr>
@@ -67,16 +67,23 @@ predictions for a test data set.</p>
 
 <dl class="function">
 <dt id="titanic2.titanic2.Fit_Random_Forest">
-<code class="descclassname">titanic2.titanic2.</code><code class="descname">Fit_Random_Forest</code><span class="sig-paren">(</span><em>features</em>, <em>train_file</em><span class="sig-paren">)</span><a class="headerlink" href="#titanic2.titanic2.Fit_Random_Forest" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">titanic2.titanic2.</code><code class="descname">Fit_Random_Forest</code><span class="sig-paren">(</span><em>features</em>, <em>train_file</em>, <em>n_est=1000</em>, <em>max_feat=’sqrt’</em>, <em>min_samp=10</em>, <em>min_leaf=2</em><span class="sig-paren">)</span><a class="headerlink" href="#titanic2.titanic2.Fit_Random_Forest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes the response from the training data and the features from the training data and trains a 
 Random Forest model and then returns that model for future predictions.</p>
+<p>For further details on appropriate values for n_est, max_feat, min_samp, and min_leaf or to see default
+values used when when training the Random Forest model, see information on Random Forest Classifier 
+in the scikit-learn documentation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>features</strong> (<em>pandas.DataFrame</em>) – Features used to train Random Forest for future predictions.</li>
-<li><strong>train_file</strong> (<em>string</em>) – Location of file containing training data.</li>
+<li><strong>train_file</strong> (<em>str</em>) – Location of file containing training data.</li>
+<li><strong>n_est</strong> (<em>int</em>) – Number of trees to be used in Random Forest Classifier (changed from default of 10).</li>
+<li><strong>max_feat</strong> (<em>int</em><em>, </em><em>float</em><em>, or </em><em>str</em>) – Maximum number of features to split on at each node (changed from using all features).</li>
+<li><strong>min_samp</strong> (<em>int</em><em>, </em><em>float</em>) – Minimum number of samples needed to split at internal node (change from default of 2).</li>
+<li><strong>min_leaf</strong> (<em>int</em><em>, </em><em>float</em>) – Minimum number of samples needed at each leaf node (changed from default of 1).</li>
 </ul>
 </td>
 </tr>
@@ -101,8 +108,8 @@ Then it outputs the predictions for each passenger in the test data set along wi
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>rf_model</strong> (<em>sklearn.ensemble.RandomForestClassifier</em>) – Trained model to be used for predictions.</li>
-<li><strong>test_file</strong> (<em>string</em>) – Name of file location for test data set.</li>
-<li><strong>out_file_name</strong> (<em>string</em>) – Name of file location for output file containing predictions.</li>
+<li><strong>test_file</strong> (<em>str</em>) – Name of file location for test data set.</li>
+<li><strong>out_file_name</strong> (<em>str</em>) – Name of file location for output file containing predictions.</li>
 </ul>
 </td>
 </tr>
