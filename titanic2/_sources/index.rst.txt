@@ -7,7 +7,7 @@ Titanic2
 ==========================================
 |Build Status| |Coverage Status|
 
-This is a test.
+Titanic data set analysis; Travis CI; Coveralls
 
 Code
 #################
