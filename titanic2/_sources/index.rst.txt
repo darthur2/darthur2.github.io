@@ -10,12 +10,12 @@ Titanic2
 Titanic data set analysis; Travis CI; Coveralls
 
 Code
-#################
+#######
 
 Code_
 
 Documentation Resources
-#########################
+########################
 
 .. _Code: https://github.com/darthur2/titanic2/
 
@@ -26,7 +26,7 @@ Documentation Resources
 
 
 Indices and tables
-####################
+#####################
 
 * :ref:`genindex`
 * :ref:`modindex`
