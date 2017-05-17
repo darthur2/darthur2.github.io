@@ -1,0 +1,50 @@
+.. titanic2 documentation master file, created by
+   sphinx-quickstart on Sat Apr 29 13:28:50 2017.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Titanic2
+==========================================
+|Build Status| |Coverage Status|
+
+titanic2 is a python package that can use information about passengers of the infamous Titanic to make predictions 
+as to whether or not any given passenger would have survived. The idea for this package comes from the introductory 
+data science competition being held on Kaggle_.
+
+For this competition, we are given a training data set that contains information about a number of passengers of the Titanic. 
+Each record in this data set details passenger attributes such as Sex, Age, Social Class, etc. In the training data set, we 
+are also given a binary indicator that tells us whether or not the passenger survived. The goal is to use this information 
+to train a model that can then be used to make accurate survival predictions for passengers found within a testing data set, 
+a data set that contains all of the same features found within the training data set, but lacking the survivorship indicator.
+
+The titanic2 package contains functions that can extract features from the data set that can be used to train a Random Forest 
+model that can produce predictions with around 79% accuracy.
+
+Code
+-----------
+
+All of the code for the titanic2 package can be found here Code_.
+
+Documentation Resources
+--------------------------
+
+.. _Code: https://github.com/darthur2/titanic2/
+.. _Kaggle: https://www.kaggle.com/c/titanic
+
+.. toctree::
+   :maxdepth: 1
+   
+   titanic2.rst
+
+
+Indices and tables
+----------------------
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
+.. |Build Status| image:: https://travis-ci.org/darthur2/titanic2.svg?branch=master
+        :target: https://travis-ci.org/darthur2/titanic2
+.. |Coverage Status| image:: https://coveralls.io/repos/github/darthur2/titanic2/badge.svg
+        :target: https://coveralls.io/github/darthur2/titanic2
