@@ -21,12 +21,12 @@ The titanic2 package contains functions that can extract features from the data 
 model that can produce predictions with around 79% accuracy.
 
 Code
-**************
+-----------
 
 All of the code for the titanic2 package can be found here Code_.
 
 Documentation Resources
-**************************
+--------------------------
 
 .. _Code: https://github.com/darthur2/titanic2/
 .. _Kaggle: https://www.kaggle.com/c/titanic
@@ -38,7 +38,7 @@ Documentation Resources
 
 
 Indices and tables
-**********************
+----------------------
 
 * :ref:`genindex`
 * :ref:`modindex`
