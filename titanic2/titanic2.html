@@ -72,7 +72,9 @@ predictions for a test data set.</p>
 </tbody>
 </table>
 <p><strong>Example:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">train_file</span> <span class="o">=</span> <span class="s1">&#39;~</span><span class="se">\t</span><span class="s1">rain.csv&#39;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Assumes the file to be loaded is within the current working directory</span>
+
+<span class="n">train_file</span> <span class="o">=</span> <span class="s1">&#39;~/train.csv&#39;</span>
 <span class="n">features</span> <span class="o">=</span> <span class="n">Extract_Features</span><span class="p">(</span><span class="n">train_file</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -109,7 +111,7 @@ in the scikit-learn documentation.</p>
 </tbody>
 </table>
 <p><strong>Example:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">train_file</span> <span class="o">=</span> <span class="s1">&#39;~</span><span class="se">\t</span><span class="s1">rain.csv&#39;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">train_file</span> <span class="o">=</span> <span class="s1">&#39;~/train.csv&#39;</span>
 <span class="n">features</span> <span class="o">=</span> <span class="n">Extract_Features</span><span class="p">(</span><span class="n">train_file</span><span class="p">)</span>
 
 <span class="n">rf_model</span> <span class="o">=</span> <span class="n">Fit_Random_Forest</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">train_file</span><span class="p">)</span>
@@ -139,9 +141,9 @@ Then it outputs the predictions for each passenger in the test data set along wi
 </tbody>
 </table>
 <p><strong>Example:</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">train_file</span> <span class="o">=</span> <span class="s1">&#39;~</span><span class="se">\t</span><span class="s1">rain.csv&#39;</span>
-<span class="n">test_file</span> <span class="o">=</span> <span class="s1">&#39;~</span><span class="se">\t</span><span class="s1">est.csv&#39;</span>
-<span class="n">out_file</span> <span class="o">=</span> <span class="s1">&#39;~\predictions.csv&#39;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">train_file</span> <span class="o">=</span> <span class="s1">&#39;~/train.csv&#39;</span>
+<span class="n">test_file</span> <span class="o">=</span> <span class="s1">&#39;~/test.csv&#39;</span>
+<span class="n">out_file</span> <span class="o">=</span> <span class="s1">&#39;~/predictions.csv&#39;</span>
 
 <span class="n">features</span> <span class="o">=</span> <span class="n">Extract_Features</span><span class="p">(</span><span class="n">train_file</span><span class="p">)</span>
 
