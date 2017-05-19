@@ -64,10 +64,11 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Reads in the Titanic csv file and extracts features needed to make predictions.</span>
 
-<span class="sd">    :param file_name: Location of csv file that contains variables for the Titanic analysis.</span>
-<span class="sd">    :type file_name: str</span>
-<span class="sd">    :returns: Data frame of features to be used in training a random forest model.</span>
-<span class="sd">    :rtype: pandas.DataFrame</span>
+<span class="sd">    Args:</span>
+<span class="sd">        file_name (str): Location of csv file that contains variables for the Titanic analysis.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        pandas.DataFrame: Data frame of features to be used in training a random forest model.</span>
 <span class="sd">    </span>
 <span class="sd">    **Example:**</span>
 
@@ -155,20 +156,16 @@
 <span class="sd">    values used when when training the random forest model, see information on RandomForestClassifier_ </span>
 <span class="sd">    in the scikit-learn documentation.</span>
 
-<span class="sd">    :param features: Features used to train random forest for future predictions.</span>
-<span class="sd">    :type features: pandas.DataFrame</span>
-<span class="sd">    :param train_file: Location of file containing training data.</span>
-<span class="sd">    :type train_file: str</span>
-<span class="sd">    :param n_est: Number of trees to be used in random Forest (changed from default of 10).</span>
-<span class="sd">    :type n_est: int</span>
-<span class="sd">    :param max_feat: Maximum number of features to split on at each node (changed from using all features).</span>
-<span class="sd">    :type max_feat: int, float, or str</span>
-<span class="sd">    :param min_samp: Minimum number of samples needed to split at internal node (change from default of 2).</span>
-<span class="sd">    :type min_samp: int, float</span>
-<span class="sd">    :param min_leaf: Minimum number of samples needed at each leaf node (changed from default of 1).</span>
-<span class="sd">    :type min_leaf: int, float</span>
-<span class="sd">    :returns: Trained model to be used for predictions.</span>
-<span class="sd">    :rtype: sklearn.ensemble.RandomForestClassifier</span>
+<span class="sd">    Args:</span>
+<span class="sd">        features (pandas.DataFrame): Features used to train random forest for future predictions.</span>
+<span class="sd">        train_file (str): Location of file containing training data.</span>
+<span class="sd">        n_est (int): Number of trees to be used in random forest (changed from default of 10).</span>
+<span class="sd">        max_feat (int, float, or str): Maximum number of features to split on at each node (changed from using all features).</span>
+<span class="sd">        min_samp (int, float): Minimum number of samples needed to split at internal node (changed from default of 2).</span>
+<span class="sd">        min_leaf (int, float): Minimum number of samples needed at each leaf node (changed from default of 1).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        sklearn.ensemble.RandomForestClassifier: Trained model to be used for predictions.</span>
 
 <span class="sd">    **Example:**</span>
 
@@ -197,13 +194,13 @@
 <span class="sd">    Takes trained random forest model and uses it to make predictions using the features from data in test data set. </span>
 <span class="sd">    Then it outputs the predictions for each passenger in the test data set along with their passenger ID.</span>
 
-<span class="sd">    :param rf_model: Trained model to be used for predictions.</span>
-<span class="sd">    :type rf_model: sklearn.ensemble.RandomForestClassifier</span>
-<span class="sd">    :param test_file: Name of file location for test data set.</span>
-<span class="sd">    :type test_file: str</span>
-<span class="sd">    :param out_file_name: Name of file location for output file containing predictions.</span>
-<span class="sd">    :type out_file_name: str</span>
-<span class="sd">    :returns: Nothing. Creates a file.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        rf_model (sklearn.ensemble.RandomForestClassifier): Trained model to be used for predictions.</span>
+<span class="sd">        test_file (str): Name of file location for test data set.</span>
+<span class="sd">        out_file_name (str): Name of file location for output file containing predictions.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Nothing. Creates a file.</span>
 <span class="sd">    </span>
 <span class="sd">    **Example:**</span>
 <span class="sd">    </span>
