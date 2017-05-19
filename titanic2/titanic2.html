@@ -24,6 +24,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Titanic2" href="index.html" /> 
@@ -52,22 +53,22 @@
             
   <div class="section" id="titanic2-module">
 <h1>Titanic2 Module<a class="headerlink" href="#titanic2-module" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="module-titanic2.titanic2"></span><p>The titanic2 package includes a suite of functions that use training data sets for both survivors and 
-non-survivors of the Titanic to perform feature engineering, fit a random forest model, and make 
+<span class="target" id="module-titanic2.titanic2"></span><p>The titanic2 package includes a suite of functions that use training data sets for both survivors and
+non-survivors of the Titanic to perform feature engineering, fit a random forest model, and make
 predictions for a test data set.</p>
 <dl class="function">
 <dt id="titanic2.titanic2.Extract_Features">
-<code class="descclassname">titanic2.titanic2.</code><code class="descname">Extract_Features</code><span class="sig-paren">(</span><em>file_name</em><span class="sig-paren">)</span><a class="headerlink" href="#titanic2.titanic2.Extract_Features" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">titanic2.titanic2.</code><code class="descname">Extract_Features</code><span class="sig-paren">(</span><em>file_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic2/titanic2.html#Extract_Features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#titanic2.titanic2.Extract_Features" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads in the Titanic csv file and extracts features needed to make predictions.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_name</strong> (<em>str</em>) – Location of csv file that contains variables for the Titanic analysis.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Location of csv file that contains variables for the Titanic analysis.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Data frame of features to be used in training a random forest model.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pandas.DataFrame</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.20.1)">pandas.DataFrame</a></td>
 </tr>
 </tbody>
 </table>
@@ -82,30 +83,30 @@ predictions for a test data set.</p>
 
 <dl class="function">
 <dt id="titanic2.titanic2.Fit_Random_Forest">
-<code class="descclassname">titanic2.titanic2.</code><code class="descname">Fit_Random_Forest</code><span class="sig-paren">(</span><em>features</em>, <em>train_file</em>, <em>n_est=1000</em>, <em>max_feat=’sqrt’</em>, <em>min_samp=10</em>, <em>min_leaf=2</em><span class="sig-paren">)</span><a class="headerlink" href="#titanic2.titanic2.Fit_Random_Forest" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes the response from the training data and the features from the training data and trains a 
+<code class="descclassname">titanic2.titanic2.</code><code class="descname">Fit_Random_Forest</code><span class="sig-paren">(</span><em>features</em>, <em>train_file</em>, <em>n_est=1000</em>, <em>max_feat=’sqrt’</em>, <em>min_samp=10</em>, <em>min_leaf=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic2/titanic2.html#Fit_Random_Forest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#titanic2.titanic2.Fit_Random_Forest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the response from the training data and the features from the training data and trains a
 random forest model and then returns that model for future predictions.</p>
 <p>For further details on appropriate values for <strong>n_est</strong>, <strong>max_feat</strong>, <strong>min_samp</strong>, and <strong>min_leaf</strong> or to see default
-values used when when training the random forest model, see information on <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">RandomForestClassifier</a> 
+values used when when training the random forest model, see information on <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">RandomForestClassifier</a>
 in the scikit-learn documentation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>features</strong> (<em>pandas.DataFrame</em>) – Features used to train random forest for future predictions.</li>
-<li><strong>train_file</strong> (<em>str</em>) – Location of file containing training data.</li>
-<li><strong>n_est</strong> (<em>int</em>) – Number of trees to be used in random Forest (changed from default of 10).</li>
-<li><strong>max_feat</strong> (<em>int</em><em>, </em><em>float</em><em>, or </em><em>str</em>) – Maximum number of features to split on at each node (changed from using all features).</li>
-<li><strong>min_samp</strong> (<em>int</em><em>, </em><em>float</em>) – Minimum number of samples needed to split at internal node (change from default of 2).</li>
-<li><strong>min_leaf</strong> (<em>int</em><em>, </em><em>float</em>) – Minimum number of samples needed at each leaf node (changed from default of 1).</li>
+<li><strong>features</strong> (<a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v0.20.1)"><em>pandas.DataFrame</em></a>) – Features used to train random forest for future predictions.</li>
+<li><strong>train_file</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Location of file containing training data.</li>
+<li><strong>n_est</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Number of trees to be used in random Forest (changed from default of 10).</li>
+<li><strong>max_feat</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a><em>, or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Maximum number of features to split on at each node (changed from using all features).</li>
+<li><strong>min_samp</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Minimum number of samples needed to split at internal node (change from default of 2).</li>
+<li><strong>min_leaf</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Minimum number of samples needed at each leaf node (changed from default of 1).</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Trained model to be used for predictions.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">sklearn.ensemble.RandomForestClassifier</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier" title="(in scikit-learn v0.18.1)">sklearn.ensemble.RandomForestClassifier</a></p>
 </td>
 </tr>
 </tbody>
@@ -121,17 +122,17 @@ in the scikit-learn documentation.</p>
 
 <dl class="function">
 <dt id="titanic2.titanic2.Predict_File">
-<code class="descclassname">titanic2.titanic2.</code><code class="descname">Predict_File</code><span class="sig-paren">(</span><em>rf_model</em>, <em>test_file</em>, <em>out_file_name</em><span class="sig-paren">)</span><a class="headerlink" href="#titanic2.titanic2.Predict_File" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes trained random forest model and uses it to make predictions using the features from data in test data set. 
+<code class="descclassname">titanic2.titanic2.</code><code class="descname">Predict_File</code><span class="sig-paren">(</span><em>rf_model</em>, <em>test_file</em>, <em>out_file_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/titanic2/titanic2.html#Predict_File"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#titanic2.titanic2.Predict_File" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes trained random forest model and uses it to make predictions using the features from data in test data set.
 Then it outputs the predictions for each passenger in the test data set along with their passenger ID.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>rf_model</strong> (<em>sklearn.ensemble.RandomForestClassifier</em>) – Trained model to be used for predictions.</li>
-<li><strong>test_file</strong> (<em>str</em>) – Name of file location for test data set.</li>
-<li><strong>out_file_name</strong> (<em>str</em>) – Name of file location for output file containing predictions.</li>
+<li><strong>rf_model</strong> (<a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier" title="(in scikit-learn v0.18.1)"><em>sklearn.ensemble.RandomForestClassifier</em></a>) – Trained model to be used for predictions.</li>
+<li><strong>test_file</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of file location for test data set.</li>
+<li><strong>out_file_name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Name of file location for output file containing predictions.</li>
 </ul>
 </td>
 </tr>
