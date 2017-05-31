@@ -58,21 +58,16 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        audio_file (str): Name of location of audio file to be transcribed.</span>
-<span class="sd">        auth_file (str): Name of location of .json file containing credentials needed to</span>
-<span class="sd">        use the speech to text service from IBM.</span>
-<span class="sd">        save_dir (str): Name of location in which audio snippets for individual</span>
-<span class="sd">        words should be saved.</span>
+<span class="sd">        auth_file (str): Name of location of .json file containing credentials needed to use the speech to text service from IBM.</span>
+<span class="sd">        save_dir (str): Name of location in which audio snippets for individual words should be saved.</span>
 <span class="sd">        prefix (str): Prefix to be given to each individual audio snippet file.</span>
-<span class="sd">        language (str): String indicating language for transcription. See Languages_</span>
-<span class="sd">        for more information. Default is US English broadband.</span>
-<span class="sd">        watson_learn (boolean): Boolean indicating whether or not information should</span>
-<span class="sd">        be sent to IBM to improve their services. Default is False.</span>
+<span class="sd">        language (str): String indicating language for transcription. See Languages_ for more information. Default is US English broadband.</span>
+<span class="sd">        watson_learn (bool): Boolean indicating whether or not information should be sent to IBM to improve their services. Default is False.</span>
 
 <span class="sd">    .. _Languages: https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.html#models</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        dict: Dictionary with individual words and the names of audio files</span>
-<span class="sd">        containing the audio snippets for each word.</span>
+<span class="sd">        dict: Dictionary with individual words and the names of audio files containing the audio snippets for each word.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="kn">import</span> <span class="nn">json</span>
