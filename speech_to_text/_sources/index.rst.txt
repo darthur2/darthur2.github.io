@@ -1,0 +1,33 @@
+.. speech_to_text documentation master file, created by
+   sphinx-quickstart on Sat Apr 29 13:28:50 2017.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Speech to Text
+==========================================
+
+Speech to Text can be used to extract individual words from a wav formatted audio file. It uses the IBM Watson Developer Cloud to transcribe the audio into text. Watson also gives the user timestamps for each word. By using these timestamps, it is possible to segment the complete audio into smaller audio snippets, each of which corresponds to a single word in the transcribed audio.
+
+Speech to Text can also be used to match up words and audio with phonemes from the CMU dictionary.
+
+Code
+-----------
+
+All of the code for the titanic2 package can be found here Code_.
+
+Documentation Resources
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+   
+   speech_to_text.rst
+
+
+Indices and tables
+----------------------
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+

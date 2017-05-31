@@ -1,0 +1,247 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>speech_to_text.speech_to_text &#8212; speech_to_text 0.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">speech_to_text 0.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for speech_to_text.speech_to_text</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="audio_transcribe"><a class="viewcode-back" href="../../speech_to_text.html#speech_to_text.speech_to_text.audio_transcribe">[docs]</a><span></span><span class="k">def</span> <span class="nf">audio_transcribe</span><span class="p">(</span><span class="n">audio_file</span><span class="p">,</span> <span class="n">auth_file</span><span class="p">,</span> <span class="n">save_dir</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span>
+                     <span class="n">language</span> <span class="o">=</span> <span class="s1">&#39;en-US_BroadbandModel&#39;</span><span class="p">,</span> <span class="n">watson_learn</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Takes a wav audio file and uses IBM&#39;s speech to text services to transcribe</span>
+<span class="sd">    the audio into text and returns the individual words found in the audio along</span>
+<span class="sd">    with names of the audio snippet files that were created for each word.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        audio_file (str): Name of location of audio file to be transcribed.</span>
+<span class="sd">        auth_file (str): Name of location of .json file containing credentials needed to</span>
+<span class="sd">        use the speech to text service from IBM.</span>
+<span class="sd">        save_dir (str): Name of location in which audio snippets for individual</span>
+<span class="sd">        words should be saved.</span>
+<span class="sd">        prefix (str): Prefix to be given to each individual audio snippet file.</span>
+<span class="sd">        language (str): String indicating language for transcription. See Languages_</span>
+<span class="sd">        for more information. Default is US English broadband.</span>
+<span class="sd">        watson_learn (boolean): Boolean indicating whether or not information should</span>
+<span class="sd">        be sent to IBM to improve their services. Default is False.</span>
+
+<span class="sd">    .. _Languages: https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.html#models</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dictionary with individual words and the names of audio files</span>
+<span class="sd">        containing the audio snippets for each word.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">import</span> <span class="nn">json</span>
+    <span class="kn">from</span> <span class="nn">watson_developer_cloud</span> <span class="k">import</span> <span class="n">SpeechToTextV1</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">auth_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">cred_file</span><span class="p">:</span>
+        <span class="n">auth_info</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cred_file</span><span class="p">)</span>
+
+    <span class="n">speech_user</span> <span class="o">=</span> <span class="n">auth_info</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
+    <span class="n">speech_pass</span> <span class="o">=</span> <span class="n">auth_info</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>
+
+    <span class="n">speech_to_text</span> <span class="o">=</span> <span class="n">SpeechToTextV1</span><span class="p">(</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="n">speech_user</span><span class="p">,</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="n">speech_pass</span><span class="p">,</span>
+        <span class="n">x_watson_learning_opt_out</span> <span class="o">=</span> <span class="n">watson_learn</span>
+    <span class="p">)</span>
+
+    <span class="n">speech_to_text</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="n">language</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">audio_file</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">audio</span><span class="p">:</span>
+        <span class="n">speech_results</span> <span class="o">=</span> <span class="n">speech_to_text</span><span class="o">.</span><span class="n">recognize</span><span class="p">(</span>
+            <span class="n">audio</span><span class="p">,</span> <span class="n">content_type</span> <span class="o">=</span> <span class="s1">&#39;audio/wav&#39;</span><span class="p">,</span> <span class="n">timestamps</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">alternatives</span> <span class="o">=</span> <span class="n">speech_results</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
+    <span class="n">num_alt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">alternatives</span><span class="p">)</span>
+
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">alternative</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_alt</span><span class="p">):</span>
+        <span class="n">cur_alternative</span> <span class="o">=</span> <span class="n">alternatives</span><span class="p">[</span><span class="n">alternative</span><span class="p">][</span><span class="s1">&#39;alternatives&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">cur_timestamps</span> <span class="o">=</span> <span class="n">cur_alternative</span><span class="p">[</span><span class="s1">&#39;timestamps&#39;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">cur_word</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cur_timestamps</span><span class="p">)):</span>
+            <span class="n">words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cur_timestamps</span><span class="p">[</span><span class="n">cur_word</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cur_timestamps</span><span class="p">[</span><span class="n">cur_word</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+            
+    <span class="n">snip_names</span> <span class="o">=</span> <span class="n">snippet_saver</span><span class="p">(</span><span class="n">audio_file</span><span class="p">,</span> <span class="n">save_dir</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">times</span><span class="p">)</span>
+    <span class="n">cap_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">element</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+    
+    <span class="n">snippet_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">snip_names</span><span class="p">,</span> <span class="n">cap_words</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">snippet_dict</span></div>
+            
+
+<div class="viewcode-block" id="create_phon_dict"><a class="viewcode-back" href="../../speech_to_text.html#speech_to_text.speech_to_text.create_phon_dict">[docs]</a><span class="k">def</span> <span class="nf">create_phon_dict</span><span class="p">(</span><span class="n">cmu_dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Takes the current phonetic dictionary from CMU and creates a dictionary that links</span>
+<span class="sd">    each word in the dictionary to a list of phonemes for that word.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cmu_dict (str): File location for current CMU phonetic dictionary.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dictionary with words as keys and lists of phonemes for each word as values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">re</span>
+    
+    <span class="n">phon_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">_rx_alpha</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[a-zA-Z]&quot;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">cmu_dict</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;;;;&quot;</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">_rx_alpha</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">vals</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">phon_dict</span><span class="p">[</span><span class="n">vals</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+                
+    <span class="k">return</span> <span class="n">phon_dict</span></div>
+
+
+<div class="viewcode-block" id="phoneme_matcher"><a class="viewcode-back" href="../../speech_to_text.html#speech_to_text.speech_to_text.phoneme_matcher">[docs]</a><span class="k">def</span> <span class="nf">phoneme_matcher</span><span class="p">(</span><span class="n">audio_dict</span><span class="p">,</span> <span class="n">cmu_dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a nested dictionary that details which individual words are in specific audio files</span>
+<span class="sd">    and uses the CMU phonetic dictionary to show which phonemes are in the words that</span>
+<span class="sd">    correspond to each audio file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        audio_dict (dict): Dictionary with audio file names as keys and corresponding word values.</span>
+<span class="sd">        cmu_dict (dict): CMU dictionary of words with phonemes.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Nested dictionary matching audio file names to words and their phonemes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">words</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">audio_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">audio_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    
+    <span class="n">word_phones</span> <span class="o">=</span> <span class="p">[</span><span class="n">cmu_dict</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+    
+    <span class="n">phon_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">word_phones</span><span class="p">))</span>
+    
+    <span class="n">word_phon_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">for</span> <span class="n">cur_word</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)):</span>
+        <span class="n">word_phon_dict</span><span class="p">[</span><span class="n">files</span><span class="p">[</span><span class="n">cur_word</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span><span class="n">words</span><span class="p">[</span><span class="n">cur_word</span><span class="p">]:</span> <span class="n">phon_dict</span><span class="p">[</span><span class="n">words</span><span class="p">[</span><span class="n">cur_word</span><span class="p">]]}</span>
+        
+    <span class="k">return</span> <span class="n">word_phon_dict</span></div>
+   
+    
+<div class="viewcode-block" id="snippet_saver"><a class="viewcode-back" href="../../speech_to_text.html#speech_to_text.speech_to_text.snippet_saver">[docs]</a><span class="k">def</span> <span class="nf">snippet_saver</span><span class="p">(</span><span class="n">audio_file</span><span class="p">,</span> <span class="n">save_dir</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">timestamps</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Takes a given audio file along with the timestamps for when each word occurs</span>
+<span class="sd">    in the audio and creates individual audio files for each word. Then returns names </span>
+<span class="sd">    of audio files that were created.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        audio_file (str): Location of audio file.</span>
+<span class="sd">        save_dir (str): Location in which audio snippets will be saved.</span>
+<span class="sd">        prefix (str): Prefix to be given to each individual audio snippet file.</span>
+<span class="sd">        timestamps (list): Timestamps for each individual word found in the audio.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: Names of files created.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">from</span> <span class="nn">pydub</span> <span class="k">import</span> <span class="n">AudioSegment</span>
+
+    <span class="n">audio</span> <span class="o">=</span> <span class="n">AudioSegment</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">audio_file</span><span class="p">,</span> <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;wav&#39;</span><span class="p">)</span>
+    <span class="n">num_snips</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">timestamps</span><span class="p">)</span>
+    <span class="n">snip_names</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">cur_word</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_snips</span><span class="p">):</span>
+        <span class="n">begin</span> <span class="o">=</span> <span class="n">timestamps</span><span class="p">[</span><span class="n">cur_word</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">timestamps</span><span class="p">[</span><span class="n">cur_word</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000</span>
+        <span class="n">cur_snippet</span> <span class="o">=</span> <span class="n">audio</span><span class="p">[</span><span class="n">begin</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+        <span class="n">snip_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">save_dir</span> <span class="o">+</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cur_word</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.wav&#39;</span><span class="p">)</span>
+        <span class="n">cur_snippet</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">snip_names</span><span class="p">[</span><span class="n">cur_word</span><span class="p">],</span> <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;wav&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span><span class="p">(</span><span class="n">snip_names</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">speech_to_text 0.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, David Arthur.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>
