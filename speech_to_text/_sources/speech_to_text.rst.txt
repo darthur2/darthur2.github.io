@@ -1,7 +1,0 @@
-Speech to Text
-================
-
-.. automodule:: speech_to_text.speech_to_text
-    :members:
-    :undoc-members:
-    :show-inheritance:
