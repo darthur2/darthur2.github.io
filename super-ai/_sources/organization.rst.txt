@@ -1,0 +1,58 @@
+Project Organization
+====================
+
+Because the :doc:`superai` relies heavily on a library of features and datasets,
+we need to be explicit about how the code for each feature is organized in the
+repository.
+
+.. note:: Since we don't have the full library of features documented yet, we
+   haven't finalized the structure of the transformations and functions. That
+   means this document will change is the library grows and evolves.
+
+Definitions
+-----------
+
+So that we are on the same page as to symantics.
+
+Transformations
+^^^^^^^^^^^^^^^
+
+A data transformation in this project is a function that accepts a vector,
+matrix or tensor and returns a transformed dataset *of the same type*. Thus, a
+time signal (vector) may be transformed via a `fft` into a frequency signal
+**vector**. That makes it a transformation.
+
+Features
+^^^^^^^^
+
+A feature extractor function accepts a vector, matrix or tensor and returns a
+single value that represents a specific feature of the data.
+
+.. note:: Frequently, the results of a transformation are considered a vector of
+   features. We refer to this as the "trivial" feature extractor, which returns
+   a scalar value for each component of the flattened `ndarray`.
+
+Project Sub-Packages
+--------------------
+
+The project includes a sub-package for `transforms` and another sub-package for
+`features` (as per the definitions above). Within each package, we strive for
+abstract/generic names of modules that logically group similar
+features/transforms. Here are some examples:
+
+- `afx.transforms.scatter`: includes 1D, 2D and 3D scattering transforms.
+- `afx.transforms.derivative`: provides first, second, third (and higher)
+  derivative transforms of input signals. These are typically referred to as
+  slope, curvature and jerk.
+- `afx.features.fractal`: provides multiple definitions of fractal dimensions
+  that can be applied to arbitrary input signals.
+- `afx.features.correlation`: functions that look for correlations within a
+  single signal (auto-correlations) or between multiple signals.
+
+There is also an `afx.preprocessing` module that deals with imputing missing
+values, range-encoding float data into integers, resampling imbalanced classes,
+etc.
+
+.. note:: The point of these examples is to remind you that new functions should
+   be organized in as abstract a way as possible so that they can be re-used in
+   multiple contexts.

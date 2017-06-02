@@ -1,0 +1,187 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>afx.features.stt &#8212; afx 0.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">afx 0.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for afx.features.stt</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Here we have a suite of functions that extract different features from audio files as well as perform other useful tasks for analyzing speech.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">watson_developer_cloud</span> <span class="k">import</span> <span class="n">SpeechToTextV1</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">pydub</span>
+
+<div class="viewcode-block" id="word_times"><a class="viewcode-back" href="../../../afx.features.html#afx.features.stt.word_times">[docs]</a><span class="k">def</span> <span class="nf">word_times</span><span class="p">(</span><span class="n">audio_file</span><span class="p">,</span> <span class="n">auth_file</span><span class="p">,</span> <span class="n">language</span> <span class="o">=</span> <span class="s1">&#39;en-US_BroadbandModel&#39;</span><span class="p">,</span> <span class="n">watson_learn</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Takes a wav audio file and uses the IBM Watson Speech to Text API to transcribe the audio into text and then extracts words with timestamps.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        audio_file (str): Location of wav audio file that is to be transcribed.</span>
+<span class="sd">        auth_file (str): Location of json file that contains Bluemix credentials needed by IBM to transcribe audio.</span>
+<span class="sd">        language (str): Language for transcription. For more information see Languages_. Defaults to US English Broadband.</span>
+<span class="sd">        watson_learn (bool): Indicates whether or not data should be returned to IBM to improve services. Defaults to False.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dictionary containing information about the audio transcript along with timestamps for words.</span>
+
+<span class="sd">    </span>
+<span class="sd">    .. _Languages: https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.html#models</span>
+
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="snippet_saver"><a class="viewcode-back" href="../../../afx.features.html#afx.features.stt.snippet_saver">[docs]</a><span class="k">def</span> <span class="nf">snippet_saver</span><span class="p">(</span><span class="n">audio_file</span><span class="p">,</span> <span class="n">word_times</span><span class="p">,</span> <span class="n">target_directory</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Uses the information provided by the word_times function to segment an audio file into individual words and saves the files.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        audio_file (str): Location of wav audio file that is to be segmented.</span>
+<span class="sd">        word_times (dict): Dictionary from word_times function containing information about words and when they occur in audio_file.</span>
+<span class="sd">        target_directory (str): Directory in which the resulting audio snippets are to be saved.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Nothing. Saves audio files with words. Names of each file are determined by the words they contain.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="create_phone_dict"><a class="viewcode-back" href="../../../afx.features.html#afx.features.stt.create_phone_dict">[docs]</a><span class="k">def</span> <span class="nf">create_phone_dict</span><span class="p">(</span><span class="n">cmu_dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a dictionary with words as keys and lists of corresponding phonemes as values.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        cmu_dict (str): Location of current CMU phonetic dictionary.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dictionary of words and their corresponding phonemes.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="create_part_dict"><a class="viewcode-back" href="../../../afx.features.html#afx.features.stt.create_part_dict">[docs]</a><span class="k">def</span> <span class="nf">create_part_dict</span><span class="p">(</span><span class="n">cmu_dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a dictionary with words as keys and lists of corresponding parts of speech as values.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cmu_dict (str): Location of current CMU phonetic dictionary.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dictionary of words and their corresponding parts of speech.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="word_phones"><a class="viewcode-back" href="../../../afx.features.html#afx.features.stt.word_phones">[docs]</a><span class="k">def</span> <span class="nf">word_phones</span><span class="p">(</span><span class="n">word_transcript</span><span class="p">,</span> <span class="n">phone_dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Matches words from an audio transcript to lists of corresponding phonemes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        word_transcript (str): Transcript of an audio file.</span>
+<span class="sd">        phone_dict (dict): Dictionary of words and their phonemes.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dictionary with words from transcript as values and lists of corresponding phonemes as values.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="word_parts"><a class="viewcode-back" href="../../../afx.features.html#afx.features.stt.word_parts">[docs]</a><span class="k">def</span> <span class="nf">word_parts</span><span class="p">(</span><span class="n">word_transcript</span><span class="p">,</span> <span class="n">part_dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Matches words from an audio transcript to lists of corresponding parts of speech.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        word_transcript (str): Transcript of an audio file.</span>
+<span class="sd">        part_dict (dict): Dictionary of words and their parts of speech.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dictionary with words from transcript as values and lists of corresponding parts of speech as values.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">afx 0.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Conrad W. Rosenbrock.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>
