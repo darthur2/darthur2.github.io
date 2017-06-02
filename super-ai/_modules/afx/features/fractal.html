@@ -77,16 +77,13 @@
 <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">floor</span>
 
 <div class="viewcode-block" id="petrosian"><a class="viewcode-back" href="../../../afx.features.html#afx.features.fractal.petrosian">[docs]</a><span class="k">def</span> <span class="nf">petrosian</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute Petrosian Fractal Dimension. Petrosian&#39;s algorithm translates the</span>
-<span class="sd">    series into a binary sequence (a vector of +1 and -1</span>
-<span class="sd">    values). :math:`\frac{\log_{10}(n)}{\log_{10}(n) + \log_{10}(\frac{n}{n +</span>
-<span class="sd">    0.4N_\Delta})}`. This code was adapted from pyEEG,</span>
-<span class="sd">    0.02 r1: http://pyeeg.sourceforge.net/</span>
+    <span class="sd">&quot;&quot;&quot;Compute Petrosian Fractal Dimension. Petrosian&#39;s algorithm translates the series into a </span>
+<span class="sd">    binary sequence (a vector of +1 and -1 values). :math:`\\frac{\log_{10}(n)}{\log_{10}(n) + \log_{10}(\\frac{n}{n + 0.4 N_\Delta})}`. </span>
+<span class="sd">    This code was adapted from pyEEG, 0.02 r1: http://pyeeg.sourceforge.net/ .</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        X (numpy.ndarray): single time series.</span>
-<span class="sd">        D (numpy.ndarray): first order differential sequence of X; if not</span>
-<span class="sd">          provided, `D` is computed by :func:`numpy.diff`.</span>
+<span class="sd">        D (numpy.ndarray): first order differential sequence of X; if not provided, `D` is computed by :func:`numpy.diff`.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        float: the Petrosian fractal dimension.</span>
@@ -106,17 +103,16 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">n</span><span class="o">+</span><span class="mf">0.4</span><span class="o">*</span><span class="n">N_delta</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="katz"><a class="viewcode-back" href="../../../afx.features.html#afx.features.fractal.katz">[docs]</a><span class="k">def</span> <span class="nf">katz</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Calculate the Katz fractal dimension. `Example</span>
-<span class="sd">    &lt;https://www.seas.upenn.edu/~littlab/Site/Publications_files/Esteller_2001.pdf&gt;`_.</span>
+    <span class="sd">&quot;&quot;&quot;Calculate the Katz fractal dimension. `Example &lt;https://www.seas.upenn.edu/~littlab/Site/Publications_files/Esteller_2001.pdf&gt;`_.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        X (numpy.ndarray): single time series.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        float: the Katz fractal dimension; :math:`\frac{\log(L)}{\log(d)}`,</span>
-<span class="sd">          where :math:`L` is extent of first point to furthest point, :math:`d` is</span>
-<span class="sd">          length of time series.</span>
+<span class="sd">        float: the Katz fractal dimension; :math:`\\frac{\log(L)}{\log(d)}`, where :math:`L` </span>
+<span class="sd">          is extent of first point to furthest point, :math:`d` is length of time series.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
     <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
     
