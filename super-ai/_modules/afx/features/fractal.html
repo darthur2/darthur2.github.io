@@ -272,8 +272,8 @@
 <span class="sd">        X (numpy.ndarray): Single time series.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        float: Rate at which the autocorrelation in a time series</span>
-<span class="sd">          decreases as the lags increase. If the series :math:`x(t)` is a self-similar</span>
+<span class="sd">        float: Rate at which the autocorrelation in a time series decreases as the </span>
+<span class="sd">          lags increase. If the series :math:`x(t)` is a self-similar</span>
 <span class="sd">          fractal, then :math:`x(bt)` is statistically equivalent to :math:`b^Hx(t)`,</span>
 <span class="sd">          where `H` is the Hurst exponent.</span>
 <span class="sd">          </span>
@@ -361,7 +361,10 @@
 <span class="sd">        kmax (float): Basically the scale size or time offset; creates `kmax`</span>
 <span class="sd">          versions of your time series. The `k`-th series is every `k`-th time of</span>
 <span class="sd">          the original series.</span>
-<span class="sd">    </span>
+<span class="sd">   </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Hjorth fractal dimension.</span>
+
 <span class="sd">    Raises:</span>
 <span class="sd">        ValueError: If `X` cannot be converted to numpy.ndarray.</span>
 <span class="sd">        ValueError: If `X` is empty.</span>
@@ -453,6 +456,9 @@
 <span class="sd">    Args:</span>
 <span class="sd">        X (numpy.ndarray): Single time series.</span>
 <span class="sd">        kmax (int): Number of times to resample the series.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Higuchi fractal dimension.</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ValueError: If `X` cannot be converted to numpy.ndarray.</span>

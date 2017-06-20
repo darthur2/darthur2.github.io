@@ -145,8 +145,9 @@
 <span class="c1"># This is the speech to text function that extracts a dictionary of features from audio</span>
 
 <div class="viewcode-block" id="audio_features"><a class="viewcode-back" href="../../../afx.features.html#afx.features.stt.audio_features">[docs]</a><span class="k">def</span> <span class="nf">audio_features</span><span class="p">(</span><span class="n">audio_file</span><span class="p">,</span> <span class="n">auth_file</span><span class="p">,</span> <span class="n">language</span> <span class="o">=</span> <span class="s1">&#39;en-US_BroadbandModel&#39;</span><span class="p">,</span> <span class="n">watson_learn</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">phonemes</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Takes an audio file and uses the IBM Watson Speech to Text API to transcribe </span>
-<span class="sd">    the audio into text and then extracts words along with desired features for each word. </span>
+    <span class="sd">&quot;&quot;&quot;Takes an audio file and uses the </span>
+<span class="sd">    `IBM Watson Speech to Text API &lt;https://www.ibm.com/watson/developercloud/speech-to-text.html&gt;`_ </span>
+<span class="sd">    to transcribe the audio into text and then extracts words along with desired features for each word. </span>
 <span class="sd">    Format of audio files must be one of the following:</span>
 
 <span class="sd">    - wav</span>
@@ -162,8 +163,6 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        dict: Dictionary containing information about the audio transcript along with desired features for each word.</span>
-
-<span class="sd">    .. _Languages: https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.html#models</span>
 <span class="sd">    </span>
 <span class="sd">    Raises:</span>
 <span class="sd">        TypeError: If parameter inputs do not match types specified.</span>
@@ -171,6 +170,9 @@
 <span class="sd">        ValueError: If Credentials file is not formatted as json.</span>
 <span class="sd">        KeyError: If `username` or `password` were not found in json file.</span>
 <span class="sd">        ValueError: If values for `username` or `password` were not found in json file.</span>
+<span class="sd">    </span>
+<span class="sd">    .. _Languages: https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.html#models</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="c1"># Checking to make sure that inputs are correct types</span>
