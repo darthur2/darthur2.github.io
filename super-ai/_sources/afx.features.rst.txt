@@ -1,0 +1,30 @@
+afx\.features package
+=====================
+
+Submodules
+----------
+
+afx\.features\.fractal module
+-----------------------------
+
+.. automodule:: afx.features.fractal
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+afx\.features\.stt module
+-------------------------
+
+.. automodule:: afx.features.stt
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: afx.features
+    :members:
+    :undoc-members:
+    :show-inheritance:

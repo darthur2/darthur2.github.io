@@ -1,0 +1,422 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>afx.features package &#8212; afx 0.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">afx 0.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">afx.features package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-afx.features.fractal">afx.features.fractal module</a></li>
+<li><a class="reference internal" href="#module-afx.features.stt">afx.features.stt module</a></li>
+<li><a class="reference internal" href="#module-afx.features">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/afx.features.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="afx-features-package">
+<h1>afx.features package<a class="headerlink" href="#afx-features-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-afx.features.fractal">
+<span id="afx-features-fractal-module"></span><h2>afx.features.fractal module<a class="headerlink" href="#module-afx.features.fractal" title="Permalink to this headline">¶</a></h2>
+<p>Fractal dimension features have historically been successful in
+discriminating sleep stages or other EEG signal classes. Here we return a
+feature matrix based on various definitions of fractal dimension.</p>
+<dl class="function">
+<dt id="afx.features.fractal.higuchi">
+<code class="descclassname">afx.features.fractal.</code><code class="descname">higuchi</code><span class="sig-paren">(</span><em>X</em>, <em>kmax=7</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#higuchi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.higuchi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Higuchi fractal dimension. The Higuchi exponent is
+considered to be a measure of the irregularity of a time series. Ported from
+<cite>&lt;https://www.mathworks.com/matlabcentral/fileexchange/30119-complete-higuchi-fractal-dimension-algorithm/content/hfd.m&gt;</cite>
+by Salai Selvam V.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Single time series.</li>
+<li><strong>kmax</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Number of times to resample the series.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>X</cite> cannot be converted to numpy.ndarray.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>X</cite> is empty.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>X</cite> has infinite or missing values.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>kmax</cite> is too large or signal is too small.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ZeroDivisionError</span></code> – If means of chunks are zero.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.fractal.hjorth">
+<code class="descclassname">afx.features.fractal.</code><code class="descname">hjorth</code><span class="sig-paren">(</span><em>X</em>, <em>kmax=5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#hjorth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.hjorth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute Hjorth Fractal Dimension of a time series. This code was taken from <a class="reference external" href="http://pyeeg.sourceforge.net/">pyEEG</a>. Hjorth FD is essentially re-sampling (or
+decimating) the time series and checking if we have similar curves. The
+similarity measure is a function of the mean value for each version of the
+series. <span class="math">\(k_{\mathrm{max}}\)</span> is the scale size (or time offset). So the
+algorithm compares <cite>kmax</cite> versions of the epoch for similarity. The first
+version skips every other datapoint, the second skips every 2 datapoints,
+and the <cite>kmax</cite> skips <cite>kmax</cite> datapoints at a time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Single time series.</li>
+<li><strong>kmax</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Basically the scale size or time offset; creates <cite>kmax</cite>
+versions of your time series. The <cite>k</cite>-th series is every <cite>k</cite>-th time of
+the original series.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>X</cite> cannot be converted to numpy.ndarray.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>X</cite> is empty.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>X</cite> has infinite or missing values.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>kmax</cite> is too large or signal is too small.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ZeroDivisionError</span></code> – If means of chunks are zero.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.fractal.hurst">
+<code class="descclassname">afx.features.fractal.</code><code class="descname">hurst</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#hurst"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.hurst" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Hurst Exponent of the time series
+vector. <a class="reference external" href="https://en.wikipedia.org/wiki/Hurst_exponent">Hurst</a> is a measure
+of long-term memory in a time series that is <em>not</em> due to periodicity. It’s
+often used as a measure how how stationary a time series is.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Single time series.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>Rate at which the autocorrelation in a time series</dt>
+<dd><p class="first last">decreases as the lags increase. If the series <span class="math">\(x(t)\)</span> is a self-similar
+fractal, then <span class="math">\(x(bt)\)</span> is statistically equivalent to <span class="math">\(b^Hx(t)\)</span>,
+where <cite>H</cite> is the Hurst exponent.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>X</cite> cannot be converted to numpy.ndarray.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>X</cite> is empty.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>X</cite> has infinite or missing values.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If signal contains less than 101 data points.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ZeroDivisionError</span></code> – If variances for lagged differences are zero.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If Hurst exponent is not between 0 and 1.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.fractal.katz">
+<code class="descclassname">afx.features.fractal.</code><code class="descname">katz</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#katz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.katz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Katz fractal dimension.
+<a class="reference external" href="https://www.seas.upenn.edu/~littlab/Site/Publications_files/Esteller_2001.pdf">Example</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Single time series.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Katz fractal dimension; <span class="math">\(\frac{\log(n)}{\log(n) + \log(\frac{d}{L})}\)</span>,
+where <span class="math">\(L\)</span> is extent of first point to furthest point, <span class="math">\(d\)</span> is length of time series.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>X</cite> cannot be converted to numpy.ndarray.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>X</cite> is empty.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>X</cite> has infinite or missing values.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If signal contains less than 3 data points.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If fractal dimension calculated is unreasonably large.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.fractal.petrosian">
+<code class="descclassname">afx.features.fractal.</code><code class="descname">petrosian</code><span class="sig-paren">(</span><em>X</em>, <em>D=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#petrosian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.petrosian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute Petrosian Fractal Dimension. Petrosian’s algorithm translates
+the series into a binary sequence (a vector of +1 and -1 values).
+<span class="math">\(\frac{\log_{10}(n)}{\log_{10}(n) + \log_{10}(\frac{n}{n + 0.4 N_\Delta})}\)</span>.
+This code was adapted from pyEEG, 0.02 r1: <a class="reference external" href="http://pyeeg.sourceforge.net/">http://pyeeg.sourceforge.net/</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Single time series.</li>
+<li><strong>D</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – First order differential sequence of <cite>X</cite>;
+if not provided, <cite>D</cite> is computed by <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.diff.html#numpy.diff" title="(in NumPy v1.13)"><code class="xref py py-func docutils literal"><span class="pre">numpy.diff()</span></code></a>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Petrosian fractal dimension.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/2.7/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>X</cite> cannot be converted to numpy.ndarray.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>X</cite> is empty.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>X</cite> has infinite or missing values.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If signal contains less than 2 data points.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-afx.features.stt">
+<span id="afx-features-stt-module"></span><h2>afx.features.stt module<a class="headerlink" href="#module-afx.features.stt" title="Permalink to this headline">¶</a></h2>
+<p>Here we have a suite of functions that extract different features from audio files
+as well as perform other useful tasks for analyzing speech.</p>
+<dl class="function">
+<dt id="afx.features.stt.audio_features">
+<code class="descclassname">afx.features.stt.</code><code class="descname">audio_features</code><span class="sig-paren">(</span><em>audio_file</em>, <em>auth_file</em>, <em>language=’en-US_BroadbandModel’</em>, <em>watson_learn=False</em>, <em>phonemes=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/stt.html#audio_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.stt.audio_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an audio file and uses the IBM Watson Speech to Text API to transcribe
+the audio into text and then extracts words along with desired features for each word.
+Format of audio files must be one of the following:</p>
+<ul class="simple">
+<li>wav</li>
+<li>flac</li>
+<li>ogg</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>audio_file</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Location of audio file that is to be transcribed.</li>
+<li><strong>auth_file</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Location of json file that contains Bluemix credentials.</li>
+<li><strong>language</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Language for transcription. For more information see <a class="reference external" href="https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.html#models">Languages</a>.</li>
+<li><strong>watson_learn</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – Indicates whether or not data should be returned to IBM.</li>
+<li><strong>phonemes</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – Indicates whether or not phonemes for words should be returned.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Dictionary containing information about the audio transcript along with desired features for each word.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code> – If parameter inputs do not match types specified.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If File extension of audio is not wav, flac, or ogg.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If Credentials file is not formatted as json.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">KeyError</span></code> – If <cite>username</cite> or <cite>password</cite> were not found in json file.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If values for <cite>username</cite> or <cite>password</cite> were not found in json file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.stt.phone_selector">
+<code class="descclassname">afx.features.stt.</code><code class="descname">phone_selector</code><span class="sig-paren">(</span><em>audio_dict</em>, <em>phones</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/stt.html#phone_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.stt.phone_selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the dictionary of features created by <a class="reference internal" href="#afx.features.stt.audio_features" title="afx.features.stt.audio_features"><code class="xref py py-func docutils literal"><span class="pre">audio_features()</span></code></a> and
+finds those words that contain the phonemes found in <cite>phones</cite> and returns
+waveforms for those words.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>audio_dict</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – Dictionary of features for the audio used in <a class="reference internal" href="#afx.features.stt.audio_features" title="afx.features.stt.audio_features"><code class="xref py py-func docutils literal"><span class="pre">audio_features()</span></code></a>.</li>
+<li><strong>phones</strong> (<em>list</em>) – List of phonemes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Dictionary with words that contained phonemes found in <cite>phones</cite>
+as keys and waveforms as values.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code> – If types of input do not match those specified.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>audio_dict</cite> is empty.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If none of the phonemes specified were found.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.stt.pos_selector">
+<code class="descclassname">afx.features.stt.</code><code class="descname">pos_selector</code><span class="sig-paren">(</span><em>audio_dict</em>, <em>parts_of_speech</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/stt.html#pos_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.stt.pos_selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the dictionary of features created by <a class="reference internal" href="#afx.features.stt.audio_features" title="afx.features.stt.audio_features"><code class="xref py py-func docutils literal"><span class="pre">audio_features()</span></code></a> and
+finds those words that contain the parts of speech found in <cite>parts_of_speech</cite>
+and returns the waveforms for those words.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>audio_dict</strong> (<a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – Dictionary of features for the audio used in <a class="reference internal" href="#afx.features.stt.audio_features" title="afx.features.stt.audio_features"><code class="xref py py-func docutils literal"><span class="pre">audio_features()</span></code></a></li>
+<li><strong>parts_of_speech</strong> (<em>list</em>) – List of parts of speech.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Dictionary with words that contained parts of speech found in <cite>parts_of_speech</cite>
+as keys and waveforms as values.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code> – If types of input do not match those specified.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If <cite>audio_dict</cite> is empty.</li>
+<li><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – If none of the parts of speech listed were found.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-afx.features">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-afx.features" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">afx 0.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Conrad W. Rosenbrock.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>
