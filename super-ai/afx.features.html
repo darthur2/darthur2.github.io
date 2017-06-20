@@ -99,7 +99,7 @@ feature matrix based on various definitions of fractal dimension.</p>
 <code class="descclassname">afx.features.fractal.</code><code class="descname">higuchi</code><span class="sig-paren">(</span><em>X</em>, <em>kmax=7</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#higuchi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.higuchi" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Higuchi fractal dimension. The Higuchi exponent is
 considered to be a measure of the irregularity of a time series. Ported from
-<cite>&lt;https://www.mathworks.com/matlabcentral/fileexchange/30119-complete-higuchi-fractal-dimension-algorithm/content/hfd.m&gt;</cite>
+<a class="reference external" href="https://www.mathworks.com/matlabcentral/fileexchange/30119-complete-higuchi-fractal-dimension-algorithm/content/hfd.m">here</a>
 by Salai Selvam V.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -118,10 +118,10 @@ by Salai Selvam V.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to numpy.ndarray.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> is empty.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> has infinite or missing values.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>kmax</cite> is too large or signal is too small.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>kmax</cite> is too large or signal is too short.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ZeroDivisionError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ZeroDivisionError</span></code></a> – If means of chunks are zero.</li>
 </ul>
 </td>
@@ -159,10 +159,10 @@ the original series.</li>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to numpy.ndarray.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> is empty.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> has infinite or missing values.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>kmax</cite> is too large or signal is too small.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>kmax</cite> is too large or signal is too short.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ZeroDivisionError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ZeroDivisionError</span></code></a> – If means of chunks are zero.</li>
 </ul>
 </td>
@@ -199,7 +199,7 @@ where <cite>H</cite> is the Hurst exponent.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to numpy.ndarray.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> is empty.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> has infinite or missing values.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If signal contains less than 101 data points.</li>
@@ -232,7 +232,7 @@ where <span class="math">\(L\)</span> is extent of first point to furthest point
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to numpy.ndarray.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> is empty.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> has infinite or missing values.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If signal contains less than 3 data points.</li>
@@ -269,7 +269,7 @@ if not provided, <cite>D</cite> is computed by <a class="reference external" hre
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to numpy.ndarray.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> is empty.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> has infinite or missing values.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If signal contains less than 2 data points.</li>
@@ -318,8 +318,8 @@ Format of audio files must be one of the following:</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#TypeError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code></a> – If parameter inputs do not match types specified.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If File extension of audio is not wav, flac, or ogg.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If Credentials file is not formatted as json.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If file extension of audio is not wav, flac, or ogg.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If credentials file is not formatted as json.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#KeyError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">KeyError</span></code></a> – If <cite>username</cite> or <cite>password</cite> were not found in json file.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If values for <cite>username</cite> or <cite>password</cite> were not found in json file.</li>
 </ul>

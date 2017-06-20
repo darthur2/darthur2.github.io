@@ -92,7 +92,7 @@
 <span class="sd">        float: Petrosian fractal dimension.</span>
 <span class="sd">        </span>
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If `X` cannot be converted to numpy.ndarray.</span>
+<span class="sd">        ValueError: If `X` cannot be converted to :class:`numpy.ndarray`.</span>
 <span class="sd">        ValueError: If `X` is empty.</span>
 <span class="sd">        ValueError: If `X` has infinite or missing values.</span>
 <span class="sd">        ValueError: If signal contains less than 2 data points.</span>
@@ -190,7 +190,7 @@
 <span class="sd">        where :math:`L` is extent of first point to furthest point, :math:`d` is length of time series.</span>
 <span class="sd">    </span>
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If `X` cannot be converted to numpy.ndarray.</span>
+<span class="sd">        ValueError: If `X` cannot be converted to :class:`numpy.ndarray`.</span>
 <span class="sd">        ValueError: If `X` is empty.</span>
 <span class="sd">        ValueError: If `X` has infinite or missing values.</span>
 <span class="sd">        ValueError: If signal contains less than 3 data points.</span>
@@ -278,7 +278,7 @@
 <span class="sd">          where `H` is the Hurst exponent.</span>
 <span class="sd">          </span>
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If `X` cannot be converted to numpy.ndarray.</span>
+<span class="sd">        ValueError: If `X` cannot be converted to :class:`numpy.ndarray`.</span>
 <span class="sd">        ValueError: If `X` is empty.</span>
 <span class="sd">        ValueError: If `X` has infinite or missing values.</span>
 <span class="sd">        ValueError: If signal contains less than 101 data points.</span>
@@ -366,10 +366,10 @@
 <span class="sd">        float: Hjorth fractal dimension.</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If `X` cannot be converted to numpy.ndarray.</span>
+<span class="sd">        ValueError: If `X` cannot be converted to :class:`numpy.ndarray`.</span>
 <span class="sd">        ValueError: If `X` is empty.</span>
 <span class="sd">        ValueError: If `X` has infinite or missing values.</span>
-<span class="sd">        ValueError: If `kmax` is too large or signal is too small.</span>
+<span class="sd">        ValueError: If `kmax` is too large or signal is too short.</span>
 <span class="sd">        ZeroDivisionError: If means of chunks are zero.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
@@ -450,7 +450,7 @@
 <div class="viewcode-block" id="higuchi"><a class="viewcode-back" href="../../../afx.features.html#afx.features.fractal.higuchi">[docs]</a><span class="k">def</span> <span class="nf">higuchi</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">kmax</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculate the Higuchi fractal dimension. The Higuchi exponent is</span>
 <span class="sd">    considered to be a measure of the irregularity of a time series. Ported from</span>
-<span class="sd">    `&lt;https://www.mathworks.com/matlabcentral/fileexchange/30119-complete-higuchi-fractal-dimension-algorithm/content/hfd.m&gt;`</span>
+<span class="sd">    `here &lt;https://www.mathworks.com/matlabcentral/fileexchange/30119-complete-higuchi-fractal-dimension-algorithm/content/hfd.m&gt;`_</span>
 <span class="sd">    by Salai Selvam V.</span>
 
 <span class="sd">    Args:</span>
@@ -461,10 +461,10 @@
 <span class="sd">        float: Higuchi fractal dimension.</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If `X` cannot be converted to numpy.ndarray.</span>
+<span class="sd">        ValueError: If `X` cannot be converted to :class:`numpy.ndarray`.</span>
 <span class="sd">        ValueError: If `X` is empty.</span>
 <span class="sd">        ValueError: If `X` has infinite or missing values.</span>
-<span class="sd">        ValueError: If `kmax` is too large or signal is too small.</span>
+<span class="sd">        ValueError: If `kmax` is too large or signal is too short.</span>
 <span class="sd">        ZeroDivisionError: If means of chunks are zero.</span>
 <span class="sd">    &quot;&quot;&quot;</span>    
     
