@@ -97,9 +97,6 @@
 <span class="sd">        float: Petrosian fractal dimension.</span>
 <span class="sd">        </span>
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If `X` cannot be converted to :class:`numpy.ndarray`.</span>
-<span class="sd">        ValueError: If `X` is empty.</span>
-<span class="sd">        ValueError: If `X` has infinite or missing values.</span>
 <span class="sd">        ValueError: If signal contains less than 2 data points.</span>
 <span class="sd">    </span>
 <span class="sd">    Examples:</span>
@@ -215,9 +212,6 @@
 <span class="sd">        where :math:`L` is extent of first point to furthest point, :math:`d` is length of time series.</span>
 <span class="sd">    </span>
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If `X` cannot be converted to :class:`numpy.ndarray`.</span>
-<span class="sd">        ValueError: If `X` is empty.</span>
-<span class="sd">        ValueError: If `X` has infinite or missing values.</span>
 <span class="sd">        ValueError: If signal contains less than 3 data points.</span>
 <span class="sd">        ValueError: If fractal dimension calculated is unreasonably large.</span>
 <span class="sd">    </span>
@@ -330,10 +324,10 @@
     <span class="k">return</span> <span class="n">katz_fd</span></div>
 
 <div class="viewcode-block" id="hurst"><a class="viewcode-back" href="../../../afx.features.html#afx.features.fractal.hurst">[docs]</a><span class="k">def</span> <span class="nf">hurst</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the Hurst Exponent of the time series</span>
+    <span class="sd">&quot;&quot;&quot;Returns the Hurst exponent of the time series</span>
 <span class="sd">    vector. `Hurst &lt;https://en.wikipedia.org/wiki/Hurst_exponent&gt;`_ is a measure</span>
 <span class="sd">    of long-term memory in a time series that is *not* due to periodicity. It&#39;s</span>
-<span class="sd">    often used as a measure how how stationary a time series is.</span>
+<span class="sd">    often used as a measure of how stationary a time series is.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        X (numpy.ndarray): Single time series.</span>
@@ -345,9 +339,6 @@
 <span class="sd">          where `H` is the Hurst exponent.</span>
 <span class="sd">          </span>
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If `X` cannot be converted to :class:`numpy.ndarray`.</span>
-<span class="sd">        ValueError: If `X` is empty.</span>
-<span class="sd">        ValueError: If `X` has infinite or missing values.</span>
 <span class="sd">        ValueError: If signal contains less than 101 data points.</span>
 <span class="sd">        ZeroDivisionError: If variances for lagged differences are zero.</span>
 <span class="sd">        ValueError: If Hurst exponent is not between 0 and 1.</span>
@@ -435,7 +426,7 @@
     <span class="k">return</span> <span class="n">hurst_exp</span></div>
 
 <div class="viewcode-block" id="hjorth"><a class="viewcode-back" href="../../../afx.features.html#afx.features.fractal.hjorth">[docs]</a><span class="k">def</span> <span class="nf">hjorth</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">kmax</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute Hjorth Fractal Dimension of a time series. This code was taken from `pyEEG</span>
+    <span class="sd">&quot;&quot;&quot;Compute Hjorth fractal dimension of a time series. This code was taken from `pyEEG</span>
 <span class="sd">    &lt;http://pyeeg.sourceforge.net/&gt;`_. Hjorth FD is essentially re-sampling (or</span>
 <span class="sd">    decimating) the time series and checking if we have similar curves. The</span>
 <span class="sd">    similarity measure is a function of the mean value for each version of the</span>
@@ -454,9 +445,6 @@
 <span class="sd">        float: Hjorth fractal dimension.</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If `X` cannot be converted to :class:`numpy.ndarray`.</span>
-<span class="sd">        ValueError: If `X` is empty.</span>
-<span class="sd">        ValueError: If `X` has infinite or missing values.</span>
 <span class="sd">        ValueError: If `kmax` is too large or signal is too short.</span>
 <span class="sd">        ZeroDivisionError: If means of chunks are zero.</span>
 <span class="sd">    </span>
@@ -561,10 +549,10 @@
     <span class="k">return</span> <span class="n">hjorth_fd</span></div>
 
 <div class="viewcode-block" id="higuchi"><a class="viewcode-back" href="../../../afx.features.html#afx.features.fractal.higuchi">[docs]</a><span class="k">def</span> <span class="nf">higuchi</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">kmax</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Calculate the Higuchi fractal dimension. The Higuchi exponent is</span>
-<span class="sd">    considered to be a measure of the irregularity of a time series. Ported from</span>
-<span class="sd">    `here &lt;https://www.mathworks.com/matlabcentral/fileexchange/30119-complete-higuchi-fractal-dimension-algorithm/content/hfd.m&gt;`_</span>
-<span class="sd">    by Salai Selvam V.</span>
+    <span class="sd">&quot;&quot;&quot;Calculate the Higuchi fractal dimension. The Higuchi exponent </span>
+<span class="sd">    is considered to be a measure of the irregularity of a time series. </span>
+<span class="sd">    Original matlab code by Salai Selvam V. can be seen</span>
+<span class="sd">    `here &lt;https://www.mathworks.com/matlabcentral/fileexchange/30119-complete-higuchi-fractal-dimension-algorithm/content/hfd.m&gt;`_.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        X (numpy.ndarray): Single time series.</span>
@@ -574,9 +562,6 @@
 <span class="sd">        float: Higuchi fractal dimension.</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If `X` cannot be converted to :class:`numpy.ndarray`.</span>
-<span class="sd">        ValueError: If `X` is empty.</span>
-<span class="sd">        ValueError: If `X` has infinite or missing values.</span>
 <span class="sd">        ValueError: If `kmax` is too large or signal is too short.</span>
 <span class="sd">        ZeroDivisionError: If means of chunks are zero.</span>
 <span class="sd">    </span>

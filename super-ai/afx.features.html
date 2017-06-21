@@ -97,10 +97,10 @@ feature matrix based on various definitions of fractal dimension.</p>
 <dl class="function">
 <dt id="afx.features.fractal.higuchi">
 <code class="descclassname">afx.features.fractal.</code><code class="descname">higuchi</code><span class="sig-paren">(</span><em>X</em>, <em>kmax=7</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#higuchi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.higuchi" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the Higuchi fractal dimension. The Higuchi exponent is
-considered to be a measure of the irregularity of a time series. Ported from
-<a class="reference external" href="https://www.mathworks.com/matlabcentral/fileexchange/30119-complete-higuchi-fractal-dimension-algorithm/content/hfd.m">here</a>
-by Salai Selvam V.</p>
+<dd><p>Calculate the Higuchi fractal dimension. The Higuchi exponent
+is considered to be a measure of the irregularity of a time series.
+Original matlab code by Salai Selvam V. can be seen
+<a class="reference external" href="https://www.mathworks.com/matlabcentral/fileexchange/30119-complete-higuchi-fractal-dimension-algorithm/content/hfd.m">here</a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -118,9 +118,6 @@ by Salai Selvam V.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> is empty.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> has infinite or missing values.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>kmax</cite> is too large or signal is too short.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ZeroDivisionError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ZeroDivisionError</span></code></a> – If means of chunks are zero.</li>
 </ul>
@@ -156,7 +153,7 @@ autoregressive time series with gaussian noise is theorized to be 1.5.</p>
 <dl class="function">
 <dt id="afx.features.fractal.hjorth">
 <code class="descclassname">afx.features.fractal.</code><code class="descname">hjorth</code><span class="sig-paren">(</span><em>X</em>, <em>kmax=5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#hjorth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.hjorth" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute Hjorth Fractal Dimension of a time series. This code was taken from <a class="reference external" href="http://pyeeg.sourceforge.net/">pyEEG</a>. Hjorth FD is essentially re-sampling (or
+<dd><p>Compute Hjorth fractal dimension of a time series. This code was taken from <a class="reference external" href="http://pyeeg.sourceforge.net/">pyEEG</a>. Hjorth FD is essentially re-sampling (or
 decimating) the time series and checking if we have similar curves. The
 similarity measure is a function of the mean value for each version of the
 series. <span class="math">\(k_{\mathrm{max}}\)</span> is the scale size (or time offset). So the
@@ -182,9 +179,6 @@ the original series.</li>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> is empty.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> has infinite or missing values.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>kmax</cite> is too large or signal is too short.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ZeroDivisionError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ZeroDivisionError</span></code></a> – If means of chunks are zero.</li>
 </ul>
@@ -220,10 +214,10 @@ value is equal to the previous value plus some gaussian noise would be around 1.
 <dl class="function">
 <dt id="afx.features.fractal.hurst">
 <code class="descclassname">afx.features.fractal.</code><code class="descname">hurst</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#hurst"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.hurst" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the Hurst Exponent of the time series
+<dd><p>Returns the Hurst exponent of the time series
 vector. <a class="reference external" href="https://en.wikipedia.org/wiki/Hurst_exponent">Hurst</a> is a measure
 of long-term memory in a time series that is <em>not</em> due to periodicity. It’s
-often used as a measure how how stationary a time series is.</p>
+often used as a measure of how stationary a time series is.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -245,9 +239,6 @@ where <cite>H</cite> is the Hurst exponent.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> is empty.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> has infinite or missing values.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If signal contains less than 101 data points.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ZeroDivisionError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ZeroDivisionError</span></code></a> – If variances for lagged differences are zero.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If Hurst exponent is not between 0 and 1.</li>
@@ -305,9 +296,6 @@ where <span class="math">\(L\)</span> is extent of first point to furthest point
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> is empty.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> has infinite or missing values.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If signal contains less than 3 data points.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If fractal dimension calculated is unreasonably large.</li>
 </ul>
@@ -389,12 +377,7 @@ if not provided, <cite>D</cite> is computed by <a class="reference external" hre
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)">float</a></p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> is empty.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> has infinite or missing values.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If signal contains less than 2 data points.</li>
-</ul>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If signal contains less than 2 data points.</p>
 </td>
 </tr>
 </tbody>
@@ -452,9 +435,6 @@ Format of audio files must be one of the following:</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#TypeError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code></a> – If parameter inputs do not match types specified.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If file extension of audio is not wav, flac, or ogg.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If credentials file is not formatted as json.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#KeyError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">KeyError</span></code></a> – If <cite>username</cite> or <cite>password</cite> were not found in json file.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If values for <cite>username</cite> or <cite>password</cite> were not found in json file.</li>
 </ul>
@@ -471,7 +451,7 @@ following format:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>where <cite>password and `username</cite> are your BlueMix Credentials for the Watson API, then
+<p>where <cite>password</cite> and <cite>username</cite> are your BlueMix Credentials for the Watson API, then
 the audio can be transcribed with the following:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.stt</span> <span class="k">import</span> <span class="n">audio_features</span> <span class="k">as</span> <span class="n">af</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">audio_file</span> <span class="o">=</span> <span class="s1">&#39;audio.wav&#39;</span>
@@ -505,8 +485,6 @@ as keys and waveforms as values.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#TypeError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code></a> – If types of input do not match those specified.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>audio_dict</cite> is empty.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If none of the phonemes specified were found.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#IndexError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">IndexError</span></code></a> – If <cite>audio_dict</cite> is missing phonemes for words.</li>
 </ul>
@@ -548,8 +526,6 @@ as keys and waveforms as values.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#TypeError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code></a> – If types of input do not match those specified.</li>
-<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>audio_dict</cite> is empty.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If none of the parts of speech listed were found.</li>
 <li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#IndexError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">IndexError</span></code></a> – If <cite>audio_dict</cite> is missing phonemes for words.</li>
 </ul>
