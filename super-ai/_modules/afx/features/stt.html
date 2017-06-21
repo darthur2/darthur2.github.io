@@ -1,0 +1,529 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>afx.features.stt &#8212; afx 0.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">afx 0.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for afx.features.stt</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Here we have a suite of functions that extract different features from audio files </span>
+<span class="sd">as well as perform other useful tasks for analyzing speech.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pydub</span> <span class="k">import</span> <span class="n">AudioSegment</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">afx</span>
+<span class="kn">from</span> <span class="nn">afx.base</span> <span class="k">import</span> <span class="n">testmode</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">path</span>
+
+<span class="c1"># Loads cmu_dict and pos_dict for use in speech to text module</span>
+
+<span class="n">cmu_dict</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">afx</span><span class="o">.</span><span class="n">__path__</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;features&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;cmu_dict.pkl&quot;</span><span class="p">),</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+<span class="n">pos_dict</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">afx</span><span class="o">.</span><span class="n">__path__</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;features&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;pos_dict.pkl&quot;</span><span class="p">),</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+
+<span class="c1"># Here we set up our own class to use when running unit tests</span>
+<span class="c1"># This is just a stub that will allow the tests to run without actually using the IBM Watson API</span>
+    
+<span class="k">class</span> <span class="nc">SpeechToTextV1</span><span class="p">:</span>
+
+    <span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;en-US_BroadbandModel&#39;</span><span class="p">,</span> <span class="s1">&#39;ar-AR_BroadbandModel&#39;</span><span class="p">,</span> <span class="s1">&#39;en-UK_BroadbandModel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;en-US_NarrowbandModel&#39;</span><span class="p">,</span> <span class="s1">&#39;en-UK_NarrowbandModel&#39;</span><span class="p">,</span> <span class="s1">&#39;es-ES_NarrowbandModel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;es-ES_BroadbandModel&#39;</span><span class="p">,</span> <span class="s1">&#39;fr-FR_BroadbandModel&#39;</span><span class="p">,</span> <span class="s1">&#39;fr-FR_NarrowbandModel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ja-JP_BroadbandModel&#39;</span><span class="p">,</span> <span class="s1">&#39;ja-JP_NarrowbandModel&#39;</span><span class="p">,</span> <span class="s1">&#39;pt-BR_BroadbandModel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;pt-BR_NarrowbandModel&#39;</span><span class="p">,</span> <span class="s1">&#39;zh-CN_BroadbandModel&#39;</span><span class="p">,</span> <span class="s1">&#39;zh-CN_NarrowbandModel&#39;</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">x_watson_learning_opt_out</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">username</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_watson_learning_opt_out</span> <span class="o">=</span> <span class="n">x_watson_learning_opt_out</span>
+        
+    <span class="k">def</span> <span class="nf">get_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">language</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">language</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Model not available for language provided&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">language</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">:</span>
+            <span class="k">pass</span>
+            
+    <span class="k">def</span> <span class="nf">recognize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">timestamps</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;result_index&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                    <span class="s1">&#39;results&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;alternatives&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;confidence&#39;</span><span class="p">:</span> <span class="mf">0.79</span><span class="p">,</span>
+                                                   <span class="s1">&#39;timestamps&#39;</span><span class="p">:</span> 
+                                                   <span class="p">[[</span><span class="s1">&#39;it&#39;</span><span class="p">,</span> <span class="mf">1.59</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">],</span>
+                                                    <span class="p">[</span><span class="s1">&#39;looks&#39;</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">,</span> <span class="mf">1.97</span><span class="p">],</span>
+                                                    <span class="p">[</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="mf">1.97</span><span class="p">,</span> <span class="mf">2.17</span><span class="p">],</span>
+                                                    <span class="p">[</span><span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="mf">2.17</span><span class="p">,</span> <span class="mf">2.25</span><span class="p">],</span>
+                                                    <span class="p">[</span><span class="s1">&#39;patient&#39;</span><span class="p">,</span> <span class="mf">2.25</span><span class="p">,</span> <span class="mf">2.63</span><span class="p">],</span>
+                                                    <span class="p">[</span><span class="s1">&#39;has&#39;</span><span class="p">,</span> <span class="mf">2.63</span><span class="p">,</span> <span class="mf">2.81</span><span class="p">],</span>
+                                                    <span class="p">[</span><span class="s1">&#39;chickenpox&#39;</span><span class="p">,</span> <span class="mf">2.81</span><span class="p">,</span> <span class="mf">3.68</span><span class="p">]],</span>
+                            <span class="s1">&#39;transcript&#39;</span><span class="p">:</span> <span class="s1">&#39;it looks like the patient has chickenpox&#39;</span><span class="p">}],</span>
+                            <span class="s1">&#39;final&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+                            <span class="p">{</span><span class="s1">&#39;alternatives&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;confidence&#39;</span><span class="p">:</span> <span class="mf">0.79</span><span class="p">,</span>
+                                                <span class="s1">&#39;timestamps&#39;</span><span class="p">:</span> 
+                                                <span class="p">[[</span><span class="s1">&#39;it&#39;</span><span class="p">,</span> <span class="mf">5.85</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">],</span>
+                                                <span class="p">[</span><span class="s1">&#39;looks&#39;</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">6.23</span><span class="p">],</span>
+                                                <span class="p">[</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="mf">6.23</span><span class="p">,</span> <span class="mf">6.43</span><span class="p">],</span>
+                                                <span class="p">[</span><span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="mf">6.43</span><span class="p">,</span> <span class="mf">6.51</span><span class="p">],</span>
+                                                <span class="p">[</span><span class="s1">&#39;patient&#39;</span><span class="p">,</span> <span class="mf">6.51</span><span class="p">,</span> <span class="mf">6.88</span><span class="p">],</span>
+                                                <span class="p">[</span><span class="s1">&#39;has&#39;</span><span class="p">,</span> <span class="mf">6.88</span><span class="p">,</span> <span class="mf">7.07</span><span class="p">],</span>
+                                                <span class="p">[</span><span class="s1">&#39;chickenpox&#39;</span><span class="p">,</span> <span class="mf">7.07</span><span class="p">,</span> <span class="mf">7.93</span><span class="p">]],</span>
+                            <span class="s1">&#39;transcript&#39;</span><span class="p">:</span> <span class="s1">&#39;it looks like the patient has chickenpox&#39;</span><span class="p">}],</span>
+                            <span class="s1">&#39;final&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}]}</span>
+        
+        <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># If we aren&#39;t in test mode, we load the true SpeechToTextV1 module</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">testmode</span><span class="p">:</span> <span class="c1"># pragma: no cover</span>
+    <span class="kn">from</span> <span class="nn">watson_developer_cloud</span> <span class="k">import</span> <span class="n">SpeechToTextV1</span>
+
+
+<span class="c1"># This is the speech to text function that extracts a dictionary of features from audio</span>
+
+<div class="viewcode-block" id="audio_features"><a class="viewcode-back" href="../../../afx.features.html#afx.features.stt.audio_features">[docs]</a><span class="k">def</span> <span class="nf">audio_features</span><span class="p">(</span><span class="n">audio_file</span><span class="p">,</span> <span class="n">auth_file</span><span class="p">,</span> <span class="n">language</span> <span class="o">=</span> <span class="s1">&#39;en-US_BroadbandModel&#39;</span><span class="p">,</span> <span class="n">watson_learn</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">phonemes</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Takes an audio file and uses the </span>
+<span class="sd">    `IBM Watson Speech to Text API &lt;https://www.ibm.com/watson/developercloud/speech-to-text.html&gt;`_ </span>
+<span class="sd">    to transcribe the audio into text and then extracts words along with desired features for each word. </span>
+<span class="sd">    Format of audio files must be one of the following:</span>
+
+<span class="sd">    - wav</span>
+<span class="sd">    - flac</span>
+<span class="sd">    - ogg</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        audio_file (str): Location of audio file that is to be transcribed.</span>
+<span class="sd">        auth_file (str): Location of json file that contains Bluemix credentials.</span>
+<span class="sd">        language (str): Language for transcription. For more information see Languages_.</span>
+<span class="sd">        watson_learn (bool): Indicates whether or not data should be returned to IBM.</span>
+<span class="sd">        phonemes (bool): Indicates whether or not phonemes for words should be returned.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dictionary containing information about the audio transcript along with desired features for each word.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If parameter inputs do not match types specified.</span>
+<span class="sd">        ValueError: If file extension of audio is not wav, flac, or ogg.</span>
+<span class="sd">        ValueError: If credentials file is not formatted as json.</span>
+<span class="sd">        KeyError: If `username` or `password` were not found in json file.</span>
+<span class="sd">        ValueError: If values for `username` or `password` were not found in json file.</span>
+<span class="sd">    </span>
+<span class="sd">    .. _Languages: https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.html#models</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        Assuming that `audio.wav` is a wav file and that `auth.json` is a json file with the</span>
+<span class="sd">        following format:</span>
+<span class="sd">        </span>
+<span class="sd">        .. code-block:: json</span>
+
+<span class="sd">            {</span>
+<span class="sd">                &quot;username&quot;: &quot;0c61ebc2-fake-json-file-371cea2fa3ff&quot;,</span>
+<span class="sd">                &quot;password&quot;: &quot;fakepassword&quot;,</span>
+<span class="sd">            }</span>
+
+<span class="sd">        where `password and `username` are your BlueMix Credentials for the Watson API, then</span>
+<span class="sd">        the audio can be transcribed with the following:</span>
+
+<span class="sd">        &gt;&gt;&gt; from afx.features.stt import audio_features as af</span>
+<span class="sd">        &gt;&gt;&gt; audio_file = &#39;audio.wav&#39;</span>
+<span class="sd">        &gt;&gt;&gt; auth_file = &#39;auth.json&#39;</span>
+<span class="sd">        &gt;&gt;&gt; af(audio_file, auth_file)  </span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Checking to make sure that inputs are correct types</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">audio_file</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Expecting object of type `str`&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">auth_file</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Expecting obect of type `str`&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">language</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Expecting object of type `str`&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">watson_learn</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Expecting object of type `bool`&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">phonemes</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Expecting object of type `bool`&quot;</span><span class="p">)</span>
+    
+    
+    <span class="c1"># Checking to make sure that audio file is supported</span>
+    
+    <span class="n">audio_ext</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">audio_file</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="n">audio_ext</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;.wav&#39;</span><span class="p">,</span> <span class="s1">&#39;.flac&#39;</span><span class="p">,</span> <span class="s1">&#39;.ogg&#39;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Format of provided audio file is not supported&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Ensures that credentials file is a json file</span>
+    
+    <span class="n">auth_ext</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">auth_file</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="n">auth_ext</span> <span class="o">!=</span> <span class="s1">&#39;.json&#39;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Credentials file must be formatted as json file&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Opens the json file containing credentials needed by IBM to transcribe</span>
+    
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">auth_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">cred_file</span><span class="p">:</span>
+        <span class="n">auth_info</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cred_file</span><span class="p">)</span>
+        
+    <span class="c1"># Checks to see if password and username exist in json file</span>
+        
+    <span class="k">if</span> <span class="s1">&#39;username&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">auth_info</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;Could not find `username` in credentials file&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="s1">&#39;password&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">auth_info</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;Could not find `password` in credentials file&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">auth_info</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`username` is empty&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">auth_info</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`password` is empty&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Sets username and password</span>
+
+    <span class="n">speech_user</span> <span class="o">=</span> <span class="n">auth_info</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
+    <span class="n">speech_pass</span> <span class="o">=</span> <span class="n">auth_info</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>
+
+    <span class="c1"># Creates a speech to text instance</span>
+    
+    <span class="n">speech_to_text</span> <span class="o">=</span> <span class="n">SpeechToTextV1</span><span class="p">(</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="n">speech_user</span><span class="p">,</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="n">speech_pass</span><span class="p">,</span>
+        <span class="n">x_watson_learning_opt_out</span> <span class="o">=</span> <span class="n">watson_learn</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># Grabs the specified language model</span>
+    
+    <span class="n">speech_to_text</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="n">language</span><span class="p">)</span>
+
+    <span class="c1"># Recognize function reads the audio and returns the transcription</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">audio_file</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">audio</span><span class="p">:</span>
+        <span class="n">speech_results</span> <span class="o">=</span> <span class="n">speech_to_text</span><span class="o">.</span><span class="n">recognize</span><span class="p">(</span>
+            <span class="n">audio</span><span class="p">,</span> <span class="n">content_type</span> <span class="o">=</span> <span class="s1">&#39;audio/&#39;</span> <span class="o">+</span> <span class="n">audio_ext</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">timestamps</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Grabs all of the results returned by the Speech API</span>
+    
+    <span class="n">results</span> <span class="o">=</span> <span class="n">speech_results</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
+    <span class="n">num_res</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+    
+    <span class="c1"># Grabs the words and timestamps from the first result (phrase)</span>
+    
+    <span class="n">first_result</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;alternatives&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">first_result</span><span class="p">[</span><span class="s1">&#39;transcript&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">first_times</span> <span class="o">=</span> <span class="n">first_result</span><span class="p">[</span><span class="s1">&#39;timestamps&#39;</span><span class="p">]</span>
+    <span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span><span class="n">first_times</span><span class="p">[</span><span class="n">cur_word</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">cur_word</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">first_times</span><span class="p">))]</span>
+
+    <span class="c1"># Gets words and timestamps for additional chunks of phrases that were returned</span>
+    
+    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_res</span><span class="p">):</span>
+        <span class="n">cur_result</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">result</span><span class="p">][</span><span class="s1">&#39;alternatives&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">words</span> <span class="o">+=</span> <span class="n">cur_result</span><span class="p">[</span><span class="s1">&#39;transcript&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">cur_times</span> <span class="o">=</span> <span class="n">cur_result</span><span class="p">[</span><span class="s1">&#39;timestamps&#39;</span><span class="p">]</span>
+        <span class="n">timestamps</span> <span class="o">+=</span> <span class="p">[</span><span class="n">cur_times</span><span class="p">[</span><span class="n">cur_word</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">cur_word</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">cur_times</span><span class="p">))]</span>
+    
+    <span class="c1"># Need to convert words to upper case to use the CMU Dictionary</span>
+    
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">element</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+    
+    <span class="c1"># Reads in the specified audio as pydub class AudioSegment</span>
+    
+    <span class="n">audio</span> <span class="o">=</span> <span class="n">AudioSegment</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">audio_file</span><span class="p">)</span>    
+    <span class="n">num_words</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+    <span class="n">audio_snippets</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="c1"># Creates a list of numpy arrays that correspond to words in audio</span>
+    
+    <span class="k">for</span> <span class="n">cur_word</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_words</span><span class="p">):</span>
+        <span class="n">begin</span> <span class="o">=</span> <span class="n">timestamps</span><span class="p">[</span><span class="n">cur_word</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">timestamps</span><span class="p">[</span><span class="n">cur_word</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000</span>
+        <span class="n">audio_snippets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">audio</span><span class="p">[</span><span class="n">begin</span><span class="p">:</span><span class="n">end</span><span class="p">])</span><span class="o">.</span><span class="n">get_array_of_samples</span><span class="p">()))</span>
+    
+    <span class="c1"># Matches words from audio to words in CMU dictionary (if they exist) and gets phonemes</span>
+    <span class="c1"># If words occur more then once, their information is appended to that word</span>
+    
+    <span class="k">if</span> <span class="n">phonemes</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">word_in_dict</span> <span class="o">=</span> <span class="p">[</span><span class="n">words</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="ow">in</span> <span class="n">cmu_dict</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">))]</span>
+        <span class="n">words_used</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">word_in_dict</span><span class="p">))</span>
+        <span class="n">stamps_used</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">timestamps</span><span class="p">,</span> <span class="n">word_in_dict</span><span class="p">))</span>
+        <span class="n">snippets_used</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">audio_snippets</span><span class="p">,</span> <span class="n">word_in_dict</span><span class="p">))</span>
+        <span class="n">word_phones</span> <span class="o">=</span> <span class="p">[</span><span class="n">cmu_dict</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words_used</span><span class="p">]</span>
+        
+        <span class="n">audio_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">words_used</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">words_used</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">audio_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="n">audio_dict</span><span class="p">[</span><span class="n">words_used</span><span class="p">[</span><span class="n">word</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stamps_used</span><span class="p">[</span><span class="n">word</span><span class="p">])</span>
+                <span class="n">audio_dict</span><span class="p">[</span><span class="n">words_used</span><span class="p">[</span><span class="n">word</span><span class="p">]][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">snippets_used</span><span class="p">[</span><span class="n">word</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">audio_dict</span><span class="p">[</span><span class="n">words_used</span><span class="p">[</span><span class="n">word</span><span class="p">]]</span> <span class="o">=</span> <span class="p">([</span><span class="n">stamps_used</span><span class="p">[</span><span class="n">word</span><span class="p">]],</span> <span class="p">[</span><span class="n">snippets_used</span><span class="p">[</span><span class="n">word</span><span class="p">]],</span> <span class="n">word_phones</span><span class="p">[</span><span class="n">word</span><span class="p">])</span>
+            
+    <span class="c1"># Matches words from audio to their timestamps and waveforms</span>
+    <span class="c1"># The code is the exact same as above except for the lack of phonemes</span>
+    
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">audio_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_words</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">words</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">audio_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="n">audio_dict</span><span class="p">[</span><span class="n">words</span><span class="p">[</span><span class="n">word</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">timestamps</span><span class="p">[</span><span class="n">word</span><span class="p">])</span>
+                <span class="n">audio_dict</span><span class="p">[</span><span class="n">words</span><span class="p">[</span><span class="n">word</span><span class="p">]][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">audio_snippets</span><span class="p">[</span><span class="n">word</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">audio_dict</span><span class="p">[</span><span class="n">words</span><span class="p">[</span><span class="n">word</span><span class="p">]]</span> <span class="o">=</span> <span class="p">([</span><span class="n">timestamps</span><span class="p">[</span><span class="n">word</span><span class="p">]],</span> <span class="p">[</span><span class="n">audio_snippets</span><span class="p">[</span><span class="n">word</span><span class="p">]])</span>
+         
+    <span class="c1"># Returns a dictionary with the specified features</span>
+    
+    <span class="k">return</span> <span class="n">audio_dict</span></div>
+
+<div class="viewcode-block" id="phone_selector"><a class="viewcode-back" href="../../../afx.features.html#afx.features.stt.phone_selector">[docs]</a><span class="k">def</span> <span class="nf">phone_selector</span><span class="p">(</span><span class="n">audio_dict</span><span class="p">,</span> <span class="n">phones</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Takes the dictionary of features created by :func:`audio_features` and </span>
+<span class="sd">    finds those words that contain the phonemes found in `phones` and returns </span>
+<span class="sd">    waveforms for those words.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        audio_dict (dict): Dictionary of features for the audio used in :func:`audio_features`.</span>
+<span class="sd">        phones (list): List of phonemes.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dictionary with words that contained phonemes found in `phones` </span>
+<span class="sd">        as keys and waveforms as values.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If types of input do not match those specified.</span>
+<span class="sd">        ValueError: If `audio_dict` is empty.</span>
+<span class="sd">        ValueError: If none of the phonemes specified were found.</span>
+<span class="sd">        IndexError: If `audio_dict` is missing phonemes for words.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        Assume that `audio_dict` holds the output from using :func:`audio_features`. </span>
+<span class="sd">        Then we can search the dictionary for specific phonemes in the following way:</span>
+
+<span class="sd">        &gt;&gt;&gt; from afx.features.stt import phone_selector as phs</span>
+<span class="sd">        &gt;&gt;&gt; phonemes = [&#39;D&#39;, &#39;IY1&#39;, &#39;AA1&#39;, &#39;W&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; phs(audio_dict, phonemes)</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Checks to make sure input are of correct types</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">audio_dict</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`audio_dict` must be of type `dict`&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">phones</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`phones` must be a `list` of phonemes&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Ensures that dictionary is not empty</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">audio_dict</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`audio_dict` is empty&quot;</span><span class="p">)</span>
+        
+    <span class="c1"># Makes sure that phonemes were supplied</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">audio_dict</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">audio_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]])</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Index out of range. `audio_dict` doesn&#39;t contain phonemes.&quot;</span><span class="p">)</span>
+        
+    <span class="c1"># Get word keys and phoneme list values from audio_dict</span>
+    
+    <span class="n">values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">audio_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">audio_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    
+    <span class="c1"># Creates lists of phonemes, both overall and for individual words</span>
+    
+    <span class="n">word_phones</span> <span class="o">=</span> <span class="p">[</span><span class="n">values</span><span class="p">[</span><span class="n">word</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">))]</span>
+    <span class="n">all_phones</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">word_phones</span><span class="p">))</span>
+    
+    <span class="c1"># Ensures that at least one of the phonemes given is found in at least one word</span>
+    
+    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">phones</span><span class="p">[</span><span class="n">phone</span><span class="p">]</span> <span class="ow">in</span> <span class="n">all_phones</span> <span class="k">for</span> <span class="n">phone</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">phones</span><span class="p">))])</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;None of phonemes in phone found in `audio_dict`&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Get waveform representations for each word</span>
+    
+    <span class="n">waveforms</span> <span class="o">=</span> <span class="p">[</span><span class="n">values</span><span class="p">[</span><span class="n">wave</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">wave</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">))]</span>
+    
+    <span class="c1"># Find out which words contain the phonemes that we are looking for</span>
+    
+    <span class="n">phone_ind</span> <span class="o">=</span> <span class="p">[[[</span><span class="nb">any</span><span class="p">(</span><span class="n">phones</span><span class="p">[</span><span class="n">phone</span><span class="p">]</span> <span class="ow">in</span> <span class="n">word_phones</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="k">for</span> <span class="n">phone</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">phones</span><span class="p">)))]</span> <span class="k">for</span> 
+      <span class="n">word</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word_phones</span><span class="p">))][</span><span class="n">ind</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word_phones</span><span class="p">))]</span>
+    
+    <span class="c1"># Creates keys of words and values of waveform representations for each word</span>
+    
+    <span class="n">phone_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">phone_ind</span><span class="p">))</span>
+    <span class="n">wave_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">waveforms</span><span class="p">,</span> <span class="n">phone_ind</span><span class="p">))</span>
+    
+    <span class="n">phone_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">phone_keys</span><span class="p">,</span> <span class="n">wave_values</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">phone_dict</span></div>
+
+
+<div class="viewcode-block" id="pos_selector"><a class="viewcode-back" href="../../../afx.features.html#afx.features.stt.pos_selector">[docs]</a><span class="k">def</span> <span class="nf">pos_selector</span><span class="p">(</span><span class="n">audio_dict</span><span class="p">,</span> <span class="n">parts_of_speech</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Takes the dictionary of features created by :func:`audio_features` and </span>
+<span class="sd">    finds those words that contain the parts of speech found in `parts_of_speech` </span>
+<span class="sd">    and returns the waveforms for those words.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        audio_dict (dict): Dictionary of features for the audio used in :func:`audio_features`</span>
+<span class="sd">        parts_of_speech (list): List of parts of speech.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Dictionary with words that contained parts of speech found in `parts_of_speech` </span>
+<span class="sd">        as keys and waveforms as values.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If types of input do not match those specified.</span>
+<span class="sd">        ValueError: If `audio_dict` is empty.</span>
+<span class="sd">        ValueError: If none of the parts of speech listed were found.</span>
+<span class="sd">        IndexError: If `audio_dict` is missing phonemes for words.</span>
+<span class="sd">    </span>
+<span class="sd">    Examples:</span>
+<span class="sd">        If `audio_dict` is the output from using :func:`audio_features`, then we can search</span>
+<span class="sd">        the dictionary for words with specific parts of speech in the following way:</span>
+
+<span class="sd">        &gt;&gt;&gt; from afx.features.stt import pos_selector as pos</span>
+<span class="sd">        &gt;&gt;&gt; parts_of_speech = [&#39;liquid&#39;, &#39;stop&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; pos(audio_dict, parts_of_speech)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Ensures that input is of correct type</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">audio_dict</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`audio_dict` must of type `dict`&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parts_of_speech</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`parts_of_speech` must be a `list` of parts of speech&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Ensures that dictionary is not empty</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">audio_dict</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`audio_dict` is empty&quot;</span><span class="p">)</span>
+  
+    <span class="c1"># Makes sure that phonemes were supplied</span>
+      
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">audio_dict</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">audio_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]])</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Index out of range. `audio_dict` doesn&#39;t contain phonemes.&quot;</span><span class="p">)</span>
+ 
+    <span class="c1"># Gets parts of speech values and phoneme keys</span>
+    
+    <span class="n">pos_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">pos_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">pos_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">pos_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    
+    <span class="c1"># Indicates which parts of speech values in pos_values we want to look for</span>
+    
+    <span class="n">pos_ind</span> <span class="o">=</span> <span class="p">[[[</span><span class="nb">any</span><span class="p">(</span><span class="n">parts_of_speech</span><span class="p">[</span><span class="n">part_of_speech</span><span class="p">]</span> <span class="ow">in</span> <span class="n">pos_values</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">part_of_speech</span> <span class="ow">in</span> 
+                     <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">parts_of_speech</span><span class="p">)))]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pos_values</span><span class="p">))][</span><span class="n">ind</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> 
+        <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pos_values</span><span class="p">))]</span>
+        
+    <span class="c1"># Creates a list of phonemes that correpond to the parts of speech we are looking for</span>
+    
+    <span class="n">phones</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">pos_keys</span><span class="p">,</span> <span class="n">pos_ind</span><span class="p">))</span>
+    
+    <span class="c1"># Tries to use phone_selector function. If phone_selector doesn&#39;t work, that means that</span>
+    <span class="c1"># none of the words in audio_dict contain the parts of speech we were looking for</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">phone_selector</span><span class="p">(</span><span class="n">audio_dict</span><span class="p">,</span> <span class="n">phones</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;None of parts of speech in `parts_of_speech` found in `audio_dict`&quot;</span><span class="p">)</span>
+        
+    <span class="c1"># Uses phone_selector function to get words and waveforms that we want</span>
+    
+    <span class="n">parts_of_speech_dict</span> <span class="o">=</span> <span class="n">phone_selector</span><span class="p">(</span><span class="n">audio_dict</span><span class="p">,</span> <span class="n">phones</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">parts_of_speech_dict</span></div>
+
+
+    
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">afx 0.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Conrad W. Rosenbrock.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

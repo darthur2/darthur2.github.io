@@ -1,0 +1,599 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>afx.features package &#8212; afx 0.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">afx 0.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">afx.features package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-afx.features.fractal">afx.features.fractal module</a></li>
+<li><a class="reference internal" href="#module-afx.features.stt">afx.features.stt module</a></li>
+<li><a class="reference internal" href="#module-afx.features">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/afx.features.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="afx-features-package">
+<h1>afx.features package<a class="headerlink" href="#afx-features-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-afx.features.fractal">
+<span id="afx-features-fractal-module"></span><h2>afx.features.fractal module<a class="headerlink" href="#module-afx.features.fractal" title="Permalink to this headline">¶</a></h2>
+<p>Fractal dimension features have historically been successful in
+discriminating sleep stages or other EEG signal classes. Here we return a
+feature matrix based on various definitions of fractal dimension.</p>
+<dl class="function">
+<dt id="afx.features.fractal.higuchi">
+<code class="descclassname">afx.features.fractal.</code><code class="descname">higuchi</code><span class="sig-paren">(</span><em>X</em>, <em>kmax=7</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#higuchi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.higuchi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Higuchi fractal dimension. The Higuchi exponent is
+considered to be a measure of the irregularity of a time series. Ported from
+<a class="reference external" href="https://www.mathworks.com/matlabcentral/fileexchange/30119-complete-higuchi-fractal-dimension-algorithm/content/hfd.m">here</a>
+by Salai Selvam V.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Single time series.</li>
+<li><strong>kmax</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Number of times to resample the series.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Higuchi fractal dimension.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> is empty.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> has infinite or missing values.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>kmax</cite> is too large or signal is too short.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ZeroDivisionError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ZeroDivisionError</span></code></a> – If means of chunks are zero.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>As explained in the examples for <a class="reference internal" href="#afx.features.fractal.hjorth" title="afx.features.fractal.hjorth"><code class="xref py py-func docutils literal"><span class="pre">hjorth()</span></code></a>, the fractal dimension of an
+autoregressive time series with gaussian noise is theorized to be 1.5.</p>
+<p>We can first create such a time series with the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span> <span class="o">=</span> <span class="mi">5715005</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gauss_series</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gauss_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gauss_series</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">gauss_noise</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">gauss_series</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">gauss_series</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can test to see if the Higuchi fractal dimension is close to 1.5.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.fractal</span> <span class="k">import</span> <span class="n">higuchi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">higuchi</span><span class="p">(</span><span class="n">gauss_series</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.49</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.fractal.hjorth">
+<code class="descclassname">afx.features.fractal.</code><code class="descname">hjorth</code><span class="sig-paren">(</span><em>X</em>, <em>kmax=5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#hjorth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.hjorth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute Hjorth Fractal Dimension of a time series. This code was taken from <a class="reference external" href="http://pyeeg.sourceforge.net/">pyEEG</a>. Hjorth FD is essentially re-sampling (or
+decimating) the time series and checking if we have similar curves. The
+similarity measure is a function of the mean value for each version of the
+series. <span class="math">\(k_{\mathrm{max}}\)</span> is the scale size (or time offset). So the
+algorithm compares <cite>kmax</cite> versions of the epoch for similarity. The first
+version skips every other datapoint, the second skips every 2 datapoints,
+and the <cite>kmax</cite> skips <cite>kmax</cite> datapoints at a time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Single time series.</li>
+<li><strong>kmax</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Basically the scale size or time offset; creates <cite>kmax</cite>
+versions of your time series. The <cite>k</cite>-th series is every <cite>k</cite>-th time of
+the original series.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Hjorth fractal dimension.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> is empty.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> has infinite or missing values.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>kmax</cite> is too large or signal is too short.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ZeroDivisionError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ZeroDivisionError</span></code></a> – If means of chunks are zero.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Higuchi theorized that the fractal dimension of a time series where each
+value is equal to the previous value plus some gaussian noise would be around 1.5.</p>
+<p>Such a time series can be produced with the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span> <span class="o">=</span> <span class="mi">5715005</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gauss_series</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gauss_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gauss_series</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">gauss_noise</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">gauss_series</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">gauss_series</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can test to see if the Hjorth fractal dimension is close to 1.5.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.fractal</span> <span class="k">import</span> <span class="n">hjorth</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">hjorth</span><span class="p">(</span><span class="n">gauss_series</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.49</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.fractal.hurst">
+<code class="descclassname">afx.features.fractal.</code><code class="descname">hurst</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#hurst"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.hurst" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Hurst Exponent of the time series
+vector. <a class="reference external" href="https://en.wikipedia.org/wiki/Hurst_exponent">Hurst</a> is a measure
+of long-term memory in a time series that is <em>not</em> due to periodicity. It’s
+often used as a measure how how stationary a time series is.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Single time series.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>Rate at which the autocorrelation in a time series decreases as the</dt>
+<dd><p class="first last">lags increase. If the series <span class="math">\(x(t)\)</span> is a self-similar
+fractal, then <span class="math">\(x(bt)\)</span> is statistically equivalent to <span class="math">\(b^Hx(t)\)</span>,
+where <cite>H</cite> is the Hurst exponent.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> is empty.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> has infinite or missing values.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If signal contains less than 101 data points.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ZeroDivisionError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ZeroDivisionError</span></code></a> – If variances for lagged differences are zero.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If Hurst exponent is not between 0 and 1.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>For stationary, periodic curves, the fractal dimension of a times series can
+be estimated as 2-H where H is the Hurst exponent. We can test this by
+calculating the Hurst exponent for the Weierstrass Function, which has a theoretical
+fractal dimension of 1.5.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.fractal</span> <span class="k">import</span> <span class="n">hurst</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gamma</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="mi">27</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span><span class="o">/</span><span class="mi">1333</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">weierstrass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tt</span><span class="p">))</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">weierstrass</span> <span class="o">+=</span> <span class="n">gamma</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="o">*</span><span class="n">H</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">gamma</span><span class="o">**</span><span class="n">i</span><span class="o">*</span><span class="n">tt</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">hurst</span><span class="p">(</span><span class="n">weierstrass</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.49</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.fractal.katz">
+<code class="descclassname">afx.features.fractal.</code><code class="descname">katz</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#katz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.katz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Katz fractal dimension.
+<a class="reference external" href="https://www.seas.upenn.edu/~littlab/Site/Publications_files/Esteller_2001.pdf">Example</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Katz fractal dimension is calculated in such a way that it will not be lower than
+1. However, for increasingly complex signals, the Katz fractal dimension will continue to grow
+beyond what one would consider to be a reasonable value for the dimension of a time series.
+In addition, the Katz fractal dimension will almost always be close to 1 except for more complex signals.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Single time series.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Katz fractal dimension; <span class="math">\(\frac{\log(n)}{\log(n) + \log(\frac{d}{L})}\)</span>,
+where <span class="math">\(L\)</span> is extent of first point to furthest point, <span class="math">\(d\)</span> is length of time series.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> is empty.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> has infinite or missing values.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If signal contains less than 3 data points.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If fractal dimension calculated is unreasonably large.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>The Weierstrass Function has a theoretical fractal dimension of 1.5. A fairly simple
+curve using the Weierstrass Function can be generated as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gamma</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="mi">27</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span><span class="o">/</span><span class="mi">1333</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">weierstrass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tt</span><span class="p">))</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">weierstrass</span> <span class="o">+=</span> <span class="n">gamma</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="o">*</span><span class="n">H</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">gamma</span><span class="o">**</span><span class="n">i</span><span class="o">*</span><span class="n">tt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then we can calculate the Katz fractal dimension with the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.fractal</span> <span class="k">import</span> <span class="n">katz</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">katz</span><span class="p">(</span><span class="n">weierstrass</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>We can generate a more complex curve using the Weierstrass Function with <cite>H</cite> of 0.2.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">weierstrass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tt</span><span class="p">))</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">weierstrass</span> <span class="o">+=</span> <span class="n">gamma</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="o">*</span><span class="n">H</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">gamma</span><span class="o">**</span><span class="n">i</span><span class="o">*</span><span class="n">tt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now our estimate of the Katz fractal dimension has increased.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">katz</span><span class="p">(</span><span class="n">weierstrass</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">1.0159</span>
+</pre></div>
+</div>
+<p>However in order to really see a large value for the Katz fractal dimension, we can
+try producing a time series composed completely of random draws from a Gaussian
+distribution with mean 0 and standard deviation 20.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gaussian_draws</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">katz</span><span class="p">(</span><span class="n">gaussian_draws</span><span class="p">))</span>
+<span class="go">1.853</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.fractal.petrosian">
+<code class="descclassname">afx.features.fractal.</code><code class="descname">petrosian</code><span class="sig-paren">(</span><em>X</em>, <em>D=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#petrosian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.petrosian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute Petrosian fractal dimension. Petrosian’s algorithm translates
+the series into a binary sequence (a vector of +1 and -1 values).
+<span class="math">\(\frac{\log_{10}(n)}{\log_{10}(n) + \log_{10}(\frac{n}{n + 0.4 N_\Delta})}\)</span>.
+This code was adapted from pyEEG, 0.02 r1: <a class="reference external" href="http://pyeeg.sourceforge.net/">http://pyeeg.sourceforge.net/</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Petrosian fractal dimension is bounded between 1 and 1.05 and
+therefore cannot give values we would believe are close to the actual fractal
+dimension of a time series. However, the differences within that range might be useful
+for investigating certain phenomenon.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Single time series.</li>
+<li><strong>D</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – First order differential sequence of <cite>X</cite>;
+if not provided, <cite>D</cite> is computed by <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.diff.html#numpy.diff" title="(in NumPy v1.13)"><code class="xref py py-func docutils literal"><span class="pre">numpy.diff()</span></code></a>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Petrosian fractal dimension.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> cannot be converted to <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> is empty.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>X</cite> has infinite or missing values.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If signal contains less than 2 data points.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>We can first simulate a simple sine wave in the following way:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sine_curve</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">tt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A sine wave should have a fractal dimension of 1. Since this is within the
+appropriate range for the Petrosian fractal dimension, we can test this with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.fractal</span> <span class="k">import</span> <span class="n">petrosian</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">petrosian</span><span class="p">(</span><span class="n">sine_curve</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">1.0001</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-afx.features.stt">
+<span id="afx-features-stt-module"></span><h2>afx.features.stt module<a class="headerlink" href="#module-afx.features.stt" title="Permalink to this headline">¶</a></h2>
+<p>Here we have a suite of functions that extract different features from audio files
+as well as perform other useful tasks for analyzing speech.</p>
+<dl class="function">
+<dt id="afx.features.stt.audio_features">
+<code class="descclassname">afx.features.stt.</code><code class="descname">audio_features</code><span class="sig-paren">(</span><em>audio_file</em>, <em>auth_file</em>, <em>language=’en-US_BroadbandModel’</em>, <em>watson_learn=False</em>, <em>phonemes=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/stt.html#audio_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.stt.audio_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an audio file and uses the
+<a class="reference external" href="https://www.ibm.com/watson/developercloud/speech-to-text.html">IBM Watson Speech to Text API</a>
+to transcribe the audio into text and then extracts words along with desired features for each word.
+Format of audio files must be one of the following:</p>
+<ul class="simple">
+<li>wav</li>
+<li>flac</li>
+<li>ogg</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>audio_file</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Location of audio file that is to be transcribed.</li>
+<li><strong>auth_file</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Location of json file that contains Bluemix credentials.</li>
+<li><strong>language</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Language for transcription. For more information see <a class="reference external" href="https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.html#models">Languages</a>.</li>
+<li><strong>watson_learn</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Indicates whether or not data should be returned to IBM.</li>
+<li><strong>phonemes</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Indicates whether or not phonemes for words should be returned.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Dictionary containing information about the audio transcript along with desired features for each word.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#TypeError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code></a> – If parameter inputs do not match types specified.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If file extension of audio is not wav, flac, or ogg.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If credentials file is not formatted as json.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#KeyError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">KeyError</span></code></a> – If <cite>username</cite> or <cite>password</cite> were not found in json file.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If values for <cite>username</cite> or <cite>password</cite> were not found in json file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Assuming that <cite>audio.wav</cite> is a wav file and that <cite>auth.json</cite> is a json file with the
+following format:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;0c61ebc2-fake-json-file-371cea2fa3ff&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;fakepassword&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>where <cite>password and `username</cite> are your BlueMix Credentials for the Watson API, then
+the audio can be transcribed with the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.stt</span> <span class="k">import</span> <span class="n">audio_features</span> <span class="k">as</span> <span class="n">af</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">audio_file</span> <span class="o">=</span> <span class="s1">&#39;audio.wav&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auth_file</span> <span class="o">=</span> <span class="s1">&#39;auth.json&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">af</span><span class="p">(</span><span class="n">audio_file</span><span class="p">,</span> <span class="n">auth_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.stt.phone_selector">
+<code class="descclassname">afx.features.stt.</code><code class="descname">phone_selector</code><span class="sig-paren">(</span><em>audio_dict</em>, <em>phones</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/stt.html#phone_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.stt.phone_selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the dictionary of features created by <a class="reference internal" href="#afx.features.stt.audio_features" title="afx.features.stt.audio_features"><code class="xref py py-func docutils literal"><span class="pre">audio_features()</span></code></a> and
+finds those words that contain the phonemes found in <cite>phones</cite> and returns
+waveforms for those words.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>audio_dict</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – Dictionary of features for the audio used in <a class="reference internal" href="#afx.features.stt.audio_features" title="afx.features.stt.audio_features"><code class="xref py py-func docutils literal"><span class="pre">audio_features()</span></code></a>.</li>
+<li><strong>phones</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a>) – List of phonemes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Dictionary with words that contained phonemes found in <cite>phones</cite>
+as keys and waveforms as values.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#TypeError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code></a> – If types of input do not match those specified.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>audio_dict</cite> is empty.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If none of the phonemes specified were found.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#IndexError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">IndexError</span></code></a> – If <cite>audio_dict</cite> is missing phonemes for words.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Assume that <cite>audio_dict</cite> holds the output from using <a class="reference internal" href="#afx.features.stt.audio_features" title="afx.features.stt.audio_features"><code class="xref py py-func docutils literal"><span class="pre">audio_features()</span></code></a>.
+Then we can search the dictionary for specific phonemes in the following way:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.stt</span> <span class="k">import</span> <span class="n">phone_selector</span> <span class="k">as</span> <span class="n">phs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phonemes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;IY1&#39;</span><span class="p">,</span> <span class="s1">&#39;AA1&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phs</span><span class="p">(</span><span class="n">audio_dict</span><span class="p">,</span> <span class="n">phonemes</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.stt.pos_selector">
+<code class="descclassname">afx.features.stt.</code><code class="descname">pos_selector</code><span class="sig-paren">(</span><em>audio_dict</em>, <em>parts_of_speech</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/stt.html#pos_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.stt.pos_selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the dictionary of features created by <a class="reference internal" href="#afx.features.stt.audio_features" title="afx.features.stt.audio_features"><code class="xref py py-func docutils literal"><span class="pre">audio_features()</span></code></a> and
+finds those words that contain the parts of speech found in <cite>parts_of_speech</cite>
+and returns the waveforms for those words.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>audio_dict</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – Dictionary of features for the audio used in <a class="reference internal" href="#afx.features.stt.audio_features" title="afx.features.stt.audio_features"><code class="xref py py-func docutils literal"><span class="pre">audio_features()</span></code></a></li>
+<li><strong>parts_of_speech</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a>) – List of parts of speech.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Dictionary with words that contained parts of speech found in <cite>parts_of_speech</cite>
+as keys and waveforms as values.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#TypeError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code></a> – If types of input do not match those specified.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>audio_dict</cite> is empty.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If none of the parts of speech listed were found.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#IndexError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">IndexError</span></code></a> – If <cite>audio_dict</cite> is missing phonemes for words.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>If <cite>audio_dict</cite> is the output from using <a class="reference internal" href="#afx.features.stt.audio_features" title="afx.features.stt.audio_features"><code class="xref py py-func docutils literal"><span class="pre">audio_features()</span></code></a>, then we can search
+the dictionary for words with specific parts of speech in the following way:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.stt</span> <span class="k">import</span> <span class="n">pos_selector</span> <span class="k">as</span> <span class="n">pos</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parts_of_speech</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;liquid&#39;</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos</span><span class="p">(</span><span class="n">audio_dict</span><span class="p">,</span> <span class="n">parts_of_speech</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-afx.features">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-afx.features" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">afx 0.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Conrad W. Rosenbrock.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>
