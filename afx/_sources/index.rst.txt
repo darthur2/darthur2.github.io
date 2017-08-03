@@ -1,0 +1,37 @@
+.. afx documentation master file, created by
+   sphinx-quickstart on Fri Feb 10 11:00:37 2017.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Automatic Feature Extractor Documentation
+=========================================
+
+The `super-ai` project is, unfortunately, not a solution to the problem of the
+general artificial intelligence, even if its name may suggest that. Instead, it
+is a framework that allows automated feature extraction (hence the python
+project name `afx`) from arbitrary datasets. The overview below describes the
+general approach.
+
+.. note:: Building ML models is a multi-step process. This project and
+   documentation does *not* deal with any actual model building! Instead, it
+   relies on the generic model framework and algorithm selection projects such
+   as the projects listed at `automl <http://automl.org/>`_ and `automl python
+   <https://github.com/automl>`_. Feature selection is the dark art of data
+   science since model selection and hyper-parameter optimization are
+   essentially solved problems: with computer-selected models and parameters
+   already outperforming humans. As such, this project aims at automating the
+   feature selection and leaving model and hyper-parameter selection to other
+   existing projects.
+
+.. toctree::
+   :maxdepth: 1
+
+   superai.rst
+   organization.rst
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
