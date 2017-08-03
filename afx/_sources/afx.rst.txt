@@ -44,6 +44,13 @@ afx\.utility module
     :undoc-members:
     :show-inheritance:
 
+afx\.validation module
+-----------------------
+
+.. automodule:: afx.validation
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
 Module contents
 ---------------
