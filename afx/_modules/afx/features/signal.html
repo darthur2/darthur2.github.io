@@ -88,8 +88,8 @@
     
     <span class="k">pass</span></div>
 
-<span class="nd">@vd</span><span class="o">.</span><span class="n">validate_array</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;nolen&quot;</span><span class="p">,</span> <span class="s2">&quot;numeric&quot;</span><span class="p">,</span> <span class="s2">&quot;empty&quot;</span><span class="p">,</span> <span class="s2">&quot;isnan&quot;</span><span class="p">,</span> <span class="s2">&quot;isinf&quot;</span><span class="p">]})</span>
-<span class="k">def</span> <span class="nf">energy</span><span class="p">(</span><span class="n">signal</span><span class="p">):</span>
+<span class="c1">#@vd.validate_array({0: [&quot;nolen&quot;, &quot;numeric&quot;, &quot;empty&quot;, &quot;isnan&quot;, &quot;isinf&quot;]})</span>
+<div class="viewcode-block" id="energy"><a class="viewcode-back" href="../../../afx.features.html#afx.features.signal.energy">[docs]</a><span class="k">def</span> <span class="nf">energy</span><span class="p">(</span><span class="n">signal</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Computes the energy of discrete input `signal`.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
@@ -135,7 +135,7 @@
         <span class="k">raise</span> <span class="n">OutputError</span><span class="p">(</span><span class="s2">&quot;Computed energy too large. Consider calculating energy &quot;</span>
                          <span class="s2">&quot;for smaller segment of signal or standardizing.&quot;</span><span class="p">)</span>
         
-    <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">result</span></div>
 
 <span class="nd">@vd</span><span class="o">.</span><span class="n">validate_array</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;nolen&quot;</span><span class="p">,</span> <span class="s2">&quot;numeric&quot;</span><span class="p">,</span> <span class="s2">&quot;empty&quot;</span><span class="p">,</span> <span class="s2">&quot;isnan&quot;</span><span class="p">,</span> <span class="s2">&quot;isinf&quot;</span><span class="p">]})</span>
 <span class="k">def</span> <span class="nf">formant_peak</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">min_peak_dist</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
