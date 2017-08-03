@@ -1,0 +1,268 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>afx.features package &#8212; afx 0.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">afx 0.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">afx.features package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-afx.features.fractal">afx.features.fractal module</a></li>
+<li><a class="reference internal" href="#module-afx.features.stt">afx.features.stt module</a></li>
+<li><a class="reference internal" href="#module-afx.features">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/afx.features.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="afx-features-package">
+<h1>afx.features package<a class="headerlink" href="#afx-features-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-afx.features.fractal">
+<span id="afx-features-fractal-module"></span><h2>afx.features.fractal module<a class="headerlink" href="#module-afx.features.fractal" title="Permalink to this headline">¶</a></h2>
+<p>Fractal dimension features have historically been successful in
+discriminating sleep stages or other EEG signal classes. Here we return a
+feature matrix based on various definitions of fractal dimension.</p>
+</div>
+<div class="section" id="module-afx.features.stt">
+<span id="afx-features-stt-module"></span><h2>afx.features.stt module<a class="headerlink" href="#module-afx.features.stt" title="Permalink to this headline">¶</a></h2>
+<p>Here we have a suite of functions that extract different features from audio files
+as well as perform other useful tasks for analyzing speech.</p>
+<dl class="function">
+<dt id="afx.features.stt.audio_features">
+<code class="descclassname">afx.features.stt.</code><code class="descname">audio_features</code><span class="sig-paren">(</span><em>audio_file</em>, <em>auth_file</em>, <em>language='en-US_BroadbandModel'</em>, <em>watson_learn=False</em>, <em>phonemes=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/stt.html#audio_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.stt.audio_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an audio file and uses the
+<a class="reference external" href="https://www.ibm.com/watson/developercloud/speech-to-text.html">IBM Watson Speech to Text API</a>
+to transcribe the audio into text and then extracts words along with desired features for
+each word. Format of audio files must be one of the following:</p>
+<ul class="simple">
+<li>wav</li>
+<li>flac</li>
+<li>ogg</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>audio_file</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Location of audio file that is to be transcribed.</li>
+<li><strong>auth_file</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Location of json file that contains Bluemix credentials.</li>
+<li><strong>language</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Language for transcription. For more information see <a class="reference external" href="https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.html#models">Languages</a>.</li>
+<li><strong>watson_learn</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Indicates whether or not data should be returned to IBM.</li>
+<li><strong>phonemes</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#bool" title="(in Python v3.5)"><em>bool</em></a>) – Indicates whether or not phonemes for words should be returned.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Dictionary containing information about the audio transcript.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#KeyError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">KeyError</span></code></a> – If <cite>username</cite> or <cite>password</cite> were not found in json file.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If values for <cite>username</cite> or <cite>password</cite> were not found in json file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Assuming that <cite>audio.wav</cite> is a wav file and that <cite>auth.json</cite> is a json file with the
+following format:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;0c61ebc2-fake-json-file-371cea2fa3ff&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;fakepassword&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>where <cite>password</cite> and <cite>username</cite> are your BlueMix Credentials for the Watson API, then
+the audio can be transcribed with the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.stt</span> <span class="k">import</span> <span class="n">audio_features</span> <span class="k">as</span> <span class="n">af</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">audio_file</span> <span class="o">=</span> <span class="s1">&#39;audio.wav&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">auth_file</span> <span class="o">=</span> <span class="s1">&#39;auth.json&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">af</span><span class="p">(</span><span class="n">audio_file</span><span class="p">,</span> <span class="n">auth_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.stt.phone_selector">
+<code class="descclassname">afx.features.stt.</code><code class="descname">phone_selector</code><span class="sig-paren">(</span><em>audio_dict</em>, <em>phones</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/stt.html#phone_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.stt.phone_selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the dictionary of features created by <a class="reference internal" href="#afx.features.stt.audio_features" title="afx.features.stt.audio_features"><code class="xref py py-func docutils literal"><span class="pre">audio_features()</span></code></a> and
+finds those words that contain the phonemes found in <cite>phones</cite> and returns
+waveforms for those words.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>audio_dict</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – Dictionary of features for the audio used in <a class="reference internal" href="#afx.features.stt.audio_features" title="afx.features.stt.audio_features"><code class="xref py py-func docutils literal"><span class="pre">audio_features()</span></code></a>.</li>
+<li><strong>phones</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a>) – List of phonemes.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Dictionary with words that contained phonemes found in <cite>phones</cite>
+as keys and waveforms as values.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If none of the phonemes specified were found.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#IndexError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">IndexError</span></code></a> – If <cite>audio_dict</cite> is missing phonemes for words.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Assume that <cite>audio_dict</cite> holds the output from using <a class="reference internal" href="#afx.features.stt.audio_features" title="afx.features.stt.audio_features"><code class="xref py py-func docutils literal"><span class="pre">audio_features()</span></code></a>.
+Then we can search the dictionary for specific phonemes in the following way:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.stt</span> <span class="k">import</span> <span class="n">phone_selector</span> <span class="k">as</span> <span class="n">phs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phonemes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;IY1&#39;</span><span class="p">,</span> <span class="s1">&#39;AA1&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phs</span><span class="p">(</span><span class="n">audio_dict</span><span class="p">,</span> <span class="n">phonemes</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.stt.pos_selector">
+<code class="descclassname">afx.features.stt.</code><code class="descname">pos_selector</code><span class="sig-paren">(</span><em>audio_dict</em>, <em>parts_of_speech</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/stt.html#pos_selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.stt.pos_selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the dictionary of features created by <a class="reference internal" href="#afx.features.stt.audio_features" title="afx.features.stt.audio_features"><code class="xref py py-func docutils literal"><span class="pre">audio_features()</span></code></a> and
+finds those words that contain the parts of speech found in <cite>parts_of_speech</cite>
+and returns the waveforms for those words.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>audio_dict</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><em>dict</em></a>) – Dictionary of features for the audio used in <a class="reference internal" href="#afx.features.stt.audio_features" title="afx.features.stt.audio_features"><code class="xref py py-func docutils literal"><span class="pre">audio_features()</span></code></a></li>
+<li><strong>parts_of_speech</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a>) – List of parts of speech.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Dictionary with words that contained parts of speech found in <cite>parts_of_speech</cite>
+as keys and waveforms as values.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)">dict</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If none of the parts of speech listed were found.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#IndexError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">IndexError</span></code></a> – If <cite>audio_dict</cite> is missing phonemes for words.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>If <cite>audio_dict</cite> is the output from using <a class="reference internal" href="#afx.features.stt.audio_features" title="afx.features.stt.audio_features"><code class="xref py py-func docutils literal"><span class="pre">audio_features()</span></code></a>, then we can search
+the dictionary for words with specific parts of speech in the following way:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.stt</span> <span class="k">import</span> <span class="n">pos_selector</span> <span class="k">as</span> <span class="n">pos</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parts_of_speech</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;liquid&#39;</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos</span><span class="p">(</span><span class="n">audio_dict</span><span class="p">,</span> <span class="n">parts_of_speech</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-afx.features">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-afx.features" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">afx 0.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Conrad W. Rosenbrock.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>
