@@ -12,6 +12,24 @@ afx\.features\.fractal module
     :undoc-members:
     :show-inheritance:
 
+afx\.features\.mfcc module
+-----------------------------
+
+.. automodule:: afx.features.mfcc
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+afx\.features\.signal module
+-----------------------------
+
+.. automodule:: afx.features.signal
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
 afx\.features\.stt module
 -------------------------
 

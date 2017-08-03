@@ -50,6 +50,8 @@
 <li><a class="reference internal" href="#">afx.features package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-afx.features.fractal">afx.features.fractal module</a></li>
+<li><a class="reference internal" href="#module-afx.features.mfcc">afx.features.mfcc module</a></li>
+<li><a class="reference internal" href="#module-afx.features.signal">afx.features.signal module</a></li>
 <li><a class="reference internal" href="#module-afx.features.stt">afx.features.stt module</a></li>
 <li><a class="reference internal" href="#module-afx.features">Module contents</a></li>
 </ul>
@@ -91,6 +93,143 @@
 <p>Fractal dimension features have historically been successful in
 discriminating sleep stages or other EEG signal classes. Here we return a
 feature matrix based on various definitions of fractal dimension.</p>
+</div>
+<div class="section" id="module-afx.features.mfcc">
+<span id="afx-features-mfcc-module"></span><h2>afx.features.mfcc module<a class="headerlink" href="#module-afx.features.mfcc" title="Permalink to this headline">¶</a></h2>
+<p>This module contains all of the functions necessary for computing the
+Mel-Frequency Cepstral Coefficients.</p>
+<dl class="exception">
+<dt id="afx.features.mfcc.FrameError">
+<em class="property">exception </em><code class="descclassname">afx.features.mfcc.</code><code class="descname">FrameError</code><a class="reference internal" href="_modules/afx/features/mfcc.html#FrameError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.mfcc.FrameError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#Exception" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></a></p>
+<p>Error raised when frames input is of incorrect type or dimension.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="afx.features.mfcc.WindowError">
+<em class="property">exception </em><code class="descclassname">afx.features.mfcc.</code><code class="descname">WindowError</code><a class="reference internal" href="_modules/afx/features/mfcc.html#WindowError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.mfcc.WindowError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#Exception" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></a></p>
+<p>Error raised when window function does not accept correct arguments or
+it does not a valid return value.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.mfcc.get_filterbanks">
+<code class="descclassname">afx.features.mfcc.</code><code class="descname">get_filterbanks</code><span class="sig-paren">(</span><em>nfilt=20</em>, <em>nfft=512</em>, <em>sample_rate=16000</em>, <em>low_freq=0</em>, <em>high_freq=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/mfcc.html#get_filterbanks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.mfcc.get_filterbanks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute a Mel-filterbank. The filters are stored in the rows, the columns correspond
+to fft bins. The filters are returned as an array of size <cite>nfilt</cite> * (<cite>nfft</cite>/2 + 1). Code was adapted from
+<a class="reference external" href="https://github.com/jameslyons/python_speech_features">here</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sample_rate</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Sample rate of the signal we are working with.</li>
+<li><strong>nfilt</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Number of filters in the filterbank, default 26.</li>
+<li><strong>nfft</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – FFT size. Default is 512.</li>
+<li><strong>low_freq</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Lowest band edge of mel filters. In Hz, default is 0.</li>
+<li><strong>high_freq</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Highest band edge of mel filters. In Hz, default is <cite>sample_rate</cite>/2</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>numpy.ndarray: A class:<cite>numpy.ndarray</cite> of size <cite>nfilt</cite> * (<cite>nfft</cite>/2 + 1) containing filterbank. Each row holds 1 filter.</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Filterbanks for calculating the Mel-Frequency Cepstral Coefficients can be obtained
+in the following way:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">afx.features.mfcc</span> <span class="k">as</span> <span class="nn">mfcc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fil_banks</span> <span class="o">=</span> <span class="n">mfcc</span><span class="o">.</span><span class="n">get_filterbanks</span><span class="p">(</span><span class="n">nfilt</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">nfft</span><span class="o">=</span><span class="mi">258</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">fbank</span> <span class="ow">in</span> <span class="n">fil_banks</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fbank</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Filterbanks&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="_images/filterbanks.png" src="_images/filterbanks.png" />
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.mfcc.hz2mel">
+<code class="descclassname">afx.features.mfcc.</code><code class="descname">hz2mel</code><span class="sig-paren">(</span><em>hz</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/mfcc.html#hz2mel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.mfcc.hz2mel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a value in Hertz to Mels. For more information, you can go to this
+<a class="reference external" href="http://www.practicalcryptography.com/miscellaneous/machine-learning/guide-mel-frequency-cepstral-coefficients-mfccs/">tutorial</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>hz</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – A value in Hz. This can also be a class:<cite>numpy.ndarray</cite>, conversion proceeds element-wise.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A value in Mels. If an array was passed in, an identical sized array is returned.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)">numpy.ndarray</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.mfcc.mel2hz">
+<code class="descclassname">afx.features.mfcc.</code><code class="descname">mel2hz</code><span class="sig-paren">(</span><em>mel</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/mfcc.html#mel2hz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.mfcc.mel2hz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a value in Mels to Hertz. For more information, you can go to this
+<a class="reference external" href="http://www.practicalcryptography.com/miscellaneous/machine-learning/guide-mel-frequency-cepstral-coefficients-mfccs/">tutorial</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mel</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – A value in Mels. This can also be a class:<cite>numpy.ndrray</cite>, conversion proceeds element-wise.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A value in Hertz. If an array was passed in, an identical sized array is returned.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)">numpy.ndarray</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.mfcc.round_half_up">
+<code class="descclassname">afx.features.mfcc.</code><code class="descname">round_half_up</code><span class="sig-paren">(</span><em>number</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/mfcc.html#round_half_up"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.mfcc.round_half_up" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs rounding where 0.5 rounds to 1.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>number</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Number to be rounded.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Rounded number.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-afx.features.signal">
+<span id="afx-features-signal-module"></span><h2>afx.features.signal module<a class="headerlink" href="#module-afx.features.signal" title="Permalink to this headline">¶</a></h2>
+<p>This module contains several functions that can be used to extract
+useful features from audio signals.</p>
+<dl class="exception">
+<dt id="afx.features.signal.OutputError">
+<em class="property">exception </em><code class="descclassname">afx.features.signal.</code><code class="descname">OutputError</code><a class="reference internal" href="_modules/afx/features/signal.html#OutputError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.signal.OutputError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#Exception" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></a></p>
+<p>Error when output is not reasonable.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="afx.features.signal.PeakError">
+<em class="property">exception </em><code class="descclassname">afx.features.signal.</code><code class="descname">PeakError</code><a class="reference internal" href="_modules/afx/features/signal.html#PeakError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.signal.PeakError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#Exception" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></a></p>
+<p>Error when peaks cannot be found.</p>
+</dd></dl>
+
 </div>
 <div class="section" id="module-afx.features.stt">
 <span id="afx-features-stt-module"></span><h2>afx.features.stt module<a class="headerlink" href="#module-afx.features.stt" title="Permalink to this headline">¶</a></h2>
