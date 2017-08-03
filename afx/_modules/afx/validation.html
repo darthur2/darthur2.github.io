@@ -70,6 +70,9 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">wraps</span>
+
+<span class="c1"># We need to use functools.wraps in order to get documentation to render correctly.</span>
 
 <div class="viewcode-block" id="is_numeric"><a class="viewcode-back" href="../../afx.html#afx.validation.is_numeric">[docs]</a><span class="k">def</span> <span class="nf">is_numeric</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Tests if the specified argument is a valid numeric array (or an object</span>
@@ -128,8 +131,10 @@
 <span class="sd">        tests (dict): keys are class:`int` for positional arguments or class:`str` for</span>
 <span class="sd">          keyword arguments; values are one of [&#39;nolen&#39;, &#39;numeric&#39;, &#39;isnan&#39;, &#39;isinf&#39;, &#39;empty&#39;].</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
+    
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">tests</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
         <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">tests</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tests</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -153,6 +158,10 @@
 
         <span class="k">return</span> <span class="n">wrapper</span>
     <span class="k">return</span> <span class="n">wrap</span></div>
+
+
+
+
 </pre></div>
 
           </div>

@@ -93,6 +93,304 @@
 <p>Fractal dimension features have historically been successful in
 discriminating sleep stages or other EEG signal classes. Here we return a
 feature matrix based on various definitions of fractal dimension.</p>
+<dl class="function">
+<dt id="afx.features.fractal.higuchi">
+<code class="descclassname">afx.features.fractal.</code><code class="descname">higuchi</code><span class="sig-paren">(</span><em>X</em>, <em>kmax=7</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#higuchi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.higuchi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Higuchi fractal dimension. The Higuchi exponent
+is considered to be a measure of the irregularity of a time series.
+Original matlab code by Salai Selvam V. can be seen
+<a class="reference external" href="https://www.mathworks.com/matlabcentral/fileexchange/30119-complete-higuchi-fractal-dimension-algorithm/content/hfd.m">here</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Single time series.</li>
+<li><strong>kmax</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Number of times to resample the series.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Higuchi fractal dimension.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>kmax</cite> is too large or signal is too short.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ZeroDivisionError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ZeroDivisionError</span></code></a> – If means of chunks are zero.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>As explained in the examples for <a class="reference internal" href="#afx.features.fractal.hjorth" title="afx.features.fractal.hjorth"><code class="xref py py-func docutils literal"><span class="pre">hjorth()</span></code></a>, the fractal dimension of an
+autoregressive time series with gaussian noise is theorized to be 1.5.</p>
+<p>We can first create such a time series with the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span> <span class="o">=</span> <span class="mi">5715005</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gauss_series</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gauss_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gauss_series</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">gauss_noise</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">gauss_series</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">gauss_series</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can test to see if the Higuchi fractal dimension is close to 1.5.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.fractal</span> <span class="k">import</span> <span class="n">higuchi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">higuchi</span><span class="p">(</span><span class="n">gauss_series</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.49</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.fractal.hjorth">
+<code class="descclassname">afx.features.fractal.</code><code class="descname">hjorth</code><span class="sig-paren">(</span><em>X</em>, <em>kmax=5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#hjorth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.hjorth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute Hjorth fractal dimension of a time series. This code was taken from <a class="reference external" href="http://pyeeg.sourceforge.net/">pyEEG</a>. Hjorth FD is essentially re-sampling (or
+decimating) the time series and checking if we have similar curves. The
+similarity measure is a function of the mean value for each version of the
+series. <span class="math">\(k_{\mathrm{max}}\)</span> is the scale size (or time offset). So the
+algorithm compares <cite>kmax</cite> versions of the epoch for similarity. The first
+version skips every other datapoint, the second skips every 2 datapoints,
+and the <cite>kmax</cite> skips <cite>kmax</cite> datapoints at a time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Single time series.</li>
+<li><strong>kmax</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Basically the scale size or time offset; creates <cite>kmax</cite>
+versions of your time series. The <cite>k</cite>-th series is every <cite>k</cite>-th time of
+the original series.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Hjorth fractal dimension.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>kmax</cite> is too large or signal is too short.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ZeroDivisionError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ZeroDivisionError</span></code></a> – If means of chunks are zero.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Higuchi theorized that the fractal dimension of a time series where each
+value is equal to the previous value plus some gaussian noise would be around 1.5.</p>
+<p>Such a time series can be produced with the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span> <span class="o">=</span> <span class="mi">5715005</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gauss_series</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gauss_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gauss_series</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">gauss_noise</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">gauss_series</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">gauss_series</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can test to see if the Hjorth fractal dimension is close to 1.5.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.fractal</span> <span class="k">import</span> <span class="n">hjorth</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">hjorth</span><span class="p">(</span><span class="n">gauss_series</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.49</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.fractal.hurst">
+<code class="descclassname">afx.features.fractal.</code><code class="descname">hurst</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#hurst"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.hurst" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Hurst exponent of the time series
+vector. <a class="reference external" href="https://en.wikipedia.org/wiki/Hurst_exponent">Hurst</a> is a measure
+of long-term memory in a time series that is <em>not</em> due to periodicity. It’s
+often used as a measure of how stationary a time series is.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Single time series.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>Rate at which the autocorrelation in a time series decreases as the</dt>
+<dd><p class="first last">lags increase. If the series <span class="math">\(x(t)\)</span> is a self-similar
+fractal, then <span class="math">\(x(bt)\)</span> is statistically equivalent to <span class="math">\(b^Hx(t)\)</span>,
+where <cite>H</cite> is the Hurst exponent.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If signal contains less than 21 data points.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ZeroDivisionError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ZeroDivisionError</span></code></a> – If variances for lagged differences are zero.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>For stationary, periodic curves, the fractal dimension of a times series can
+be estimated as 2-H where H is the Hurst exponent. We can test this by
+calculating the Hurst exponent for the Weierstrass Function, which has a theoretical
+fractal dimension of 1.5.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.fractal</span> <span class="k">import</span> <span class="n">hurst</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gamma</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="mi">27</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span><span class="o">/</span><span class="mi">1333</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">weierstrass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tt</span><span class="p">))</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">weierstrass</span> <span class="o">+=</span> <span class="n">gamma</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="o">*</span><span class="n">H</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">gamma</span><span class="o">**</span><span class="n">i</span><span class="o">*</span><span class="n">tt</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">hurst</span><span class="p">(</span><span class="n">weierstrass</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.47</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.fractal.katz">
+<code class="descclassname">afx.features.fractal.</code><code class="descname">katz</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#katz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.katz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Katz fractal dimension.
+<a class="reference external" href="https://www.seas.upenn.edu/~littlab/Site/Publications_files/Esteller_2001.pdf">Example</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Katz fractal dimension is calculated in such a way that it will not be lower
+than 1. However, for increasingly complex signals, the Katz fractal dimension will
+continue to grow beyond what one would consider to be a reasonable value for the
+dimension of a time series. In addition, the Katz fractal dimension will almost
+always be close to 1 except for more complex signals.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Single time series.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Katz fractal dimension; <span class="math">\(\frac{\log(n)}{\log(n) + \log(\frac{d}{L})}\)</span>,
+where <span class="math">\(L\)</span> is extent of first point to furthest point, <span class="math">\(d\)</span> is
+length of time series.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)">float</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If signal contains less than 3 data points.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>The Weierstrass Function has a theoretical fractal dimension of 1.5. A fairly simple
+curve using the Weierstrass Function can be generated as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gamma</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="mi">27</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span><span class="o">/</span><span class="mi">1333</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">weierstrass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tt</span><span class="p">))</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">weierstrass</span> <span class="o">+=</span> <span class="n">gamma</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="o">*</span><span class="n">H</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">gamma</span><span class="o">**</span><span class="n">i</span><span class="o">*</span><span class="n">tt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then we can calculate the Katz fractal dimension with the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.fractal</span> <span class="k">import</span> <span class="n">katz</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">katz</span><span class="p">(</span><span class="n">weierstrass</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>We can generate a more complex curve using the Weierstrass Function with <cite>H</cite> of 0.2.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">weierstrass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tt</span><span class="p">))</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">weierstrass</span> <span class="o">+=</span> <span class="n">gamma</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="o">*</span><span class="n">H</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">gamma</span><span class="o">**</span><span class="n">i</span><span class="o">*</span><span class="n">tt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now our estimate of the Katz fractal dimension has increased.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">katz</span><span class="p">(</span><span class="n">weierstrass</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">1.0159</span>
+</pre></div>
+</div>
+<p>However in order to really see a large value for the Katz fractal dimension, we can
+try producing a time series composed completely of random draws from a Gaussian
+distribution with mean 0 and standard deviation 20.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gaussian_draws</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">katz</span><span class="p">(</span><span class="n">gaussian_draws</span><span class="p">))</span>
+<span class="go">1.853</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.fractal.petrosian">
+<code class="descclassname">afx.features.fractal.</code><code class="descname">petrosian</code><span class="sig-paren">(</span><em>X</em>, <em>D=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/fractal.html#petrosian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.fractal.petrosian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute Petrosian fractal dimension. Petrosian’s algorithm translates
+the series into a binary sequence (a vector of +1 and -1 values).
+<span class="math">\(\frac{\log_{10}(n)}{\log_{10}(n) + \log_{10}(\frac{n}{n + 0.4 N_\Delta})}\)</span>.
+This code was adapted from pyEEG, 0.02 r1: <a class="reference external" href="http://pyeeg.sourceforge.net/">http://pyeeg.sourceforge.net/</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Petrosian fractal dimension is bounded between 1 and 1.05 and
+therefore cannot give values we would believe are close to the actual fractal
+dimension of a time series. However, the differences within that range might be useful
+for investigating certain phenomenon.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Single time series.</li>
+<li><strong>D</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – First order differential sequence of <cite>X</cite>;
+if not provided, <cite>D</cite> is computed by <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.diff.html#numpy.diff" title="(in NumPy v1.13)"><code class="xref py py-func docutils literal"><span class="pre">numpy.diff()</span></code></a>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Petrosian fractal dimension.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If signal contains less than 2 data points.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>We can first simulate a simple sine wave in the following way:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sine_curve</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">tt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A sine wave should have a fractal dimension of 1. Since this is within the
+appropriate range for the Petrosian fractal dimension, we can test this with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.fractal</span> <span class="k">import</span> <span class="n">petrosian</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">petrosian</span><span class="p">(</span><span class="n">sine_curve</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">1.0001</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </div>
 <div class="section" id="module-afx.features.mfcc">
 <span id="afx-features-mfcc-module"></span><h2>afx.features.mfcc module<a class="headerlink" href="#module-afx.features.mfcc" title="Permalink to this headline">¶</a></h2>
@@ -111,6 +409,66 @@ Mel-Frequency Cepstral Coefficients.</p>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#Exception" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></a></p>
 <p>Error raised when window function does not accept correct arguments or
 it does not a valid return value.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.mfcc.fbank">
+<code class="descclassname">afx.features.mfcc.</code><code class="descname">fbank</code><span class="sig-paren">(</span><em>signal</em>, <em>sample_rate=16000</em>, <em>win_len=0.025</em>, <em>win_step=0.01</em>, <em>nfilt=26</em>, <em>nfft=512</em>, <em>low_freq=0</em>, <em>high_freq=None</em>, <em>pre_emph=0.97</em>, <em>win_func=&lt;function &lt;lambda&gt;&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/mfcc.html#fbank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.mfcc.fbank" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute Mel-filterbank energy features from an audio signal. Code was adapted from
+<a class="reference external" href="https://github.com/jameslyons/python_speech_features">here</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>signal</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Audio signal from which to compute features. Should be an N*1 <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
+<li><strong>sample_rate</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Sample rate of the signal we are working with.</li>
+<li><strong>win_len</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Length of the analysis window in seconds. Default is 0.025s (25 milliseconds)</li>
+<li><strong>win_step</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Step between successive windows in seconds. Default is 0.01s (10 milliseconds)</li>
+<li><strong>nfilt</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Number of filters in the filterbank, default 26.</li>
+<li><strong>nfft</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – FFT size. Default is 512.</li>
+<li><strong>low_freq</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Lowest band edge of mel filters. In Hz, default is 0.</li>
+<li><strong>high_freq</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Highest band edge of mel filters. In Hz, default is <cite>sample_rate</cite>/2</li>
+<li><strong>pre_emph</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Apply preemphasis filter with <cite>pre_emph</cite> as coefficient. 0 is no filter. Default is 0.97.</li>
+<li><strong>win_func</strong> (<em>function</em>) – Analysis window to apply to each frame. By default no window is applied.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Numpy array of size (num_frames by <cite>nfilt</cite>) containing features. Each row holds 1 feature vector.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)">numpy.ndarray</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.mfcc.framesig">
+<code class="descclassname">afx.features.mfcc.</code><code class="descname">framesig</code><span class="sig-paren">(</span><em>signal</em>, <em>frame_len</em>, <em>frame_step</em>, <em>winfunc=&lt;function &lt;lambda&gt;&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/mfcc.html#framesig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.mfcc.framesig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Frame <cite>signal</cite> into overlapping frames. Code was adapted from
+<a class="reference external" href="https://github.com/jameslyons/python_speech_features">here</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>signal</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Audio signal from which to compute features. Should be an N*1 <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
+<li><strong>frame_len</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Length of each frame measured in samples.</li>
+<li><strong>frame_step</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Number of samples after the start of the previous frame that the next frame should begin.</li>
+<li><strong>win_func</strong> (<em>function</em>) – Analysis window to apply to each frame. By default no window is applied.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A class:<cite>numpy.ndarray</cite> of frames. Size is <cite>num_frames</cite> by <cite>frame_len</cite>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)">numpy.ndarray</a></p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -150,7 +508,7 @@ in the following way:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure align-center">
+<div class="figure align-left">
 <img alt="_images/filterbanks.png" src="_images/filterbanks.png" />
 </div>
 </dd></dl>
@@ -175,6 +533,63 @@ in the following way:</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="afx.features.mfcc.lifter">
+<code class="descclassname">afx.features.mfcc.</code><code class="descname">lifter</code><span class="sig-paren">(</span><em>cepstra</em>, <em>L=22</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/mfcc.html#lifter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.mfcc.lifter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a cepstral lifter to the matrix of <cite>cepstra</cite>. This has the effect of increasing the
+magnitude of the high frequency DCT coeffs. Code was adapted from
+<a class="reference external" href="https://github.com/jameslyons/python_speech_features">here</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>cepstra</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Matrix of mel-cepstra, will be <cite>num_frames</cite> * <cite>num_cep</cite> in size.</li>
+<li><strong>L</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Liftering coefficient to use. Default is 22. L &lt;= 0 disables lifter.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Liftered matrix of mel-cepstra.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)">numpy.ndarray</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.mfcc.magspec">
+<code class="descclassname">afx.features.mfcc.</code><code class="descname">magspec</code><span class="sig-paren">(</span><em>frames</em>, <em>nfft</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/mfcc.html#magspec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.mfcc.magspec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the magnitude spectrum of each frame in frames. If frames is an NxD matrix,
+output will be Nx(NFFT/2+1). Code was adapted from
+<a class="reference external" href="https://github.com/jameslyons/python_speech_features">here</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>frames</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – The array of frames. Each row is a frame.</li>
+<li><strong>nfft</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – The FFT length to use. If <cite>nfft</cite> &gt; frame_len, the frames are zero-padded.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>If <cite>frames</cite> is an NxD matrix, output will be Nx(<cite>nfft</cite>/2+1).</dt>
+<dd><p class="first last">Each row will be the magnitude spectrum of the corresponding frame.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)">numpy.ndarray</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="afx.features.mfcc.mel2hz">
 <code class="descclassname">afx.features.mfcc.</code><code class="descname">mel2hz</code><span class="sig-paren">(</span><em>mel</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/mfcc.html#mel2hz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.mfcc.mel2hz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a value in Mels to Hertz. For more information, you can go to this
@@ -188,6 +603,97 @@ in the following way:</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A value in Hertz. If an array was passed in, an identical sized array is returned.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)">numpy.ndarray</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.mfcc.mfcc">
+<code class="descclassname">afx.features.mfcc.</code><code class="descname">mfcc</code><span class="sig-paren">(</span><em>signal</em>, <em>sample_rate=16000</em>, <em>win_len=0.025</em>, <em>win_step=0.01</em>, <em>num_cep=13</em>, <em>nfilt=26</em>, <em>nfft=512</em>, <em>low_freq=0</em>, <em>high_freq=None</em>, <em>pre_emph=0.97</em>, <em>cep_lifter=22</em>, <em>win_func=&lt;function &lt;lambda&gt;&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/mfcc.html#mfcc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.mfcc.mfcc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the MFCC features from an audio signal. Code was adapted from
+<a class="reference external" href="https://github.com/jameslyons/python_speech_features">here</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>signal</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Audio signal from which to compute features. Should be an N*1 <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
+<li><strong>sample_rate</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Sample rate of the signal we are working with.</li>
+<li><strong>win_len</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Length of the analysis window in seconds. Default is 0.025s (25 milliseconds)</li>
+<li><strong>win_step</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Step between successive windows in seconds. Default is 0.01s (10 milliseconds)</li>
+<li><strong>num_cep</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Number of cepstrum to return, default 13</li>
+<li><strong>nfilt</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – Number of filters in the filterbank, default 26.</li>
+<li><strong>nfft</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a>) – FFT size. Default is 512.</li>
+<li><strong>low_freq</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Lowest band edge of mel filters. In Hz, default is 0.</li>
+<li><strong>high_freq</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Highest band edge of mel filters. In Hz, default is <cite>sample_rate</cite>/2</li>
+<li><strong>pre_emph</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Apply preemphasis filter with <cite>pre_emph</cite> as coefficient. 0 is no filter. Default is 0.97.</li>
+<li><strong>cep_lifter</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Apply a lifter to final cepstral coefficients. 0 is no lifter. Default is 22.</li>
+<li><strong>win_func</strong> (<em>function</em>) – Analysis window to apply to each frame. By default no window is applied.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A numpy array of size (<cite>num_frames</cite> by <cite>num_cep</cite>) containing features. Each row holds 1 feature vector.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)">numpy.ndarray</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.mfcc.powspec">
+<code class="descclassname">afx.features.mfcc.</code><code class="descname">powspec</code><span class="sig-paren">(</span><em>frames</em>, <em>nfft</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/mfcc.html#powspec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.mfcc.powspec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the power spectrum of each frame in <cite>frames</cite>. If <cite>frames</cite> is an NxD matrix,
+output will be Nx(NFFT/2+1). Code was adapted from
+<a class="reference external" href="https://github.com/jameslyons/python_speech_features">here</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>frames</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – The array of frames. Each row is a frame.</li>
+<li><strong>nfft</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – The FFT length to use. If <cite>nfft</cite> &gt; frame_len, the frames are zero-padded.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>If <cite>frames</cite> is an NxD matrix, output will be Nx(<cite>nfft</cite>/2+1).</dt>
+<dd><p class="first last">Each row will be the power spectrum of the corresponding frame.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)">numpy.ndarray</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.mfcc.preemphasis">
+<code class="descclassname">afx.features.mfcc.</code><code class="descname">preemphasis</code><span class="sig-paren">(</span><em>signal</em>, <em>coeff=0.95</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/mfcc.html#preemphasis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.mfcc.preemphasis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform preemphasis on input <cite>signal</cite>. Code was adapted from
+<a class="reference external" href="https://github.com/jameslyons/python_speech_features">here</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>signal</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Audio signal from which to compute features. Should be an N*1 <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>.</li>
+<li><strong>coeff</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – The preemphasis coefficient. 0 is no filter, default is 0.95.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The filtered signal.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)">numpy.ndarray</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -267,6 +773,91 @@ very close to <span class="math">\(\pi\)</span>.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="n">tt</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">energy</span><span class="p">(</span><span class="n">signal</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
 <span class="go">3.14154</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.signal.formant_peak">
+<code class="descclassname">afx.features.signal.</code><code class="descname">formant_peak</code><span class="sig-paren">(</span><em>signal</em>, <em>min_peak_dist=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/signal.html#formant_peak"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.signal.formant_peak" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple peak picking algorithm to see if proposed value for peak is bigger than
+neighboring values on each side. Code was adapted from a Matlab function that is
+part of the COVAREP project. For more information, you can go to
+<a class="reference external" href="https://github.com/covarep/covarep/blob/master/formant/formant_CGDZP.m">here</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>signal</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Signal for which peaks are to be found.</li>
+<li><strong>min_peak_dist</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#str" title="(in Python v3.5)"><em>str</em></a>) – Minimum distance between peaks. Defaults to 1.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Array of indices for locations of peaks in <cite>signal</cite>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)">numpy.ndarray</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="#afx.features.signal.PeakError" title="afx.features.signal.PeakError"><code class="xref py py-exc docutils literal"><span class="pre">PeakError</span></code></a> – If peaks weren’t found in <cite>signal</cite>.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#TypeError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code></a> – If <cite>min_peak_dist</cite> is not a valid integer, float, or string.</li>
+<li><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>min_peak_dist</cite> is less than or equal to zero or if input is too short.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>We can test this function using a simple sine wave.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.signal</span> <span class="k">import</span> <span class="n">formant_peak</span> <span class="k">as</span> <span class="n">formant_peak</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sine_wave</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">tt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formant_peak</span><span class="p">(</span><span class="n">sine_wave</span><span class="p">)</span>
+<span class="go">array([ 157, 785, 1414, 2042, 2670, 3299, 3927, 4555, 5184, 5812, 6440,</span>
+<span class="go">       7069, 7697, 8325, 8954, 9482])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="afx.features.signal.formants">
+<code class="descclassname">afx.features.signal.</code><code class="descname">formants</code><span class="sig-paren">(</span><em>signal</em>, <em>sample_rate</em>, <em>frame_size=30</em>, <em>frame_shift=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/afx/features/signal.html#formants"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#afx.features.signal.formants" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the first 5 formants of input <cite>signal</cite>. Code was adapted from
+a Matlab function that is part of the COVAREP project. Further details can
+be found <a class="reference external" href="https://github.com/covarep/covarep/blob/master/formant/formant_CGDZP.m">here</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>signal</strong> (<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><em>numpy.ndarray</em></a>) – Input signal (speech signal).</li>
+<li><strong>sample_rate</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Sample rate of <cite>signal</cite>.</li>
+<li><strong>frame_size</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Size of frames (defaults to 30).</li>
+<li><strong>frame_shift</strong> (<a class="reference external" href="https://docs.python.org/3.5/library/functions.html#int" title="(in Python v3.5)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3.5/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) – Duration between two successive frames (defaults to 10).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Two-dimensional array containing values for first 5 formants of <cite>signal</cite>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)">numpy.ndarray</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ValueError" title="(in Python v3.5)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a> – If <cite>frame_size</cite> or <cite>frame_shift</cite> result in window that is too large.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Assuming that <cite>signal</cite> is a one-dimensional <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> from an audio
+file that was sampled at 16000 Hz, we can use <a class="reference internal" href="#afx.features.signal.formants" title="afx.features.signal.formants"><code class="xref py py-func docutils literal"><span class="pre">formants()</span></code></a> to track the first
+five formants with the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">afx.features.signal</span> <span class="k">import</span> <span class="n">formants</span> <span class="k">as</span> <span class="n">formants</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sample_rate</span> <span class="o">=</span> <span class="mi">16000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formants</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">sample_rate</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
