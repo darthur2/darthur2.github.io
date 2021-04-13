@@ -96,3 +96,9 @@ each book and copying the reviews over into an excel document. In the
 future, I would like to come up with a more robust data collection
 method, but this worked for what I wanted to do with this analysis. Here
 is what the data look like for the first Newbery winner:
+
+    ## [1] "The Story of Mankind"
+
+    ## [1] "Hendrik Willem van Loon"
+
+    ## [1] "Winner of the first John Newbery Medal, this renowned classic is now updated for the millennium. Hendrik Willem van Loon's ability to convey history as a fascinating tale of adventure has endeared this book to countless readers. \"The Story of Mankind seems to be used as a core or spine world history by an increasing number of homeschoolers, particularly those looking for a history written from something other than a Protestant perspective. While the author was himself a Protestant, this history "
