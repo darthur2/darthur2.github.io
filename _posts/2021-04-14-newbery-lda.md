@@ -43,7 +43,7 @@ but after you sift through enough reviews it becomes clear that not even
 adults like some of these books.
 
 <figure>
-<img src="https://media.giphy.com/media/KSKvdT1YGCpUIonvSq/giphy.gif" alt="I Tried" style="width:50%">
+<img src="https://media.giphy.com/media/KSKvdT1YGCpUIonvSq/giphy.gif" alt="I Tried" style="width:50%" class = "center">
 <figcaption>
 When you ask someone if they liked Smoky the Cow Horse
 </figcaption>
