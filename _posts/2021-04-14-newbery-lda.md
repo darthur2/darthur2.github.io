@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Understanding the Newbery with Latent Dirichlet Allocation?"
+title: "Understanding the Newbery with Latent Dirichlet Allocation"
 output:
   md_document:
     variant: markdown_github
@@ -83,4 +83,8 @@ scraping book descriptions
 </figcaption>
 </figure>
 
-In the end I spent a little time each day searching online reviews
+In the end I spent a little time each day searching online reviews for
+each book and copying the reviews over into an excel document. In the
+future, I would like to come up with a more robust data collection
+method, but this worked for what I wanted to do with this analysis. Here
+is what the data look like for the first Newbery winner:
