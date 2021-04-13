@@ -8,7 +8,8 @@ output:
 ---
 
 ```{r "setup", include = FALSE}
-knitr::opts_knit$set(root.dir = "/Users/david/Documents/Website/darthur2.github.io/", base.url = "/")
+knitr::opts_knit$set(base.dir = "C:/Users/david/Documents/Website/darthur2.github.io", base.url = "/")
+knitr::opts_knit$set(root.dir = "/Users/david/Documents/Website/darthur2.github.io", base.url = "/")
 knitr::opts_chunk$set(fig.path = "images/")
 ```
 
@@ -29,7 +30,7 @@ library(textdata)
 
 # Read data
 
-reviewsFile <- "_posts/_files/book_reviews.xlsx"
+reviewsFile <- "files/book_reviews.xlsx"
 reviews <- read.xlsx(reviewsFile)
 ```
 
