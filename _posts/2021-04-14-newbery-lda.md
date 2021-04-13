@@ -3,7 +3,7 @@ layout: post
 title: "Understanding the Newbery with Latent Dirichlet Allocation"
 output:
   md_document:
-    variant: markdown_github
+    variant: gfm
     preserve_yaml: true
 categories: analysis
 ---
@@ -24,10 +24,9 @@ In this blog post, I will walk through the following:
 3.  Give a little background on LDA.
 4.  Use LDA to understand important themes in Newbery award winners.
 
-Let’s dive in!
+Let’s dive in\!
 
-The Newbery Award
-=================
+# The Newbery Award
 
 According to Wikipedia, The [Newbery
 Award](https://en.wikipedia.org/wiki/Newbery_Medal) is a literary award
@@ -43,18 +42,22 @@ but after you sift through enough reviews it becomes clear that not even
 adults like some of these books.
 
 <figure>
+
 <img src="https://media.giphy.com/media/KSKvdT1YGCpUIonvSq/giphy.gif" alt="I Tried" style="width:50%" class = "center">
+
 <figcaption>
+
 When you ask someone if they liked Smoky the Cow Horse
+
 </figcaption>
+
 </figure>
 
 This is part of the reason that I thought that this analysis would be
 interesting. I was curious to discover if there any common themes share
 by Newbery winners.
 
-The Data
-========
+# The Data
 
 Because I didn’t have access to the text of each book, I went with the
 next best thing I could think of and searched for reviews of the books.
@@ -76,11 +79,16 @@ reviews were the same across different websites and weren’t very
 detailed and I wanted a lot of text for each book for this analysis.
 
 <figure>
+
 <img src="https://media.giphy.com/media/ac7MA7r5IMYda/giphy.gif" alt="Get Out" style="width:50%">
+
 <figcaption>
+
 This was pretty much how Amazon responded to me the second I started
 scraping book descriptions
+
 </figcaption>
+
 </figure>
 
 In the end I spent a little time each day searching online reviews for
