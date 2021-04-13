@@ -42,6 +42,13 @@ perhaps it was selected because adults like what it teaches children,
 but after you sift through enough reviews it becomes clear that not even
 adults like some of these books.
 
+<figure>
+<img src="https://media.giphy.com/media/KSKvdT1YGCpUIonvSq/giphy.gif" alt="I Tried" style="width:50%">
+<figcaption>
+When you ask someone if they liked Smoky the Cow Horse
+</figcaption>
+</figure>
+
 This is part of the reason that I thought that this analysis would be
 interesting. I was curious to discover if there any common themes share
 by Newbery winners.
