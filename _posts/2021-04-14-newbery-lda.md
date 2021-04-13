@@ -69,7 +69,7 @@ reviews were the same across different websites and weren’t very
 detailed and I wanted a lot of text for each book for this analysis.
 
 <figure>
-<img src="https://media.giphy.com/media/ac7MA7r5IMYda/giphy.gif" alt="Get Out" style="width:100%">
+<img src="https://media.giphy.com/media/ac7MA7r5IMYda/giphy.gif" alt="Get Out" style="width:50%">
 <figcaption>
 This was pretty much how Amazon responded to me the second I started
 scraping book descriptions
