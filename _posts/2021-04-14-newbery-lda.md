@@ -68,8 +68,12 @@ probably wouldn’t have worked out very well because many of these
 reviews were the same across different websites and weren’t very
 detailed and I wanted a lot of text for each book for this analysis.
 
-![](https://media.giphy.com/media/ac7MA7r5IMYda/giphy.gif) *This was
-pretty much how Amazon responded to me the second I started scraping
-book descriptions*
+<figure>
+<img src="https://media.giphy.com/media/ac7MA7r5IMYda/giphy.gif" alt="Get Out" style="width:100%">
+<figcaption>
+This was pretty much how Amazon responded to me the second I started
+scraping book descriptions
+</figcaption>
+</figure>
 
 In the end I spent a little time each day searching online reviews
