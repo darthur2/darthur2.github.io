@@ -96,8 +96,8 @@ words as we did before, but this time we are going to create bigrams
 instead of 1-grams. After creating the bigrams, I remove “unimportant”
 bigrams. By this I mean I’m going to remove bigrams that don’t occur
 very often. I’m choosing to only select the top 700 or so bigrams.
-Finally, I fit an LDA with 6 topics again and select the top 10 bigrams
-for each topic.
+Finally, I performed LDA with 6 topics again and select the top 10
+bigrams for each topic.
 
 ![](/images/lda2-unnamed-chunk-3-1.png)<!-- -->
 
