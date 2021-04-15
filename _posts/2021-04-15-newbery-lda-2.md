@@ -9,7 +9,8 @@ categories: analysis
 tags: lda nlp
 ---
 
-In my [previous post](%7B%-%20post_url%202021-04-14-newbery-lda%20-%%7D)
+In my [previous
+post](%7B%7B%20site.baseurl%20%7D%7D%7B%%20link%20_posts/2021-04-14-newbery-lda.md%20%%7D)
 I explored reviews of books that have won the Newbery award using Latent
 Dirichlet Allocation (LDA). In that post I only looked at one word
 chunks (1-grams). In this post I am going to perform the same type of
