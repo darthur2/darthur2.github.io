@@ -9,7 +9,7 @@ categories: analysis
 tags: lda nlp
 ---
 
-In my [previous post](%7B%%20post_url%202021-04-14-newbery-lda%20%%7D) I
+In my [previous post](%7B%post_url%202021-04-14-newbery-lda%20%%7D) I
 explored reviews of books that have won the Newbery award using Latent
 Dirichlet Allocation (LDA). In that post I only looked at one word
 chunks (1-grams). In this post I am going to perform the same type of
@@ -183,20 +183,25 @@ Here are the labels that I chose for the topics:
 1.  Historical fiction
 2.  Junior high coming of age
 3.  Medieval and 19th century adventure
-4.  Wars (Civil, Revolutionary, II) 5: Fictional family stories 6: Young
-    teenager adventures
+4.  War era books (Civil, Revolutionary, II) 5: Fictional family stories
+    6: Young teenager adventures
 
 Again, these labels aren’t perfect and the caveat that this might not be
-the optimal number of labels still applies. However, this does help us
-to see how LDA with bigrams can give us some information that wasn’t
-available before when we were using 1-grams.
+the optimal number of labels still applies. We can recall that each book
+is a mixture of topics so multiple topics, not just one. For example,
+The Hero and the Crown doesn’t quite seem to belong with the other books
+in the topic 1 group. The probability for topic 1 in this book is 18.5%.
+The probabilities for the other topics range from 16%-17%. In other
+words, The Hero and the Crown really can’t be assigned to a single
+topic. This is probably further evidence that there are more than six
+topics being discussed in these reviews.
 
 # Conclusion
 
 I hope I was able to show how LDA can be used with bigrams to model
 topics discussed by reviewers of Newbery award winning books. It really
 is the same as LDA, but the only difference is that words are grouped
-together in groups of two and treated as single quantites in LDA.
+together in groups of two and treated as single quantities in LDA.
 
 From this and my previous post, it seems that Newbery winners share some
 common ingredients. They deal with families and relationships, many

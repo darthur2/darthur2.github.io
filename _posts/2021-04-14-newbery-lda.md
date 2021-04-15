@@ -422,7 +422,7 @@ Topic 6:
 We can do this with the other topics as well. I did this and these are
 the titles that I came up with for the topics discovered with LDA:
 
-1.  Boy adventures around the world
+1.  Boys and adventures around the world
 2.  Girls and magic
 3.  Relationships and cultures
 4.  Kids and navigating family relationships
