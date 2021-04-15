@@ -85,8 +85,8 @@ book for this analysis.
 
 <figcaption>
 
-This was pretty much how Amazon responded to me the second I started
-scraping book descriptions
+Amazon to me the very instant I thought about scraping book descriptions
+on there.
 
 </figcaption>
 
@@ -122,12 +122,33 @@ performed LDA with these tweets, assuming there were four major topics,
 and then grabbed the top 3 words for each discovered topic, the output
 of LDA might look like this:
 
+    ## <!-- html table generated in R 4.0.3 by xtable 1.8-4 package -->
+    ## <!-- Wed Apr 14 21:23:03 2021 -->
+    ## <table border=1>
+    ## <tr> <th>  </th> <th> Topic 1 </th> <th> Topic 2 </th> <th> Topic 3 </th> <th> Topic 4 </th>  </tr>
+    ##   <tr> <td align="right"> Word 1 </td> <td> america </td> <td> punch </td> <td> tech </td> <td> thanos </td> </tr>
+    ##   <tr> <td align="right"> Word 2 </td> <td> justice </td> <td> kick </td> <td> gadgets </td> <td> government </td> </tr>
+    ##   <tr> <td align="right"> Word 3 </td> <td> freedom </td> <td> justice </td> <td> justice </td> <td> justice </td> </tr>
+    ##    </table>
+
 From here we could try to infer what the topics are and give them names.
 For example, we might say that the first topic is American Patriotism,
 the next are Fighting, then Nerd Stuff, and finally Bad Guys. You’ll
 notice that it’s possible for a word to be associated with more than one
 topic. In this case this would just mean that no matter what they are
 talking about, Avengers are all about justice.
+
+<figure>
+
+<img src="https://media.giphy.com/media/sMC9FSKrBPBaE/giphy.gif" alt="Captain America" style="width:50%" class = "center">
+
+<figcaption>
+
+One of Captain America’s tweets
+
+</figcaption>
+
+</figure>
 
 It would also be possible to see which topics are the most popular for
 different Avengers. For example, if you look at the topic distribution
@@ -220,11 +241,13 @@ These are all books that might be considered magical and many of them
 have a female lead. This might be why some of the top words for this
 topic are “girl”, “witch”, and “magic”.
 
-Here are the groups of books for topics 3, 4, 5, and 6:
+Here are the books for topic 3:
 
     ## [1] "Waterless Mountain"          "Call It Courage"            
     ## [3] "The Twenty-One Balloons"     "Island of the Blue Dolphins"
     ## [5] "Julie of the Wolves"         "The Giver"
+
+Here they are for topic 4:
 
     ##  [1] "Invincible Louisa"            "Caddie Woodlawn"             
     ##  [3] "Thimble Summer"               "Strawberry Girl"             
@@ -240,6 +263,8 @@ Here are the groups of books for topics 3, 4, 5, and 6:
     ## [23] "The Crossover"                "Hello, Universe"             
     ## [25] "Merci Suarez Changes Gears"
 
+Topic 5:
+
     ##  [1] "The Voyages of Doctor Dolittle"   "The Cat Who Went to Heaven"      
     ##  [3] "Roller Skates"                    "Adam of the Road"                
     ##  [5] "Rabbit Hill"                      "Miss Hickory"                    
@@ -248,9 +273,7 @@ Here are the groups of books for topics 3, 4, 5, and 6:
     ## [11] "Mrs. Frisby and the Rats of NIMH" "Shiloh"                          
     ## [13] "The One and Only Ivan"
 
-``` r
-reviews$Book[max_doc_topics == 6]
-```
+Topic 6:
 
     ##  [1] "The Story of Mankind"            "The Dark Frigate"               
     ##  [3] "Shen of the Sea"                 "Smoky the Cowhorse"             
