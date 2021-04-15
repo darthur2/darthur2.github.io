@@ -302,9 +302,9 @@ books. I’m only going to select words that are mentioned at least 20
 times and that appear for at least 10 of the books. After doing this,
 the text for the reviews for the first three books now looks like this:
 
-    ## [1] "classic loon's ability history fascinating tale adventure readers world history history written perspective author history written true chapters loon's death originally published times begins development actual history begins perspective continues time time treated style writing aspect author audience directly telling attitude lived begins ancient time families business forever running discuss writing style history written children grade level aloud parents references children discuss ideas exte"
+    ## [1] "winner medal classic loon's ability history fascinating tale adventure readers world history history written perspective author history reads written true chapters loon's death originally published times begins development actual history begins perspective continues time time treated style writing aspect author audience directly telling attitude lived begins ancient time families business forever running discuss writing style history written children grade level aloud parents references children"
     ## [2] "eccentric doctor favorite children earlier doctor dolittle.in doctor takes person account boy son village meets doctor takes hurt doctor treatment doctor quickly friends boy learns animals remarkable talking amazing creatures previous sequel mysterious friend doctor's called sets train strange events doctor exciting native american son living world.the quirky animal doctor plot approach world desire concern memorable adventure strong appeal compassion share south american discover giant sea wond"
-    ## [3] "century england terrible accident forces fear life sea dark quiet philip's spirit knowledge sea win captain's forced fortune return england battles hero tale search adventure century england terrible accident forces fear life sea dark quiet philip's spirit knowledge sea win captain's forced fortune return england battles hero tale search adventure twenty difficult found difficult adult imagine crazy son 6y0m main boy named mother died father lost sea pages staying father's accident gun leads ric"
+    ## [3] "century england terrible accident forces fear life sea dark quiet philip's spirit knowledge sea win captain's forced fortune return england battles hero tale search adventure century england terrible accident forces fear life sea dark quiet philip's spirit knowledge sea win captain's forced fortune return england battles hero tale search adventure twenty difficult reads found difficult adult imagine crazy son 6y0m main boy named mother died father lost sea pages staying father's accident leads r"
 
 With the text in this form, we are ready to perform LDA. However, one
 problem is that before using LDA, we need to specify how many underlying
@@ -335,26 +335,24 @@ represented in peoples’ reviews of that book. This would help us further
 as we try and give labels to the topics. For example, the books for
 which topic 1 is discussed the most in reviews are:
 
-    ##  [1] "Dobry"                                               
-    ##  [2] "Secret of the Andes"                                 
-    ##  [3] "...And Now Miguel"                                   
-    ##  [4] "Onion John"                                          
-    ##  [5] "From the Mixed-Up Files of Mrs. Basil E. Frankweiler"
-    ##  [6] "Summer of the Swans"                                 
-    ##  [7] "M.C. Higgins the Great"                              
-    ##  [8] "The Westing Game"                                    
-    ##  [9] "Jacob Have I Loved"                                  
-    ## [10] "Walk Two Moons"                                      
-    ## [11] "The View from Saturday"                              
-    ## [12] "Out of the Dust"                                     
-    ## [13] "A Year Down Yonder"                                  
-    ## [14] "A Single Shard"                                      
-    ## [15] "Criss Cross"                                         
+    ##  [1] "Young Fu of the Upper Yangtze"                       
+    ##  [2] "Dobry"                                               
+    ##  [3] "Secret of the Andes"                                 
+    ##  [4] "From the Mixed-Up Files of Mrs. Basil E. Frankweiler"
+    ##  [5] "The Westing Game"                                    
+    ##  [6] "A Visit to William Blake's Inn"                      
+    ##  [7] "The Whipping Boy"                                    
+    ##  [8] "Joyful Noise: Poems for Two Voices"                  
+    ##  [9] "The Midwife's Apprentice"                            
+    ## [10] "Holes"                                               
+    ## [11] "A Single Shard"                                      
+    ## [12] "Crispin: The Cross of Lead"                          
+    ## [13] "The Tale of Despereaux"                              
+    ## [14] "Criss Cross"                                         
+    ## [15] "Good Masters! Sweet Ladies!"                         
     ## [16] "When You Reach Me"                                   
-    ## [17] "Moon Over Manifest"                                  
-    ## [18] "Dead End in Norvelt"                                 
-    ## [19] "Last Stop on Market Street"                          
-    ## [20] "Hello, Universe"
+    ## [17] "Dead End in Norvelt"                                 
+    ## [18] "Last Stop on Market Street"
 
 These books are adventure books that feature boys and are often set at
 various places around the world. This makes sense since some of the top
@@ -363,16 +361,13 @@ words for this topic are “boy”, “world”, “village”, “learn”, and
 
 We can do the same thing for topic 2:
 
-    ##  [1] "Waterless Mountain"           "Invincible Louisa"           
-    ##  [3] "Caddie Woodlawn"              "The Matchlock Gun"           
-    ##  [5] "Strawberry Girl"              "Amos Fortune Free Man"       
-    ##  [7] "Carry On, Mr. Bowditch"       "The Witch of Blackbird Pond" 
-    ##  [9] "I, Juan de Pareja"            "Up a Road Slowly"            
-    ## [11] "The Slave Dancer"             "Roll of Thunder, Hear My Cry"
-    ## [13] "A Gathering of Days"          "Sarah, Plain and Tall"       
-    ## [15] "Lincoln, a Photobiography"    "Number the Stars"            
-    ## [17] "Maniac Magee"                 "Kira-Kira"                   
-    ## [19] "The Girl Who Drank the Moon"
+    ##  [1] "Tales of Silver Lands"       "The Witch of Blackbird Pond"
+    ##  [3] "A Wrinkle in Time"           "Up a Road Slowly"           
+    ##  [5] "Summer of the Swans"         "Bridge to Terabithia"       
+    ##  [7] "The Hero and the Crown"      "Number the Stars"           
+    ##  [9] "Missing May"                 "Walk Two Moons"             
+    ## [11] "The Graveyard Book"          "Moon Over Manifest"         
+    ## [13] "Flora and Ulysses"           "The Girl Who Drank the Moon"
 
 These are all books that might be considered magical and many of them
 have a female lead. This might be why some of the top words for this
@@ -380,50 +375,54 @@ topic are “girl”, “witch”, and “magic”.
 
 Here are the books for topic 3:
 
-    ##  [1] "Hitty, Her First Hundred Years"   "The Cat Who Went to Heaven"      
-    ##  [3] "Roller Skates"                    "Thimble Summer"                  
-    ##  [5] "Rabbit Hill"                      "Miss Hickory"                    
-    ##  [7] "Ginger Pye"                       "Miracles on Maple Hill"          
-    ##  [9] "It's Like This, Cat"              "Mrs. Frisby and the Rats of NIMH"
-    ## [11] "Missing May"
+    ## [1] "Waterless Mountain"          "Call It Courage"            
+    ## [3] "The Twenty-One Balloons"     "Island of the Blue Dolphins"
+    ## [5] "Julie of the Wolves"         "The Giver"
 
 Here they are for topic 4:
 
-    ##  [1] "Call It Courage"             "Adam of the Road"           
-    ##  [3] "Johnny Tremain"              "The Door in the Wall"       
-    ##  [5] "The Wheel on the School"     "Island of the Blue Dolphins"
-    ##  [7] "The Bronze Bow"              "A Wrinkle in Time"          
-    ##  [9] "Shadow of a Bull"            "Julie of the Wolves"        
-    ## [11] "The Whipping Boy"            "The Midwife's Apprentice"   
-    ## [13] "Crispin: The Cross of Lead"  "The Higher Power of Lucky"
+    ##  [1] "Invincible Louisa"            "Caddie Woodlawn"             
+    ##  [3] "Thimble Summer"               "Strawberry Girl"             
+    ##  [5] "...And Now Miguel"            "The Wheel on the School"     
+    ##  [7] "Onion John"                   "Sounder"                     
+    ##  [9] "M.C. Higgins the Great"       "Roll of Thunder, Hear My Cry"
+    ## [11] "A Gathering of Days"          "Jacob Have I Loved"          
+    ## [13] "Dicey's Song"                 "Dear Mr. Henshaw"            
+    ## [15] "Sarah, Plain and Tall"        "Maniac Magee"                
+    ## [17] "The View from Saturday"       "Out of the Dust"             
+    ## [19] "Bud, Not Buddy"               "A Year Down Yonder"          
+    ## [21] "Kira-Kira"                    "The Higher Power of Lucky"   
+    ## [23] "The Crossover"                "Hello, Universe"             
+    ## [25] "Merci Suarez Changes Gears"
 
 Topic 5:
 
-    ##  [1] "The Twenty-One Balloons"    "Sounder"                   
-    ##  [3] "Bridge to Terabithia"       "Dicey's Song"              
-    ##  [5] "Dear Mr. Henshaw"           "Shiloh"                    
-    ##  [7] "The Giver"                  "Holes"                     
-    ##  [9] "Bud, Not Buddy"             "The Graveyard Book"        
-    ## [11] "The One and Only Ivan"      "Flora and Ulysses"         
-    ## [13] "The Crossover"              "Merci Suarez Changes Gears"
+    ##  [1] "The Voyages of Doctor Dolittle"   "The Cat Who Went to Heaven"      
+    ##  [3] "Roller Skates"                    "Adam of the Road"                
+    ##  [5] "Rabbit Hill"                      "Miss Hickory"                    
+    ##  [7] "The Door in the Wall"             "Ginger Pye"                      
+    ##  [9] "Miracles on Maple Hill"           "It's Like This, Cat"             
+    ## [11] "Mrs. Frisby and the Rats of NIMH" "Shiloh"                          
+    ## [13] "The One and Only Ivan"
 
 Topic 6:
 
-    ##  [1] "The Story of Mankind"               "The Voyages of Doctor Dolittle"    
-    ##  [3] "The Dark Frigate"                   "Tales of Silver Lands"             
-    ##  [5] "Shen of the Sea"                    "Smoky the Cowhorse"                
-    ##  [7] "Gay Neck, The Story of a Pigeon"    "The Trumpeter of Krakow"           
-    ##  [9] "Young Fu of the Upper Yangtze"      "The White Stag"                    
-    ## [11] "Daniel Boone"                       "King of the Wind"                  
-    ## [13] "Rifles for Watie"                   "The High King"                     
-    ## [15] "The Grey King"                      "A Visit to William Blake's Inn"    
-    ## [17] "The Hero and the Crown"             "Joyful Noise: Poems for Two Voices"
-    ## [19] "The Tale of Despereaux"             "Good Masters! Sweet Ladies!"
+    ##  [1] "The Story of Mankind"            "The Dark Frigate"               
+    ##  [3] "Shen of the Sea"                 "Smoky the Cowhorse"             
+    ##  [5] "Gay Neck, The Story of a Pigeon" "The Trumpeter of Krakow"        
+    ##  [7] "Hitty, Her First Hundred Years"  "The White Stag"                 
+    ##  [9] "Daniel Boone"                    "The Matchlock Gun"              
+    ## [11] "Johnny Tremain"                  "King of the Wind"               
+    ## [13] "Amos Fortune Free Man"           "Carry On, Mr. Bowditch"         
+    ## [15] "Rifles for Watie"                "The Bronze Bow"                 
+    ## [17] "Shadow of a Bull"                "I, Juan de Pareja"              
+    ## [19] "The High King"                   "The Slave Dancer"               
+    ## [21] "The Grey King"                   "Lincoln, a Photobiography"
 
 We can do this with the other topics as well. I did this and these are
 the titles that I came up with for the topics discovered with LDA:
 
-1.  Boys and adventures around the world
+1.  Boy adventures around the world
 2.  Girls and magic
 3.  Relationships and cultures
 4.  Kids and navigating family relationships
