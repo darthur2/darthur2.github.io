@@ -122,21 +122,6 @@ performed LDA with these tweets, assuming there were four major topics,
 and then grabbed the top 3 words for each discovered topic, the output
 of LDA might look like this:
 
-    ## % latex table generated in R 4.0.3 by xtable 1.8-4 package
-    ## % Wed Apr 14 20:53:45 2021
-    ## \begin{table}[ht]
-    ## \centering
-    ## \begin{tabular}{rllll}
-    ##   \hline
-    ##  & Topic 1 & Topic 2 & Topic 3 & Topic 4 \\ 
-    ##   \hline
-    ## Word 1 & america & punch & tech & thanos \\ 
-    ##   Word 2 & justice & kick & gadgets & government \\ 
-    ##   Word 3 & freedom & justice & justice & justice \\ 
-    ##    \hline
-    ## \end{tabular}
-    ## \end{table}
-
 From here we could try to infer what the topics are and give them names.
 For example, we might say that the first topic is American Patriotism,
 the next are Fighting, then Nerd Stuff, and finally Bad Guys. You’ll
@@ -263,6 +248,10 @@ Here are the groups of books for topics 3, 4, 5, and 6:
     ## [11] "Mrs. Frisby and the Rats of NIMH" "Shiloh"                          
     ## [13] "The One and Only Ivan"
 
+``` r
+reviews$Book[max_doc_topics == 6]
+```
+
     ##  [1] "The Story of Mankind"            "The Dark Frigate"               
     ##  [3] "Shen of the Sea"                 "Smoky the Cowhorse"             
     ##  [5] "Gay Neck, The Story of a Pigeon" "The Trumpeter of Krakow"        
@@ -300,10 +289,10 @@ will explore them in a different post.
 # Conclusion
 
 So they are you have it\! That’s just a little dive into Latent
-Dirichlet Allocation and how it can be used for topic modeling of topics
-discussed in reviews of Newbery winners. There’s a lot more that could
-be done with these data. Not only could we dive into methods for finding
-the optimal number of topics as I mentioned previously, but we could
-look at LDA with bi-grams (two words together instead of words by
-themselves), sentiment analysis, word clouds, and more. Perhaps I will
-touch on those in future posts, but that’s it for now.
+Dirichlet Allocation and how it can be used for model topics discussed
+in reviews of Newbery winners. There’s a lot more that could be done
+with these data. Not only could we dive into methods for finding the
+optimal number of topics as I mentioned previously, but we could look at
+LDA with bi-grams (two words together instead of words by themselves),
+sentiment analysis, word clouds, and more. Perhaps I will touch on those
+in future posts, but that’s it for now.
