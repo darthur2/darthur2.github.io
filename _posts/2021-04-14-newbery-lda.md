@@ -122,14 +122,143 @@ performed LDA with these tweets, assuming there were four major topics,
 and then grabbed the top 3 words for each discovered topic, the output
 of LDA might look like this:
 
-    ## <!-- html table generated in R 4.0.3 by xtable 1.8-4 package -->
-    ## <!-- Wed Apr 14 21:23:03 2021 -->
-    ## <table border=1>
-    ## <tr> <th>  </th> <th> Topic 1 </th> <th> Topic 2 </th> <th> Topic 3 </th> <th> Topic 4 </th>  </tr>
-    ##   <tr> <td align="right"> Word 1 </td> <td> america </td> <td> punch </td> <td> tech </td> <td> thanos </td> </tr>
-    ##   <tr> <td align="right"> Word 2 </td> <td> justice </td> <td> kick </td> <td> gadgets </td> <td> government </td> </tr>
-    ##   <tr> <td align="right"> Word 3 </td> <td> freedom </td> <td> justice </td> <td> justice </td> <td> justice </td> </tr>
-    ##    </table>
+<table border="1">
+
+<tr>
+
+<th>
+
+</th>
+
+<th>
+
+Topic 1
+
+</th>
+
+<th>
+
+Topic 2
+
+</th>
+
+<th>
+
+Topic 3
+
+</th>
+
+<th>
+
+Topic 4
+
+</th>
+
+</tr>
+
+<tr>
+
+<td align="right">
+
+Word 1
+
+</td>
+
+<td>
+
+america
+
+</td>
+
+<td>
+
+punch
+
+</td>
+
+<td>
+
+tech
+
+</td>
+
+<td>
+
+thanos
+
+</td>
+
+</tr>
+
+<tr>
+
+<td align="right">
+
+Word 2
+
+</td>
+
+<td>
+
+justice
+
+</td>
+
+<td>
+
+kick
+
+</td>
+
+<td>
+
+gadgets
+
+</td>
+
+<td>
+
+government
+
+</td>
+
+</tr>
+
+<tr>
+
+<td align="right">
+
+Word 3
+
+</td>
+
+<td>
+
+freedom
+
+</td>
+
+<td>
+
+justice
+
+</td>
+
+<td>
+
+justice
+
+</td>
+
+<td>
+
+justice
+
+</td>
+
+</tr>
+
+</table>
 
 From here we could try to infer what the topics are and give them names.
 For example, we might say that the first topic is American Patriotism,
@@ -292,7 +421,7 @@ the titles that I came up for the topics discovered with LDA:
 
 1.  Boy adventures around the world
 2.  Girls and magic
-3.  Relationships among different cultures
+3.  Relationships and cultures
 4.  Kids navigating family relationships
 5.  Animals and people
 6.  Historical and medieval fantasy
@@ -300,8 +429,8 @@ the titles that I came up for the topics discovered with LDA:
 These are by no means the “correct” names for these topics. It’s also
 good to remember that a book isn’t always represented completely by one
 topic. For example, the Grey King was around 26% topic 2 and 65% topic 6
-while the rest is split equally among the other topics. That makes
-intuitive sense since it deals with medieval fantasy, girls, and magic.
+while the rest is split equally among the other topics. Intuitively,
+that makes sense. It deals with medieval fantasy, girls, and magic.
 
 It’s also good to remember that this is just my interpretation when
 there are six topics. As I mentioned before, part of topic modeling is
