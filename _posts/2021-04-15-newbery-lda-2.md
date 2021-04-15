@@ -214,7 +214,7 @@ these reviews.
 
 <figcaption>
 
-Caveat strikes again\!
+Caveat strikes again
 
 </figcaption>
 
