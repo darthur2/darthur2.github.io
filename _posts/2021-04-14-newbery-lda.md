@@ -87,7 +87,7 @@ book for this analysis.
 <figcaption>
 
 Amazon to me the very instant I thought about scraping book descriptions
-on there.
+on there
 
 </figcaption>
 

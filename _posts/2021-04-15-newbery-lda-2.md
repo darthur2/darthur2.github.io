@@ -9,8 +9,8 @@ categories: analysis
 tags: lda nlp
 ---
 
-In my [previous post](%7B%post_url%202021-04-14-newbery-lda%20%%7D) I
-explored reviews of books that have won the Newbery award using Latent
+In my [previous post](%7B%-%20post_url%202021-04-14-newbery-lda%20-%%7D)
+I explored reviews of books that have won the Newbery award using Latent
 Dirichlet Allocation (LDA). In that post I only looked at one word
 chunks (1-grams). In this post I am going to perform the same type of
 analysis, but this time I am going to look at bigrams (these are two
@@ -22,7 +22,7 @@ word chunks). For this analysis I will be doing the following:
 
 For more context about where the data came from and what they look like,
 you can look at my previous post about LDA. There you will also find a
-quick overview of what LDA is and how it works.
+simple explanation of what LDA is and how it works.
 
 # Bigrams
 
@@ -33,19 +33,32 @@ into two words, “annoying” and “dog”, after removing the stop words “I
 is being said by looking at words grouped together as n-grams. For
 example, the single bigram (2-gram) of the previous sentence would be,
 “annoying dog”. Using 1-grams tells us that the person talks about
-their dog and that something is annoying, but the bigram tells us that
-it’s the dog that is annoying.
+their dog and that something is annoying, but the bigram indicates that
+the words annoying and dog are connected.
 
 There are some caveats about using bigrams, the first of which simply
 applies to text analysis and natural language processing in general. The
 first caveat is that by removing stop words, it’s possible to lose some
 context about what is being said. For example, the sentence “I don’t
 have an annoying dog” would lead to the same 1-grams and the same bigram
-after removing the stop words. This is something to keep in mind when
-interpreting topics in LDA. We don’t know whether the dog likes or
-dislikes their dog, however it seems unlikely that we would find the
-phrase “annoying dog” a lot if everyone was saying how much they loved
-their dog, but it’s important to remember that it could happen.
+as the same sentence without the word “don’t”. This is something to keep
+in mind when interpreting topics in LDA. Technically, we don’t know
+whether the dog is liked or disliked, but it seems unlikely that we
+would find the phrase “annoying dog” a lot if everyone were saying how
+much they loved their dog. Still, it’s important to remember that it
+could happen.
+
+<figure>
+
+<img src="https://media.giphy.com/media/67yPFqokhReVi/giphy.gif" alt="Fancy" style="width:50%" class = "center">
+
+<figcaption>
+
+This is unrelated, but it’s how I feel when I use the word caveat…
+
+</figcaption>
+
+</figure>
 
 As a quick aside, I’ll say that one could try to avoid the ambiguity in
 meaning by leaving in the stop words, but this creates other problems.
@@ -54,21 +67,21 @@ meaning since the most popular words would now be those stop words
 (which is why they removed in the first place). Using bigrams wouldn’t
 really fix the problem for our example because then you would just have
 the bigrams “I don’t”, “don’t have”, “have an”, “an annoying”, and
-“annoying dog”. In this case since the word “don’t” is separated from
-“annoying dog” we still wouldn’t be able to quickly infer what the
-speaker means to say. We could try solving this by using larger chunks
-of words, but this leads to the next problem I was going to mention.
+“annoying dog”. In this case, it will still be difficult to know that
+the bigram “don’t have” is connected to the bigram “annoying dog”. We
+could try solving this by using larger chunks of words, but this leads
+to the next problem I was going to mention.
 
 Using higher order n-grams results in more sparsity. By this I just mean
 that once you start grouping words together, you are less likely to find
 lots of occurrences of those phrases which makes it difficult to find
 out what is important and what isn’t. In our example, we are more likely
 to find occurrences of the words “annoying” and “dog” separately than we
-are to find them together. We are even less likely to find many
-occurrences of the phrase “don’t have an annoying dog” than we are to
-find occurrences of the bigram “annoying dog”. In general, the larger
-the phrases, the more unique they become and the harder it becomes to
-find meaningful topics in the text.
+are to find them together. We are even less likely to find occurrences
+of the phrase “don’t have an annoying dog” than we are to find
+occurrences of the bigram “annoying dog”. In general, the larger the
+phrases, the more unique they become and the harder it becomes to find
+meaningful topics in the text.
 
 In most cases, people will probably look at 1-grams and bigrams. They
 might look at trigrams (3-grams) if they have a lot of data. I am just
@@ -78,8 +91,8 @@ just another word.
 
 # Discovering Topics in Newbery Reviews Using LDA with Bigrams
 
-The first thing we are going to do now is remove the stop words and stem
-the words as we did before, but this time we are going to create bigrams
+The first thing we are going to do is remove the stop words and stem the
+words as we did before, but this time we are going to create bigrams
 instead of 1-grams. After creating the bigrams, I remove “unimportant”
 bigrams. By this I mean I’m going to remove bigrams that don’t occur
 very often. I’m choosing to only select the top 700 or so bigrams.
@@ -88,17 +101,15 @@ for each topic.
 
 ![](/images/lda2-unnamed-chunk-3-1.png)<!-- -->
 
-As we can see, using bigrams gives us some insight into what is being
-discussed in these reviews that we didn’t have when we were using
-1-grams. Some bigrams are found in all topics. For example, most of the
-topics include the bigram for historical fiction which for me makes
-sense. We can also see that the idea of children growing up is a common
-theme throughout books. The coming of age bigram is important for many
-topics.
+As we can see, using bigrams gives us some more insight into what topics
+are being discussed in peoples’ book reviews. Some bigrams are found in
+all topics. For example, most of the topics include the bigram for
+historical fiction which for me makes sense. We can also see that the
+idea of children growing up is a common theme. The coming of age bigram
+is also important for many topics.
 
-We can again look at which topics are the most popular for each book to
-help us gain some additional insight into what these discovered topics
-might be.
+We can again look at which topics are the most prevalent for each book
+to help us gain some additional insight into what these topics might be.
 
     ##  [1] "Smoky the Cowhorse"                 "Young Fu of the Upper Yangtze"     
     ##  [3] "Invincible Louisa"                  "The White Stag"                    
@@ -107,8 +118,9 @@ might be.
     ##  [9] "The Hero and the Crown"             "Joyful Noise: Poems for Two Voices"
     ## [11] "Out of the Dust"                    "Hello, Universe"
 
-By look at the books in topic 1 and reviewing the bigrams, I might say
-that topic 1 should maybe just be labeled historical fiction.
+By looking at the books for which topic 1 is most prevalent and
+reviewing the related words, I might say that topic 1 should maybe just
+be labeled historical fiction.
 
     ##  [1] "The Voyages of Doctor Dolittle" "Waterless Mountain"            
     ##  [3] "Thimble Summer"                 "Amos Fortune Free Man"         
@@ -119,7 +131,7 @@ that topic 1 should maybe just be labeled historical fiction.
     ## [13] "The One and Only Ivan"          "Flora and Ulysses"             
     ## [15] "Last Stop on Market Street"     "Merci Suarez Changes Gears"
 
-I might label this topic fictional coming of age stories.
+The label for this topic might be fictional coming of age stories".
 
 Here are the books for topic 3:
 
@@ -181,20 +193,32 @@ Topic 6:
 Here are the labels that I chose for the topics:
 
 1.  Historical fiction
-2.  Junior high coming of age
+2.  Teen coming of age
 3.  Medieval and 19th century adventure
-4.  War era books (Civil, Revolutionary, II) 5: Fictional family stories
-    6: Young teenager adventures
+4.  War era books (Civil, Revolutionary, II) 5: Fictional stories about
+    families 6: Young teenager adventures
 
 Again, these labels aren’t perfect and the caveat that this might not be
 the optimal number of labels still applies. We can recall that each book
-is a mixture of topics so multiple topics, not just one. For example,
-The Hero and the Crown doesn’t quite seem to belong with the other books
-in the topic 1 group. The probability for topic 1 in this book is 18.5%.
-The probabilities for the other topics range from 16%-17%. In other
-words, The Hero and the Crown really can’t be assigned to a single
-topic. This is probably further evidence that there are more than six
-topics being discussed in these reviews.
+is a mixture of multiple topics. For example, The Hero and the Crown
+doesn’t quite seem to belong with the other books in the topic 1 group.
+The probability for topic 1 in this book is 18.5%. The probabilities for
+the other topics range from 16%-17%. In other words, The Hero and the
+Crown really can’t be assigned to a single topic. This is probably
+further evidence that there are more than six topics being discussed in
+these reviews.
+
+<figure>
+
+<img src="https://media.giphy.com/media/sgswHaZw5yklq/giphy.gif" alt="Caveat" style="width:50%" class = "center">
+
+<figcaption>
+
+Caveat strikes again\!
+
+</figcaption>
+
+</figure>
 
 # Conclusion
 
@@ -205,12 +229,11 @@ together in groups of two and treated as single quantities in LDA.
 
 From this and my previous post, it seems that Newbery winners share some
 common ingredients. They deal with families and relationships, many
-feature animals, many are historical fiction, many of the historical
-fiction books are set during periods of war, and almost all of them deal
-with kids or youth growing up (coming of age). I didn’t mention this
-before but you’ll notice that the bigram “mother dies” is found in
-several of the topics so death is apparently another common theme
-discusses in these books.
+feature animals, many are historical fiction (often set during periods
+of war), and almost all of them deal with kids or youth growing up
+(coming of age). I didn’t mention this before but you’ll notice that the
+bigram “mother dies” is popular for several of the topics so death is
+apparently another common theme that is discussed in these books.
 
 Hope you enjoyed the post\! I look forward to doing a couple more posts
 about this data set.
