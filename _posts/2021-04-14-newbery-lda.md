@@ -110,8 +110,8 @@ Allocation (LDA) works.
 
 There are three important terms used in LDA: Documents, topics, and
 words. In this case, a single document consists of all of the reviews
-collected for a given book. So in this case there are 98 documents (I
-only collected reviews for 1922 to 2019). Each document is made up of a
+collected for a given book. That means there are 98 documents (I only
+collected reviews for 1922 to 2019). Each document is made up of a
 mixture of topics which in turn are made up of mixtures of words. The
 goal of LDA is to try and discover which topics make up a document and
 which words belong to a topic.
@@ -283,7 +283,7 @@ It would also be possible to see which topics are the most popular for
 different Avengers. For example, if you look at the topic distribution
 for Steve Rogers’ tweets you might find them to be 85% Patriotism and
 15% Fighting. Peter Parker’s tweets on the other hand might be 20%
-Patriotism, 30% Fighting, 50% Nerd, and 10% Bad Guys.
+Patriotism, 20% Fighting, 50% Nerd Stuff, and 10% Bad Guys.
 
 With that example in mind, we can turn our attention to the analysis at
 hand.
@@ -299,13 +299,13 @@ themes in the reviews of Newbery books, I’m not going to focus on words
 that either aren’t mentioned very often or aren’t mentioned in very many
 books. I’m only going to select words that are mentioned at least 20
 times and that appear for at least 10 of the books. After doing this,
-the text for the reviews for the first three books now looked like this:
+the text for the reviews for the first three books now looks like this:
 
     ## [1] "winner medal classic loon's ability history fascinating tale adventure readers world history history written perspective author history reads written true chapters loon's death originally published times begins development actual history begins perspective continues time time treated style writing aspect author audience directly telling attitude lived begins ancient time families business forever running discuss writing style history written children grade level aloud parents references children"
     ## [2] "eccentric doctor favorite children earlier doctor dolittle.in doctor takes person account boy son village meets doctor takes hurt doctor treatment doctor quickly friends boy learns animals remarkable talking amazing creatures previous sequel mysterious friend doctor's called sets train strange events doctor exciting native american son living world.the quirky animal doctor plot approach world desire concern memorable adventure strong appeal compassion share south american discover giant sea wond"
     ## [3] "century england terrible accident forces fear life sea dark quiet philip's spirit knowledge sea win captain's forced fortune return england battles hero tale search adventure century england terrible accident forces fear life sea dark quiet philip's spirit knowledge sea win captain's forced fortune return england battles hero tale search adventure twenty difficult reads found difficult adult imagine crazy son 6y0m main boy named mother died father lost sea pages staying father's accident leads r"
 
-With the text in the form, we are ready to perform LDA. However, one
+With the text in this form, we are ready to perform LDA. However, one
 problem is that before using LDA, we need to specify how many underlying
 topics there are, which is something we don’t know. For now, we are just
 going to choose a number of topics and see what we can discover. There
@@ -315,9 +315,12 @@ with 6 topics.
 
 After fitting the LDA model with 6 topics, we can examine the top 15
 words for each topic and see if we can identify any themes that help us
-give names to the topics.
+give names for the topics.
 
 ![](/images/unnamed-chunk-5-1.png)<!-- -->
+
+Notice that some of these words have been stemmed which means words like
+village and villages will be converted to villag.
 
 One thing that is apparent is that there are some words that are related
 to each topic. Most of these words are related to family, community, and
@@ -350,11 +353,10 @@ which topic 1 is discussed the most in reviews are:
     ## [17] "Dead End in Norvelt"                                 
     ## [18] "Last Stop on Market Street"
 
-Notice that some of these words have been stemmed which means words like
-village and villages will be converted to villag. These books are
-adventure books that feature boys and are often set at various places
-around the world. This makes sense since some of the top words for this
-topic are “boy”, “world”, “village”, “learn”, and “setting”.
+These books are adventure books that feature boys and are often set at
+various places around the world. This makes sense since some of the top
+words for this topic are “boy”, “world”, “village”, “learn”, and
+“setting”.
 
 We can do the same thing for topic 2:
 
@@ -417,14 +419,14 @@ Topic 6:
     ## [21] "The Grey King"                   "Lincoln, a Photobiography"
 
 We can do this with the other topics as well. I did this and these are
-the titles that I came up for the topics discovered with LDA:
+the titles that I came up with for the topics discovered with LDA:
 
 1.  Boy adventures around the world
 2.  Girls and magic
 3.  Relationships and cultures
-4.  Kids navigating family relationships
+4.  Kids and navigating family relationships
 5.  Animals and people
-6.  Historical and medieval fantasy
+6.  Historical fiction and medieval fantasy
 
 These are by no means the “correct” names for these topics. It’s also
 good to remember that a book isn’t always represented completely by one
@@ -441,10 +443,10 @@ will explore them in a different post.
 # Conclusion
 
 So they are you have it\! That’s just a little dive into Latent
-Dirichlet Allocation and how it can be used for model topics discussed
-in reviews of Newbery winners. There’s a lot more that could be done
-with these data. Not only could we dive into methods for finding the
-optimal number of topics as I mentioned previously, but we could look at
-LDA with bi-grams (two words together instead of words by themselves),
-sentiment analysis, word clouds, and more. Perhaps I will touch on those
-in future posts, but that’s it for now.
+Dirichlet Allocation and how it can be used for modeling topics
+discussed in reviews of Newbery winners. There’s a lot more that could
+be done with these data. Not only could we dive into methods for finding
+the optimal number of topics as I mentioned previously, but we could
+look at LDA with bi-grams (two words together instead of words by
+themselves), sentiment analysis, word clouds, and more. Perhaps I will
+touch on those in future posts, but that’s it for now.
