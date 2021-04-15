@@ -10,12 +10,12 @@ tags: lda nlp
 ---
 
 In my [previous
-post](%7B%%20link%20_posts/2021-04-14-newbery-lda.md%20%%7D) I explored
-reviews of books that have won the Newbery award using Latent Dirichlet
-Allocation (LDA). In that post I only looked at one word chunks
-(1-grams). In this post I am going to perform the same type of analysis,
-but this time I am going to look at bigrams (these are two word chunks).
-For this analysis I will be doing the following:
+post](https://darthur2.github.io/analysis/2021/04/14/newbery-lda.html) I
+explored reviews of books that have won the Newbery award using Latent
+Dirichlet Allocation (LDA). In that post I only looked at one word
+chunks (1-grams). In this post I am going to perform the same type of
+analysis, but this time I am going to look at bigrams (these are two
+word chunks). For this analysis I will be doing the following:
 
 1.  Explain a little about bigrams.
 2.  Use bigrams to get some more insights into topics covered in reviews
