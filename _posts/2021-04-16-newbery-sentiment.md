@@ -41,7 +41,7 @@ Consider the following:
 
     ## [1] "The book was okay. I didn't really like it though. It was too long and the characters weren't very interesting"
 
-We can read this and have a pretty good idea whether the sentiment is
+When we read this, we have a pretty good idea whether the sentiment is
 negative or positive, but how would a computer do it? The first step
 would be to assign words a polarity. The polarity of a word is a numeric
 value that represents where that word falls on a scale of “very
