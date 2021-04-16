@@ -16,14 +16,14 @@ and
 I have been learning more about Newbery award winners and what people
 think about them. I thought it would be interesting to do a sentiment
 analysis on the book reviews I had collected from different websites and
-blogs. In the post, I will do the following:
+blogs. In this post, I will do the following:
 
 1.  Explain a little about sentiment analysis.
 2.  Perform a sentiment analysis on the book reviews for Newbery
     winners.
 
 I won’t be explaining much about where the data came from in this post
-but you can go to my [first
+but, you can go to my [first
 post](https://darthur2.github.io/analysis/2021/04/14/newbery-lda.html)
 if you would like to know a little more about that.
 
@@ -49,10 +49,10 @@ negative” to “very positive”. For now we will say our scale goes from
 -1 to 1. Most words, like “okay”, “I”, and “long”, would be neutral and
 therefore have a polarity of 0. Other words like “interesting” or
 “like”, by themselves, would be positive and might have a polarity
-of 0.75 and 0.5 respectively. If we would at the polarity of each word
-by itself, we would say that these sentences have a lot of positive
-words. However, we know that saying the sentiment here is positive would
-be a mistake, so polarity by itself isn’t enough to judge sentiment.
+of 0.75 and 0.5 respectively. If we look at the polarity of each word by
+itself, we would say that these sentences have a lot of positive words.
+However, we know that saying the sentiment here is positive would be a
+mistake, so polarity by itself isn’t enough to judge sentiment.
 
 This is where the other two concepts of valence shifting and
 amplification come into play. Amplifiers are words that enhance the
@@ -63,8 +63,9 @@ a surrounding word. In our sentences, words like “didn’t” and “weren’t
 would be considered valence shifters. By adding the word “really” to
 “like” the sentiment might increase from 0.5 to 0.65 and then by
 augmenting the phrase “really like” with “didn’t” we would flip the
-polarity to -0.65. By doing this with our text, a computer would begin
-to recognize that the sentiment here is negative, not positive.
+polarity to obtain a score of -0.65. By doing this with our text, a
+computer would begin to recognize that the sentiment here is negative,
+not positive.
 
 Some algorithms and sentiment analysis models add upon these ideas, but
 these three ideas are at the heart of most sentiment analysis tools. The
@@ -117,6 +118,18 @@ winner. Indeed, after looking at the actual reviews I collected I saw
 that people weren’t particularly impressed. People didn’t hate it, but
 they didn’t love it. So why was it so far out in front?
 
+<figure>
+
+<img src="https://static.wikia.nocookie.net/heroes-and-villain/images/4/40/Harry-potter-dobby.jpg/revision/latest/scale-to-width-down/720?cb=20181208050400" alt="Dobby" style="width:50%" class = "center">
+
+<figcaption>
+
+Everyone’s gotta have an origin story
+
+</figcaption>
+
+</figure>
+
 When we look at the number of sentences for each book, we find that the
 number of sentences for reviews of Dobry is 3-4 times smaller than that
 of other books. This means that a few really positive sentences can help
@@ -140,7 +153,7 @@ It would be interesting to grab reviews from a website like goodreads
 and try this again to get a better picture of how people feel about
 these books.
 
-There are three final things to note. First, if you woudl like you can
+There are three final things to note. First, if you would like you can
 see the scores for all of the books down below. Second, you’ll notice
 that the range of sentiment scores is pretty small. When you are ranking
 things using some scoring method and the scores are this close to each
