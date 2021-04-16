@@ -140,18 +140,18 @@ It would be interesting to grab reviews from a website like goodreads
 and try this again to get a better picture of how people feel about
 these books.
 
-There are three final things to note. First, the plot doesn’t show all
-of the books. You can see the scores for all of the books here down
-below. Second, you’ll notice that the range of sentiment scores is
-pretty small. When you are ranking things using some scoring method and
-the scores are this close to each other, it means that the rank order
-isn’t definitive. If I were to collect some more reviews and do this
-again there’s a good chance that books with scores close to each other
-might switch places. As I collect more reviews, the order would start to
-solidify. However, this doesn’t mean that the ordering here isn’t
-completely uninformative. You probably aren’t going to see The High King
-and The Dark Frigate switch places, but you could very well see The High
-King jump from 10th to 6th place or higher.
+There are three final things to note. First, if you woudl like you can
+see the scores for all of the books down below. Second, you’ll notice
+that the range of sentiment scores is pretty small. When you are ranking
+things using some scoring method and the scores are this close to each
+other, it means that the rank order isn’t definitive. If I were to
+collect some more reviews and do this again there’s a good chance that
+books with scores close to each other might switch places. As I collect
+more reviews, the order would start to solidify. However, this doesn’t
+mean that the ordering here isn’t completely uninformative. You probably
+aren’t going to see The High King and The Dark Frigate switch places,
+but you could very well see The High King jump from 10th to 6th place or
+higher.
 
 The last thing to note is that last place doesn’t mean the book is *bad*
 it might just mean the reviews have a lot of negative words and phrases.
