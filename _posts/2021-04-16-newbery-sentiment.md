@@ -120,7 +120,7 @@ they didn’t love it. So why was it so far out in front?
 
 <figure>
 
-<img src="https://static.wikia.nocookie.net/heroes-and-villain/images/4/40/Harry-potter-dobby.jpg/revision/latest/scale-to-width-down/720?cb=20181208050400" alt="Dobby" style="width:50%" class = "center">
+<img src="https://static0.srcdn.com/wordpress/wp-content/uploads/2019/07/Harry-Potter-Dobby-Feature.jpg" alt="Dobby" style="width:50%" class = "center">
 
 <figcaption>
 
@@ -153,18 +153,32 @@ It would be interesting to grab reviews from a website like goodreads
 and try this again to get a better picture of how people feel about
 these books.
 
+<figure>
+
+<img src="https://media.giphy.com/media/3ornk6UHtk276vLtkY/giphy.gif" alt="Caveat" style="width:50%" class = "center">
+
+<figcaption>
+
+Luke also couldn’t believe that Dobry ranked higher than Holes
+
+</figcaption>
+
+</figure>
+
+<https://media.giphy.com/media/3ornk6UHtk276vLtkY/giphy.gif>
+
 There are three final things to note. First, if you would like you can
-see the scores for all of the books down below. Second, you’ll notice
-that the range of sentiment scores is pretty small. When you are ranking
-things using some scoring method and the scores are this close to each
-other, it means that the rank order isn’t definitive. If I were to
-collect some more reviews and do this again there’s a good chance that
-books with scores close to each other might switch places. As I collect
-more reviews, the order would start to solidify. However, this doesn’t
-mean that the ordering here isn’t completely uninformative. You probably
-aren’t going to see The High King and The Dark Frigate switch places,
-but you could very well see The High King jump from 10th to 6th place or
-higher.
+see the scores for all of they are in a table at the end of the post.
+Second, you’ll notice that the range of sentiment scores is pretty
+small. When you are ranking things using some scoring method and the
+scores are this close to each other, it means that the rank order isn’t
+definitive. If I were to collect some more reviews and do this again
+there’s a good chance that books with scores close to each other might
+switch places. As I collect more reviews, the order would start to
+solidify. However, this doesn’t mean that the ordering here isn’t
+completely uninformative. You probably aren’t going to see The High King
+and The Dark Frigate switch places, but you could very well see The High
+King jump from 10th to 6th place or higher.
 
 The last thing to note is that last place doesn’t mean the book is *bad*
 it might just mean the reviews have a lot of negative words and phrases.
@@ -172,6 +186,15 @@ This is important to remember when you see books like The Slave Dancer
 and Bridge to Terabithia in last place. They both deal with some pretty
 heavy topics: slavery and kids dying. I think it would be hard to not
 have some negative feelings about things like that.
+
+# Conclusion
+
+Hopefully this post has given you a better idea of how sentiment
+analysis works and how it can be used to see how people feel about
+Newbery award winning books. We can definitely see that people do have
+more positive things to say about some books than they do others.
+There’s a lot to unpack with these Newbery reviews data and I’ve
+enjoyed what we’ve discovered so far\!
 
     ##                                                         Sentiment Number
     ## Dobry                                                 0.246273458      1
@@ -272,12 +295,3 @@ have some negative feelings about things like that.
     ## Bridge to Terabithia                                 -0.013497337     96
     ## Roll of Thunder, Hear My Cry                         -0.025514887     97
     ## The Slave Dancer                                     -0.059366423     98
-
-# Conclusion
-
-Hopefully this post has given you a better idea of how sentiment
-analysis works and how it can be used to see how people feel about
-Newbery award winning books. We can definitely see that people do have
-more positive things to say about some books than they do others.
-There’s a lot to unpack with these Newbery reviews data and I’ve
-enjoyed what we’ve discovered so far\!
