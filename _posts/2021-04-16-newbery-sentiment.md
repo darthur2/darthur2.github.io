@@ -12,7 +12,7 @@ tags: sentiment nlp
 In my previous two posts
 ([here](https://darthur2.github.io/analysis/2021/04/14/newbery-lda.html)
 and
-[here])(https://darthur2.github.io/analysis/2021/04/15/newbery-lda-2.html),
+[here](https://darthur2.github.io/analysis/2021/04/15/newbery-lda-2.html)),
 I have been learning more about Newbery award winners and what people
 think about them. I thought it would be interesting to do a sentiment
 analysis on the book reviews I had collected from different websites and
