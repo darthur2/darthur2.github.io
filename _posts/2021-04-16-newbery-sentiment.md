@@ -165,8 +165,6 @@ Luke also couldn’t believe that Dobry ranked higher than Holes
 
 </figure>
 
-<https://media.giphy.com/media/3ornk6UHtk276vLtkY/giphy.gif>
-
 There are three final things to note. First, if you would like you can
 see the scores for all of they are in a table at the end of the post.
 Second, you’ll notice that the range of sentiment scores is pretty
