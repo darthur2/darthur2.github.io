@@ -48,12 +48,12 @@ wouldn’t work. New York City and Samson, Alabama just aren’t the same.
 
 <figure>
 
-<img src="/images/eternal-mayor.png" alt="Fancy" style="width:50%" class = "center">
+<img src="/images/eternal-mayor.png" alt="Samson" style="width:30%" class = "center">
 
 <figcaption>
 
 One difference between Samson and New York City is that Samson has an
-eternal mayor as their form of goverrnment. New York City does not.
+eternal mayor as their form of government. New York City does not.
 
 </figcaption>
 
